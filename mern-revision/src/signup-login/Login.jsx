@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import './From.css'
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
-function Login() {
+import { AppContext } from "../ContextApi/FisrtContext";
+
+ function Login() {
     const [showpass, SetShowpass] = useState(false)
+    const {loading, setLoading, SendDataSignLogin,}  = useContext(AppContext);
+
     const [NormaluserData, setNormalUserData] = useState({
         username: "",
         email: "",
         password: "",
     });
-
 
     const changeHandler = (event) => {
         const { name, value } = event.target;
@@ -24,9 +27,8 @@ function Login() {
     // Handling form submission
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log("login form send succes");
-        window.alert("verifying")
-
+        const response =  SendDataSignLogin('login',NormaluserData);
+        console.log("login form send succes",response);
     };
     return (
         <div>
