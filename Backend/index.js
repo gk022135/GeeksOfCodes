@@ -1,6 +1,9 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require("cookie-parser");
+
+
 
 const DB_connect = require('./Configs/DatabaseConfig')
 
@@ -10,8 +13,7 @@ const route = require('./Routes/PostRoutes')
 const app = express();
 dotenv.config();
 app.use(bodyParser.json());
-
-
+app.use(cookieParser());
 app.use('/mern-revision/v1',route);
 
 
