@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import './From.css'
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
+
+import { AppContext } from "../ContextApi/FisrtContext";
+import HashLoader  from 'react-spinners/HashLoader'
+
+
 
 function Normaluser() {
     const [showpass, SetShowpass] = useState(false)
     const [confshowpass, SetconfShowpass] = useState(false)
     const [IsPassMatch,SetMatch] = useState(true);
+
+    const {loading, setLoading, SendDataSignLogin,} = useContext(AppContext);
+
 
 
     const [NormaluserData, setNormalUserData] = useState({
@@ -27,18 +35,26 @@ function Normaluser() {
         }));
         SetMatch(true);
     };
+     
+    const SignUpData = {
+        username : NormaluserData.username,
+        email : NormaluserData.email,
+        password : NormaluserData.password,
+        role : NormaluserData.role
+    }
 
+    console.log("new object",SignUpData);
     // Handling form submission
     const submitHandler = (e) => {
         e.preventDefault();
         if(NormaluserData.password === NormaluserData.confirmpass){
-            console.log("Your form data saved successfully", NormaluserData);
-            window.alert("Form submit success")
+
+            const signupresponse = SendDataSignLogin('signup',SignUpData)
+            console.log("Your form data response from bknd", signupresponse);
         }
         else{
             SetMatch(!IsPassMatch);
             console.log("password not match")
-            window.alert("pass not match")
         }
         
     };

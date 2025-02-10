@@ -6,6 +6,7 @@ const UserModel = require('../Models/UserSchema');
 
 const SignupCtrl = async (req, res) => {
     try {
+        // app.use(express.json());
         const {username,email,password,role} = req.body; // Extract request data
         console.log(req.body);
 
