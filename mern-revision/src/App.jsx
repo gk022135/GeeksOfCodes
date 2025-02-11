@@ -1,42 +1,37 @@
-import { useEffect } from 'react'
-import HashLoader from 'react-spinners/HashLoader'
-
-import './App.css'
-// import Design from './signup-login/Design'
-import Signup from './signup-login/Signup'
-
-import AOS from 'aos'
-import Login from './signup-login/Login'
-import Navbar from './components/Navbar'
-import { ToastContainer } from 'react-toastify'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HashLoader from 'react-spinners/HashLoader';
+import './App.css';
+import Signup from './signup-login/Signup';
+import Login from './signup-login/Login';
+import Navbar from './components/Navbar';
+import { ToastContainer } from 'react-toastify';
+import UserHome from './user-pages/UserHome';
+import AdminHome from "./admin-pages/adminHome";
+import Otpvarifiacation from "./signup-login/OtpVarification";
 
 function App() {
-
-
-  // useEffect (() =>{
-  //      AOS.init({duration : 3000});
-  // },[])
-
   return (
-    <>
+    <BrowserRouter> {/* ✅ Wrap everything inside BrowserRouter */}
+      <>
       <div className='bg-black/1 fixed top-0 z-20 w-full'>
-        <Navbar />
-      </div>
+          <Navbar />
+        </div>
 
-      <div className='w-full h-screen bg-amber-400'>
-        <Signup />
-        <Login />
-        <HashLoader color='green' />
-      </div>
-      <div className='bg-amber-900'>
+        <div className='w-full h-screen bg-amber-400'>
+          <Routes>
+            <Route path="/" element={<Signup />} />
+            <Route path="/user-home" element={<UserHome />} />
+            <Route path="/login" element={<Login />} />
+            <Route path = '/admin-dashboard' element = {<AdminHome/>} />
+            <Route path="/otpvarification" element = {<Otpvarifiacation />} />
+          </Routes>
+          <HashLoader color='green' /> 
+        </div>
 
-        <h1>hello ji</h1>
-      </div>
-      <ToastContainer />
-    </>
-
-  )
+        <ToastContainer />
+      </>
+    </BrowserRouter>
+  );
 }
 
-export default App
-//n ok so sad life hello njfewnfoewofewofnoew
+export default App;
