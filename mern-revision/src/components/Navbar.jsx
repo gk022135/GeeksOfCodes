@@ -5,7 +5,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-10 bg-cyan-800 backdrop-blur-lg text-white">
+    <nav className="sticky top-0 z-10 bg-black/50 backdrop-blur-lg text-white">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -31,7 +31,7 @@ const Navbar = () => {
 
      
       {isOpen && (
-        <div className="md:hidden bg-cyan-800 flex flex-col items-center space-y-4 py-4">
+        <div className="md:hidden bg-black/5 flex flex-col items-center space-y-4 py-4">
           <a href="#" className="opacity-70 hover:opacity-100 hover:text-lg hover:font-bold">Dashboard</a>
           <a href="#" className="opacity-70 hover:opacity-100 hover:text-lg hover:font-bold">About</a>
           <a href="#" className="opacity-70 hover:opacity-100 hover:text-lg hover:font-bold">Projects</a>
