@@ -13,11 +13,11 @@ function App() {
   return (
     <BrowserRouter> {/* ✅ Wrap everything inside BrowserRouter */}
       <>
-      <div className='bg-black/1 fixed top-0 z-20 w-full'>
+      <div className='fixed top-0 z-20 w-full'>
           <Navbar />
         </div>
 
-        <div className='w-full h-screen bg-amber-400'>
+        <div className='w-full h-screen bg-amber-400 mt-17'>
           <Routes>
             <Route path="/" element={<Signup />} />
             <Route path="/user-home" element={<UserHome />} />
