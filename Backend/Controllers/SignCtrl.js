@@ -1,6 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const UserModel = require('../Models/UserSchema');
+const GeneratedOtp = require('./OtpGenerator');
+const EmailSender = require('./EmailToUser');
 
 
 
@@ -25,6 +27,31 @@ const SignupCtrl = async (req, res) => {
                 success : false,
             })
         }
+
+
+        
+        //send opt function to user
+        const otp = GeneratedOtp();
+        req.session.otp = otp;
+
+        //email send to user 
+        const responseEmail = await EmailSender(email,otp);
+        if(responseEmail){
+            return res.status(200).json({
+                message : `OTP send Succesfully to ${email}`,
+                success : true
+            })
+        }
+        else if(!responseEmail) {
+            return res.status(500).json({
+                message : "error pleas try again",
+                success : false,
+            })
+        }
+
+
+        //wait for user side otp
+
         // encrypt the password
         //salt generation
         const saltRounds = 10;
@@ -48,7 +75,8 @@ const SignupCtrl = async (req, res) => {
         } catch (error) {
             res.status(500).json({ message: "Error encrypting password", success: false, error });
         }
-        
+
+
 
         // const objectToDb = {
         //     username : username,
