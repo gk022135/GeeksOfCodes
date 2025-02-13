@@ -53,14 +53,14 @@ import { useNavigate } from "react-router-dom";
             if (response.role === "normal-user") {
 
                 setTimeout(() => {
-                  navigate("/user-home"); // ✅ Corrected function usage
+                  navigate("/user-home"); 
                 }, 1000);
             }
             //redirect to home page and other page
         }
     };
     return (
-        <div>
+        <div className="p-20">
             <form className="form " onSubmit={submitHandler}>
                 <label htmlFor="name">User Name</label>
                 <input

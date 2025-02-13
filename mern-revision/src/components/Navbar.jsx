@@ -1,8 +1,24 @@
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa"; 
+import {NavLink} from "react-router-dom"
+import Logout from "./Logout";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const localData = localStorage.getItem("userData");
+  console.log(localData)
+  let data = localData ? JSON.parse(localData) : {}; // Ensure `data` is an object
+  
+  // Ensure `data.success` is always a boolean
+  if (typeof data.success !== "boolean") {
+    data.success = false;
+  }
+  console.log("hi ", data.success)
+  
+
+ 
+
 
   return (
     <nav className="sticky top-0 z-10 bg-black/50 backdrop-blur-lg text-white">
@@ -13,10 +29,10 @@ const Navbar = () => {
 
         
           <div className="hidden md:flex space-x-5">
-            <a href="#" className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">Dashboard</a>
-            <a href="#" className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">About</a>
-            <a href="#" className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">Projects</a>
-            <a href="#" className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">Contact</a>
+            <NavLink to="/"  className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">Home</NavLink>
+            <NavLink to="/user-home" className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">About</NavLink>
+            <NavLink to="/login" className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">{data.success ? <Logout /> : "Login"}</NavLink>
+            <NavLink to="/Contact" className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">Contact</NavLink>
           </div>
 
          

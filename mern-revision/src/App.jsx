@@ -17,7 +17,7 @@ function App() {
           <Navbar />
         </div>
 
-        <div className='w-full h-screen bg-amber-400 mt-17'>
+        <div className='w-full h-screen bg-amber-400'>
           <Routes>
             <Route path="/" element={<Signup />} />
             <Route path="/user-home" element={<UserHome />} />

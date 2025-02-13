@@ -12,28 +12,27 @@ function Signup() {
 
     
 
-    function isAdmin() {
-        setTrue(!istrue);
-    }
-
+  function isAdmin() {
+    setTrue(!istrue);
+  }
     return (
-        <div className="bg-amber-900">
+        <div className="flex flex-col justify-center bg-amber-900 ">
             <Design />
             {
                 loading ? (<HashLoader />) :
                     (
-                        <div className="flex flex-col justify-center content-center items-center p-1 m-3 w-[400px] bg-blue-600/75 text-blue-50 gap-2">
+                        <div className="flex flex-col justify-center md:ml-[350px] p-1 m-3 w-[410px] bg-blue-600/50 text-blue-50 rounded-2xl gap-2">
 
-                            <div className="flex flex-row">
+                            <div className="flex flex-row justify-center border-2 rounded-2xl">
                                 <button className="sigup-button  border-2 rounded-md bg-amber-700/90 h-10 m-2  " onClick={isAdmin}
-                                 style={{ backgroundColor: istrue ? "red" : "#076944" }}
+                                 style={{ backgroundColor: istrue ? "blue" : "#076944" }}
                                 >Admin-user</button>
                                 <button className="border-2 rounded-md bg-amber-700/90 h-10 m-2" onClick={() => setTrue(false)}
-                                style={{ backgroundColor: istrue ? "red" : "#076944" }}
+                                style={{ backgroundColor: !istrue ? "blue" : "#076944" }}
                                 >Normal-user</button>
                             </div>
 
-                            <div className="w-auto bg-black text-white justify-center content-center items-center h-auto">
+                            <div className="w-auto bg-black text-white justify-center content-center items-center h-auto rounded-2xl">
                                 {istrue ? <Adminuser /> : <Normaluser />}
                             </div>
                         </div >
@@ -45,4 +44,5 @@ function Signup() {
     );
 }
 
+   
 export default Signup;

@@ -1,6 +1,12 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const UserModel = require('../Models/UserSchema');
+const GeneratedOtp = require('./OtpGenerator');
+const EmailSender = require('./EmailToUser');
+
+
+
 const GeneratedOtp = require('./OtpGenerator');
 const EmailSender = require('./EmailToUser');
 
