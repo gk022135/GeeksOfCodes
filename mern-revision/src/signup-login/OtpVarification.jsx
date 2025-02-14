@@ -1,52 +1,97 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 function OtpVerification() {
-    const [digits, setDigits] = useState(Array(6).fill(""));
+    const navigate = useNavigate();
 
-    const handleChange = (index, value) => {
-        if (!/^[0-9]?$/.test(value)) return;
+    const [otp, setOtp] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
-        const newDigits = [...digits];
-        newDigits[index] = value;
-        setDigits(newDigits);
-
-        if (index < 5 && value !== "") {
-            document.getElementById(`otp-${index + 1}`).focus();
+    useEffect(() => {
+        const storedEmail = localStorage.getItem("useremail");
+        if (storedEmail) {
+            setEmail(storedEmail);
+            localStorage.removeItem("useremail"); // Removes only the email, not everything
         }
+    }, []);
+
+    const handleChange = (e) => {
+        const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric input
+        setOtp(value.slice(0, 6)); // Limit to 6 digits
     };
 
-    const handleSubmit = () => {
-        const completeNumber = digits.join("");
-        console.log("Whole number is:", completeNumber);
+    const handleSubmit = async () => {
+        if (otp.length !== 6) {
+            setMessage("OTP must be 6 digits");
+            return;
+        }
 
-        //otp varification
-        
+        if (!email) {
+            setMessage("Email not found. Please go back to the signup form.");
+            toast.warning("Email not found");
+            return;
+        }
+
+        setLoading(true);
+        setMessage("");
+
+        try {
+            const response = await fetch("http://localhost:3000/mern-revision/v1/optvarification", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ otp, email }), // Send OTP & email
+            });
+
+            const data = await response.json();
+            // console.log("bakend otp response ",data)
+
+            if (response.ok) {
+                setMessage("OTP verified successfully!");
+                toast.success("OTP verified successfully")
+                setTimeout( () =>{
+                    navigate('/login')
+                }, 1000);
+                
+                
+            } else {
+                setMessage(data.message || "OTP verification failed!");
+                toast.error("OTP verification failed!");
+            }
+        } catch (error) {
+            setMessage("Network error. Please try again.");
+        }
+
+        setLoading(false);
     };
 
     return (
-        <div className="flex border-2 mt-20 justify-center content-center items-center bg-blue-500/90">
-            <div className="flex gap-2 justify-center items-center">
-                {digits.map((digit, index) => (
-                    <input
-                        key={index}
-                        id={`otp-${index}`}
-                        type="text"
-                        maxLength="1"
-                        value={digit}
-                        onChange={(e) => handleChange(index, e.target.value)}
-                        className="w-12 h-12 border-2 border-b-red-800 text-center text-xl font-bold 
-                            focus:border-blue-500 focus:outline-amber-300 rounded-lg 
-                            sm:w-14 sm:h-14 md:w-16 md:h-16"
-                    />
-                ))}
-            </div>
+        <div className="flex flex-col items-center mt-20 bg-blue-500/90 p-6 rounded-lg">
+            <p className="text-white mb-2">Email: {email || "No email provided"}</p>
+            <input
+                type="text"
+                value={otp}
+                onChange={handleChange}
+                maxLength="6"
+                placeholder="Enter OTP"
+                className="w-48 h-12 text-center text-xl font-bold border-2 border-blue-600 
+                           focus:border-blue-400 focus:outline-none rounded-lg"
+            />
             <button 
                 onClick={handleSubmit}
-                className="ml-4 px-4 py-2 bg-blue-600 text-white rounded-lg"
+                className={`mt-4 px-4 py-2 rounded-lg text-white ${
+                    otp.length === 6 ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-400 cursor-not-allowed"
+                }`}
+                disabled={otp.length !== 6 || loading}
             >
-                Submit
+                {loading ? "Verifying..." : "Submit"}
             </button>
+            {message && <p className="mt-2 text-white">{message}</p>}
+            <ToastContainer />
         </div>
     );
 }

@@ -7,11 +7,13 @@ import { FcGoogle } from "react-icons/fc";
 import { AppContext } from "../ContextApi/FisrtContext";
 import HashLoader from 'react-spinners/HashLoader'
 import { ToastContainer, toast } from 'react-toastify'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 
 
 function Normaluser() {
+    const navigate = useNavigate();
+
     const [showpass, SetShowpass] = useState(false)
     const [confshowpass, SetconfShowpass] = useState(false)
     const [IsPassMatch, SetMatch] = useState(true);
@@ -47,7 +49,14 @@ function Normaluser() {
         role: NormaluserData.role
     }
 
-    console.log("new object", SignUpData);
+    if (NormaluserData && NormaluserData.email) {
+        localStorage.setItem("useremail", NormaluserData.email);
+        console.log("New object stored in localStorage:", NormaluserData.email);
+    } else {
+        console.log("Error: Email is missing in NormaluserData");
+    }
+
+
     // Handling form submission
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -58,7 +67,12 @@ function Normaluser() {
             if (signupresponse.error) {
                 toast.error(signupresponse.error)
             }
-            else toast.success(signupresponse.message)
+            else {
+                toast.success(signupresponse.message)
+                setTimeout(() => {
+                    navigate("/otpvarification");
+                }, 1000);
+            }
         }
         else {
             SetMatch(!IsPassMatch);

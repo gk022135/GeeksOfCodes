@@ -5,6 +5,7 @@ const UserModel = require('../Models/UserSchema');
 const GeneratedOtp = require('./OtpGenerator');
 const EmailSender = require('./EmailToUser');
 
+const client = require('../client');
 
 
 const GeneratedOtp = require('./OtpGenerator');
@@ -37,10 +38,43 @@ const SignupCtrl = async (req, res) => {
 
         
         //send opt function to user
+
+
         const otp = GeneratedOtp();
-        req.session.otp = otp;
+        // console.log("generated otp", otp);
+        const saveOtp_to_redis =await client.set(`otp:${email}`, otp); //ise save krna hai in redis db
+
+        // console.log("otp saved to redis", saveOtp_to_redis);
 
         //email send to user 
+        
+
+
+        //wait for user side otp
+        // encrypt the password
+        //salt generation
+        const saltRounds = 10;
+
+        try {
+            const salt = await bcrypt.genSalt(saltRounds);
+            const hashpass = await bcrypt.hash(password, salt);
+
+            console.log("Encrypted Password:", hashpass);
+
+            //database model document
+            const dataToSave = {
+                username,
+                email,
+                password : hashpass,
+                role,
+            };
+            await client.set(`data:${email}`, JSON.stringify(dataToSave))
+            res.status(201).json({ message: "User Otp Send to mail successfully!", user: dataToSave });
+
+        } catch (error) {
+            res.status(500).json({ message: "Error encrypting password", success: false, error });
+        }
+
         const responseEmail = await EmailSender(email,otp);
         if(responseEmail){
             return res.status(200).json({
@@ -53,33 +87,6 @@ const SignupCtrl = async (req, res) => {
                 message : "error pleas try again",
                 success : false,
             })
-        }
-
-
-        //wait for user side otp
-
-        // encrypt the password
-        //salt generation
-        const saltRounds = 10;
-
-        try {
-            const salt = await bcrypt.genSalt(saltRounds);
-            const hashpass = await bcrypt.hash(password, salt);
-
-            console.log("Encrypted Password:", hashpass);
-
-            //database model document
-            const dataToSave = new UserModel({
-                username,
-                email,
-                password : hashpass,
-                role,
-            });
-            await dataToSave.save();
-            res.status(201).json({ message: "User registered successfully!", user: dataToSave });
-
-        } catch (error) {
-            res.status(500).json({ message: "Error encrypting password", success: false, error });
         }
 
 
