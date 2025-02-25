@@ -8,6 +8,9 @@ import { ToastContainer } from 'react-toastify';
 import UserHome from './user-pages/UserHome';
 import AdminHome from "./admin-pages/adminHome";
 import Otpvarifiacation from "./signup-login/OtpVarification";
+import QrScanner from "./QR/QR_Scanner";
+import Qr_res from "./user-pages/Qr_res";
+import QrGenerator from "./QR/QrGenerator";
 
 function App() {
   return (
@@ -24,6 +27,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path = '/admin-dashboard' element = {<AdminHome/>} />
             <Route path="/otpvarification" element = {<Otpvarifiacation />} />
+            <Route path="/qrscanner" element = {<Qr_res />} />
+            <Route path="/qrgenerator" element = {<QrGenerator />} />
           </Routes>
           <HashLoader color='green' /> 
         </div>

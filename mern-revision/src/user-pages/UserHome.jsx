@@ -6,6 +6,7 @@ import MiddlemiddleComp from "./Middle_middle_comp";
 import { AppContext } from "../ContextApi/FisrtContext";
 import { useContext } from "react";
 import { useEffect } from "react";
+import UserProfile from "./User_Profile";
 
 function UserHome() {
     const { SendDataSignLogin } = useContext(AppContext);
@@ -44,7 +45,6 @@ function UserHome() {
     const dataFromLocalStorage = localStorage.getItem("userData");
     let userInfo = dataFromLocalStorage ? JSON.parse(dataFromLocalStorage) : null;
     let G_User2 = G_user ? JSON.parse(G_user) : null
-
      
     if(userInfo == null && G_User2 != null){
         userInfo = G_User2
@@ -83,6 +83,8 @@ function UserHome() {
                 <LeftDivComp props={userInfo} />
                 <LeftDivComp props={userInfo} />
                 <LeftDivComp props={userInfo} />
+
+                <UserProfile props = {userInfo} />
             </div>
 
             <div className="middle-div flex flex-col items-center justify-center bg-blue-400/20 h-full w-3/5 p-4 rounded-2xl relative">
