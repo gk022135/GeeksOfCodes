@@ -6,31 +6,6 @@ const LoginButton = () => {
   const { loading, setLoading, SendDataSignLogin } = useContext(AppContext);
   const { loginWithRedirect, user, isAuthenticated } = useAuth0();
 
-  console.log("hi login se")
-
-  // Function to initiate Google login
-  // const handleGoogleLogin = async () => {
-  //   await loginWithRedirect();
-  // };
-
-  console.log("user data",user);
-
-  // Send user data to backend after authentication
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      const sendUserData = async () => {
-        try {
-          const response = await SendDataSignLogin("google-login", user);
-          console.log("Response for saving Google user:", response);
-        } catch (error) {
-          console.error("Error sending user data:", error);
-        }
-      };
-
-      sendUserData();
-    }
-  }, [isAuthenticated, user, SendDataSignLogin]);
-
   return <button onClick={() => loginWithRedirect()}>Log In with Google</button>;
 };
 

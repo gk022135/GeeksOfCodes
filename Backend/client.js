@@ -1,6 +1,6 @@
 const {Redis} = require('ioredis');
 
-const client = new Redis();
+// const client = new Redis();
 
 // async function init(){
 //     console.log("in client ",await client.get("otp:user@gmail.com"));
@@ -9,4 +9,4 @@ const client = new Redis();
 // init();
 //
 
-module.exports = client;
+// module.exports = client;

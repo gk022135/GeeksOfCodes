@@ -18,7 +18,7 @@ function Normaluser() {
     const navigate = useNavigate();
     const googleAuth = useAuth0();
 
-    console.log("google data",googleAuth);
+    console.log("google data frontend per ",googleAuth);
 
     const [showpass, SetShowpass] = useState(false)
     const [confshowpass, SetconfShowpass] = useState(false)
