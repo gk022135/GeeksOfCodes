@@ -14,7 +14,7 @@ const GoogleSchema = new mongoose.Schema({
 });
 
 // Convert Schema to Model
-const GoogleUser = mongoose.model('GoogeLoginData', GoogleSchema);
+const GoogleUser = mongoose.model('Guser', GoogleSchema);
 
 // Export the Model
 module.exports = GoogleUser;

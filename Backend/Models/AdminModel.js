@@ -1,10 +1,15 @@
-const { required } = require('joi')
-const mongoose = require('mongoose')
+const { required } = require('joi');
+const mongoose = require('mongoose');
 
-const AdminModel = new mongoose.Schema({
-    AdminName: {type: string, required:true},
-    AdminEmail : {type: string, required: true},
-    role : "Admin",
-    Entry_Qr : [],
-    Exit_Qr : [],
-})
+const AdminSchema = new mongoose.Schema({
+    AdminEmail: { type: String, required: true, unique: true },
+    AdminName: { type: String, required: true },
+    password :{type:String, required:true},
+    role: { type: String, default: "Admin" },
+    Entry_Qr: { type: [String], default: [] },
+    Exit_Qr: { type: [String], default: [] } 
+});
+
+const AdminModel = new mongoose.model("Admin", AdminSchema);
+
+module.exports = AdminModel;
