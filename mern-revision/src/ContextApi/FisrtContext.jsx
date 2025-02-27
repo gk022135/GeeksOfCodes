@@ -1,6 +1,8 @@
 import { useContext, createContext, useState } from "react";
 
 const BASE_URL = "http://localhost:3000/mern-revision/v1";
+const BASE_URL_GET = "http://localhost:3000/mern-revision/v1/get"
+const BASE_URL_PUT = "http://localhost:3000/mern-revision/v1/put"
 
 export const AppContext = createContext();
 
@@ -31,11 +33,63 @@ export default function AppContextProvider({ children }) {
             setLoading(false);
         }
     }
+    async function AllGetReq(Api_url, queryParams = {}) {
+        try {
+            const queryString = new URLSearchParams(queryParams).toString();
+            
+            const newUrl = `${BASE_URL_GET}/${Api_url}${queryString ? `?${queryString}` : ""}`;
+
+            console.log("GET URL:", newUrl);
+
+            const result = await fetch(newUrl, {
+                method: "GET",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+            });
+
+            if (!result.ok) {
+                throw new Error(`HTTP error! Status: ${result.status}`);
+            }
+
+            const response = await result.json();
+            return response;
+        } catch (error) {
+            console.error("Error in AllGetReq:", error);
+            return { success: false, message: "Error fetching data" };
+        }
+    }
+
+    async function PutRequets(courseId, updatedData,Api_url) {
+        console.log("id context mein aya",courseId)
+        try {
+            const NewUrl = `${BASE_URL}/put/${Api_url}/${courseId}`
+            const response = await fetch(NewUrl, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedData),
+            });
+    
+            const data = await response.json();
+            if (data.success) {
+                console.log("Course updated:", data);
+                return data;
+            } else {
+                console.error("Failed to update course:", data.message);
+            }
+        } catch (error) {
+            console.error("Error in updating course:", error);
+        }
+    }
+
 
     const value = {
         loading,
         setLoading,
         SendDataSignLogin,
+        AllGetReq,
+        PutRequets
     };
 
     return (

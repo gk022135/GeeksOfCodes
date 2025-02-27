@@ -15,8 +15,6 @@ function Adminuser() {
     username: "",
     email: "",
     password: "",
-    contact: "",
-    gender: "",
     role: "Admin-user",
   });
 
@@ -31,24 +29,21 @@ function Adminuser() {
 
 
   const NewObject = {
-    username: NormaluserData.username,
+    name: NormaluserData.username,
     email: NormaluserData.email,
     password: NormaluserData.password,
     role: NormaluserData.role,
   }
 
 
-  //saving email to local storage then delete imediately after varification
-  localStorage.setItem("useremail", NormaluserData.email);
 
-  // Handling form submission
   const submitHandler = async (e) => {
     e.preventDefault();
-    const response = await SendDataSignLogin("signup", NewObject);
+    const response = await SendDataSignLogin("admin-sign-up", NewObject);
     if (response.success) {
       toast.success(response.message);
       setTimeout(() => {
-        navigate('/otpvarification')
+        navigate('/admin-login')
       }, 1000)
     }
     if(!response.success)toast.error(response.message)
@@ -100,24 +95,6 @@ function Adminuser() {
           value={NormaluserData.confirmpass}
           onChange={changeHandler}
           required
-        />
-
-        <label htmlFor="gen">Gender</label>
-        <input
-          type="text"
-          id="gen"
-          name="gender"
-          value={NormaluserData.gender}
-          onChange={changeHandler}
-        />
-
-        <label htmlFor="con">Contact</label>
-        <input
-          type="number"
-          id="con"
-          name="contact"
-          value={NormaluserData.contact}
-          onChange={changeHandler}
         />
 
         <button type="submit">Sign Up</button>

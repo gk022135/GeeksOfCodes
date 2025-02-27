@@ -42,7 +42,7 @@ const AminLogin = async (req, res) => {
 
         return res
             .status(200)
-            .cookie("Myjwt", Myjwt, {
+            .cookie("AdminCookie", Myjwt, {
                 httpOnly: true, // Prevent client-side JavaScript access
                 secure: true,   // Send only over HTTPS (enable in production)
                 sameSite: "Strict", // Prevent CSRF attacks
@@ -52,8 +52,8 @@ const AminLogin = async (req, res) => {
                 message: "Login successfully",
                 success: true,
                 role: isUserExists.role,
-                name: isUserExists.username,
-                email: isUserExists.email,
+                name: isUserExists.AdminName,
+                email: isUserExists.AdminEmail,
             });
 
 

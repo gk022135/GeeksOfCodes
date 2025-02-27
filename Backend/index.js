@@ -9,6 +9,8 @@ const cors = require('cors')
 const DB_connect = require('./Configs/DatabaseConfig')
 
 const route = require('./Routes/PostRoutes')
+const getRoute = require('./Routes/GetRoute');
+const putrouter = require('./Routes/PutRoute')
 
 
 const app = express();
@@ -21,13 +23,18 @@ app.use(
   );
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+
 app.use('/mern-revision/v1',route);
+app.use('/mern-revision/v1/get', getRoute);
+app.use('/mern-revision/v1/put', putrouter);
 
 
 app.get('/hello', (req, res) => {
     console.log("hi all fine bro");
     res.send(`<h1> hi bro </h1>`);
 });
+
 
 app.listen(3000, () => {
     console.log("Server is running at port 3000");

@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../ContextApi/FisrtContext";
 
 function Create_class() {
+  const {SendDataSignLogin} = useContext(AppContext)
   const [courseData, setCourseData] = useState({
-    className: "",
-    teacherName: "",
+    courseName: "",
+    Teacher: "",
     courseCode: "",
     isActive: false,
     createdAt: Date.now(),
@@ -22,13 +24,7 @@ function Create_class() {
     console.log("Submitted Course Data:", courseData);
     try {
       // Example API call (replace with your actual API call)
-      const response = await fetch("/api/courses", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(courseData),
-      });
+      const response = await SendDataSignLogin("ClassCreate",courseData)
 
       const result = await response.json();
       console.log("Server response:", result);
@@ -64,8 +60,8 @@ function Create_class() {
             <label>Course Name</label>
             <input
               type="text"
-              name="className"
-              value={courseData.className}
+              name="courseName"
+              value={courseData.courseName}
               onChange={handleChange}
               className="border rounded p-1"
               required
@@ -76,8 +72,8 @@ function Create_class() {
         <label>Teacher Name</label>
         <input
           type="text"
-          name="teacherName"
-          value={courseData.teacherName}
+          name="Teacher"
+          value={courseData.Teacher}
           onChange={handleChange}
           className="border rounded p-1"
           required
@@ -100,6 +96,7 @@ function Create_class() {
           Create A Class
         </button>
       </form>
+      
     </div>
   );
 }

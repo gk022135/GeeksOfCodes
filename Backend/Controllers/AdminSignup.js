@@ -6,6 +6,8 @@ async function AdmSignup(req, res) {
     try {
         const { email, name, password, role } = req.body;
 
+        console.log("data",req.body)
+
         if (!email || !password || !name || !role) {
             return res.status(400).json({
                 message: "all fields are required",
