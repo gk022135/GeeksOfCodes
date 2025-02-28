@@ -25,7 +25,6 @@ import { useNavigate } from "react-router-dom";
             ...prevData,
             [name]: value,
         }));
-        SetMatch(true);
     };
 
 

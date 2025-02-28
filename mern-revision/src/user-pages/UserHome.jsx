@@ -7,6 +7,8 @@ import { AppContext } from "../ContextApi/FisrtContext";
 import { useContext } from "react";
 import { useEffect } from "react";
 import UserProfile from "./User_Profile";
+import Todo_Page from "./Todo_redir";
+import CommunityForum from "./Community_chat";
 
 function UserHome() {
     const { SendDataSignLogin } = useContext(AppContext);
@@ -14,7 +16,7 @@ function UserHome() {
 
     useEffect(() => {
         const sendUserData = async () => {
-           
+
             if (G_user) {
                 const parsedUser = JSON.parse(G_user);
                 const userUpdatedData = {
@@ -27,7 +29,7 @@ function UserHome() {
                 };
 
                 try {
-                    const G_user_res =  SendDataSignLogin("google-login-data", userUpdatedData);
+                    const G_user_res = SendDataSignLogin("google-login-data", userUpdatedData);
                     console.log("Response from backend:", G_user_res);
                     console.log("Updated user data:", userUpdatedData);
                 } catch (error) {
@@ -45,13 +47,13 @@ function UserHome() {
     const dataFromLocalStorage = localStorage.getItem("UserData");
     let userInfo = dataFromLocalStorage ? JSON.parse(dataFromLocalStorage) : null;
     let G_User2 = G_user ? JSON.parse(G_user) : null
-     
-    if(userInfo == null && G_User2 != null){
+
+    if (userInfo == null && G_User2 != null) {
         userInfo = G_User2
     }
 
-    if(G_User2 == null && userInfo != null){
-        
+    if (G_User2 == null && userInfo != null) {
+
     }
 
     if (userInfo == null || G_User2 == null) {
@@ -64,51 +66,83 @@ function UserHome() {
     console.log(userInfo)
 
     // which data to be displayed 
-    
+    const leftEditor = {
+        url: "/all-classes-student",
+        head: "Monaic code",
+        para: "vs-code code editor try to use for real time collbroation in code",
+        name: "Go To All"
+    }
+    const logout = {
+        url : '/logout',
+        head : 'Logout',
+        para : "want to logout ?",
+        name: "logout"
+    }
 
-    const middleUper = {
-        name: "Gaurav  kumar",
-        url: "#",
-        color: "blue"
+
+    const AvailableClasses = {
+        url: "/all-classes",
+        head: "All Available",
+        para: "Here is All Classes that are held",
+        name: "Go To All"
+    }
+    const attendance = {
+        url: "/all-classes-student",
+        head: "Mark Your Attendance",
+        para: "now you can mark your attendance subject wise",
+        name: "Mark Attendance"
+    }
+
+    const QRComponent = {
+        url: "/qrscanner",
+        head: "G1/G2 Entries",
+        para: "scan Qr for making entries from university gate",
+        name: "Scan Qr"
     }
 
 
 
     return (
-        <div className="main flex flex-row bg-black relative h-screen mt-[80px] gap-4">
+        <div className="main flex flex-col md:flex-row bg-black relative min-h-screen mt-[80px] gap-4">
 
-
-            <div className="left-div bg-emerald-700/20 border-2 border-b-blue-800 h-full w-1/5 p-4 mt-4 rounded-2xl relative">
-
+            {/* Left Sidebar */}
+            <div className="left-div flex flex-col w-full bg-emerald-700/20 border-2 border-b-blue-800 md:w-1/5 p-4 mt-4 rounded-2xl relative">
+                <UserProfile props={userInfo} />
+                <LeftDivComp props={leftEditor} />
                 <LeftDivComp props={userInfo} />
-                <LeftDivComp props={userInfo} />
-                <LeftDivComp props={userInfo} />
+                <LeftDivComp props={logout} />
 
-                <UserProfile props = {userInfo} />
             </div>
 
-            <div className="middle-div flex flex-col items-center justify-center bg-blue-400/20 h-full w-3/5 p-4 rounded-2xl relative">
-                <div className="middle flex justify-center items-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative h-1/4 w-1/1">
-                    <Middle_upper props={middleUper} color={"#13180f"} />
-                    <Middle_upper props={middleUper} color={"#13180f"} />
-                    <Middle_upper props={middleUper} color={"#13180f"} />
+            {/* Middle Section */}
+            <div className="middle-div flex flex-col items-center justify-center bg-blue-400/20 md:h-full md:w-3/5 p-4 rounded-2xl relative gap-4">
 
+                {/* Upper Section */}
+                <div className="middle flex flex-col md:flex-row justify-center items-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative md:w-full gap-4 h-1/4">
+                    <Middle_upper props={QRComponent} color={"#13180f"} />
+                    <Middle_upper props={attendance} color={"#13180f"} />
+                    <Middle_upper props={AvailableClasses} color={"#13180f"} />
                 </div>
-                <div className="middle flex justify-center items-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative h-1/2 w-1/1">
+
+                {/* Middle Section */}
+                <div className="middle flex justify-center items-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative h-1/2 w-full">
                     <MiddlemiddleComp />
                     <MiddlemiddleComp />
                 </div>
-                <div className="middle flex justify-center  border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative h-1/4 w-1/1">
-                    <h1>your recent activties </h1>
+
+                {/* Bottom Section */}
+                <div className="middle flex justify-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative h-1/4 w-full">
+                    <h1>Your Recent Activities</h1>
                 </div>
             </div>
 
-            <div className="right-div bg-emerald-500/30 h-full w-1/5 p-4 mt-4 rounded-2xl relative">
+            {/* Right Sidebar */}
+            <div className="right-div bg-emerald-500/30 h-full md:w-1/5 p-4 mt-4 rounded-2xl relative">
+                <Todo_Page />
+                <CommunityForum />
                 <RightDivComp props={userInfo} />
-                <RightDivComp props={userInfo} />
-                <RightDivComp props={userInfo} />
-
             </div>
+
         </div>
 
     )

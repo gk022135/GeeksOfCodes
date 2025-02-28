@@ -53,10 +53,9 @@ import LoginButton from "../Google Auth/Login";
             if (response.role === "normal-user") {
 
                 setTimeout(() => {
-                  navigate("/user-home"); // ✅ Corrected function usage
+                  navigate("/user-home");
                 }, 1000);
             }
-            //redirect to home page and other page
         }
     };
     return (

@@ -15,6 +15,14 @@ const ClassCreate = require('../Controllers/Class_Create')
 const Attendance_marking = require('../Controllers/Attendance_Marking')
 
 
+//todos imports
+// const AddUser = require('../controllers/AddUser');
+// const AddTask = require('../controllers/AddTask');
+// const deleteTasks = require('../controllers/DeleteTask');
+// const completedTasks = require('../controllers/CompletedTask');
+// const Alltasks = require('../controllers/all-gets/Alltasks');
+
+
 // router.post('/signup',signUpValidation, signupctrl);
 router.post('/login', LoginCtrl);
 // router.post('/optvarification', OtpVarification);
@@ -25,5 +33,15 @@ router.post('/admin-login',AdminLogin)
 
 router.post('/ClassCreate', ClassCreate)
 router.post('/attendance-marking',Attendance_marking)
+
+
+
+//todos routes are here
+// router.post('/adduser', AddUser);
+// router.put('/addtask',AddTask)
+// router.put('/deletetask',deleteTasks);
+// router.put('/completed-tasks',completedTasks);
+
+// router.get('/get-all-tasks/:email',Alltasks)
 
 module.exports = router;

@@ -5,7 +5,7 @@ const QrGenerator = () => {
   const [text, setText] = useState("");
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4">
+    <div className="flex flex-col items-center justify-center content-center gap-4 p-4">
       <h2 className="text-xl font-semibold">QR Code Generator</h2>
       <input
         type="text"

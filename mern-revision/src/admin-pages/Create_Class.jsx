@@ -42,8 +42,8 @@ function Create_class() {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit} className="flex flex-col gap-4 p-4">
+    <div className="text-white relative">
+      <form onSubmit={onSubmit} className="flex flex-col gap-4 p-4 w-4/5">
         <div className="flex flex-row justify-center gap-4">
           <span>
             <label>Course Code</label>

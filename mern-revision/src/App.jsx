@@ -15,6 +15,11 @@ import AdminHome from "./admin-pages/Admin_Home";
 import AdminLogin from "./signup-login/AdminLogin";
 import Create_class from "./admin-pages/Create_Class";
 import All_Class_adm from "./admin-pages/All_Class_Ad";
+import TodoHome from "./components/TodoHome";
+import All_Class_Std from "./user-pages/All_class_std";
+import All_Class from "./user-pages/All_Class";
+
+
 
 function App() {
   return (
@@ -38,6 +43,11 @@ function App() {
             <Route path='/admin-login' element={<AdminLogin />} />
             <Route path="/create-class" element = {<Create_class />} />
             <Route path="/all-classes-adm" element = {<All_Class_adm />} />
+
+            <Route path="/todo-home" element={<TodoHome /> } />
+            <Route path="/all-classes-student" element = {<All_Class_Std />} />
+
+            <Route path="/all-classes" element = {<All_Class />} />
 
 
           </Routes>
