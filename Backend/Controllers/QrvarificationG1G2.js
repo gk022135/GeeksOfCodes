@@ -17,8 +17,11 @@ async function QrvarificationG1G2(req, res) {
     const qrPrefix = qrvalue.substring(0, 4).toUpperCase(); // Fix function name
     const adminData = await AdminModel.findOne().select("Entry_Qr Exit_Qr");
 
+    console.log(adminData)
+
     if (!adminData || (adminData.Entry_Qr != qrvalue && adminData.Exit_Qr != qrvalue)) {
-      return res.status(404).json({
+      console.log("value check hua ")
+      return res.status(400).json({
         message: "Wrong QR code",
         success: false,
       });
@@ -51,6 +54,7 @@ async function QrvarificationG1G2(req, res) {
         return res.status(200).json({
           message: "Exit recorded successfully.",
           success: true,
+          direction : "Now you Can go Outside of University"
         });
       } else {
         return res.status(400).json({
@@ -71,8 +75,9 @@ async function QrvarificationG1G2(req, res) {
 
         await newEntry.save();
         return res.status(200).json({
-          message: "Entry recorded successfully.",
+          message: "Entry recorded successfully .",
           success: true,
+          direction : "come inside University"
         });
       } else {
         return res.status(400).json({

@@ -19,6 +19,8 @@ import TodoHome from "./components/TodoHome";
 import All_Class_Std from "./user-pages/All_class_std";
 import All_Class from "./user-pages/All_Class";
 import PopComponent from "./UiComponents/PopupComponent";
+import AddEntryExitQr from "./admin-pages/AddEntryExitQr";
+import EntriesLog from "./admin-pages/AllEntryExits";
 
 
 
@@ -50,6 +52,8 @@ function App() {
 
             <Route path="/all-classes" element = {<All_Class />} />
             <Route path="/popcomp" element = {<PopComponent />} />
+            <Route path="/qrrr" element={<AddEntryExitQr />} />
+            {/* <Route path="/xyz" element={<EntriesLog />} /> */}
 
 
           </Routes>

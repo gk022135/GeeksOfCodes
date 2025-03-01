@@ -6,23 +6,16 @@ import LogoutButton from "../Google Auth/Logout";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
-  const {isAuthenticated} = useAuth0();
-  console.log("ky a maal hai isme", useAuth0());
-  
+  const {isAuthenticated} = useAuth0();  
   const [isOpen, setIsOpen] = useState(false);
 
   const localData = localStorage.getItem("userData");
-  console.log(localData)
   let data = localData ? JSON.parse(localData) : {}; // Ensure `data` is an object
   
   // Ensure `data.success` is always a boolean
   if (typeof data.success !== "boolean") {
     data.success = false;
   }
-  console.log("hi ", data.success)
-  
-
- 
 
 
   return (

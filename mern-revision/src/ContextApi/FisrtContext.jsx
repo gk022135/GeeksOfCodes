@@ -36,31 +36,36 @@ export default function AppContextProvider({ children }) {
     async function AllGetReq(Api_url, queryParams = {}) {
         try {
             const queryString = new URLSearchParams(queryParams).toString();
-            
             const newUrl = `${BASE_URL_GET}/${Api_url}${queryString ? `?${queryString}` : ""}`;
-
+    
             console.log("GET URL:", newUrl);
-
+    
             const result = await fetch(newUrl, {
                 method: "GET",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
             });
-
+    
+            const responseData = await result.json();
+    
+            // ✅ Check for HTTP errors but return the response instead of throwing
             if (!result.ok) {
-                throw new Error(`HTTP error! Status: ${result.status}`);
+                console.warn(`HTTP Error: ${result.status} - ${responseData.message}`);
+                return responseData; // Return response even if it's an error
             }
-
-            const response = await result.json();
-            return response;
+    
+            return responseData; // Normal success case
+    
         } catch (error) {
             console.error("Error in AllGetReq:", error);
             return { success: false, message: "Error fetching data" };
         }
     }
+    
 
-    async function PutRequets(courseId, updatedData,Api_url) {
-        console.log("id context mein aya",courseId)
+
+    async function PutRequets(courseId, updatedData, Api_url) {
+        console.log("id context mein aya", courseId)
         try {
             const NewUrl = `${BASE_URL}/put/${Api_url}/${courseId}`
             const response = await fetch(NewUrl, {
@@ -70,7 +75,7 @@ export default function AppContextProvider({ children }) {
                 },
                 body: JSON.stringify(updatedData),
             });
-    
+
             const data = await response.json();
             if (data.success) {
                 console.log("Course updated:", data);

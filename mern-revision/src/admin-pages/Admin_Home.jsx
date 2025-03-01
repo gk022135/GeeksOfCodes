@@ -6,6 +6,7 @@ import Attendance from "./Mark_Attendance";
 
 import AdminPro from './AdminPro'
 import QrGenerator from "../QR/QrGenerator";
+import EntriesLog from "./AllEntryExits";
 
 function AdminHome() {
     const [selectedButton, setSelectedButton] = useState(null);
@@ -50,6 +51,10 @@ function AdminHome() {
                     <button onClick={() => handleButtonClick("Attendance")} className="border-2 border-cyan-500 rounded-2xl text-white p-2  m-2 w-9/10">
                         Mark Attendance
                     </button>
+
+                    <button onClick={() => handleButtonClick("entrieslog")} className="border-2 border-cyan-500 rounded-2xl text-white p-2  m-2 w-9/10">
+                        G1 G2 Log
+                    </button>
                    
                 </div>
 
@@ -60,6 +65,8 @@ function AdminHome() {
                     {selectedButton === "Qr Add" &&<QrGenerator/>}
                     {selectedButton === "Delete_User" && <DeleteUser />}
                     {selectedButton === "Attendance" && <Attendance />}
+
+                    {selectedButton === "entrieslog" && <EntriesLog />}
                     
                     {/* Default Content when no button is clicked */}
                     {!selectedButton && <h1 className="text-white text-2xl">Select an option from the sidebar</h1>}
