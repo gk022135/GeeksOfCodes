@@ -15,6 +15,7 @@ const ClassCreate = require('../Controllers/Class_Create')
 const Attendance_marking = require('../Controllers/Attendance_Marking')
 
 
+
 //todos imports
 // const AddUser = require('../controllers/AddUser');
 // const AddTask = require('../controllers/AddTask');
@@ -33,6 +34,7 @@ router.post('/admin-login',AdminLogin)
 
 router.post('/ClassCreate', ClassCreate)
 router.post('/attendance-marking',Attendance_marking)
+
 
 
 

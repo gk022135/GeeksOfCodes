@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import QrScanner from "../QR/QR_Scanner";
 import { AppContext } from "../ContextApi/FisrtContext";
+import QrvarificationG1g2 from "./QR_VarificationG1G2";
 
 const Qr_res = () => {
   const [scanResult, setScanResult] = useState("");
@@ -18,16 +19,16 @@ const Qr_res = () => {
   };
 
   //sending scanned data to backend for varification purpose
-  useEffect ( async()=>{
-    try{
-        // const qr_response = await SendDataSignLogin()
-    }
-    catch (error){
-      console.log("qr_res error = ", error)
+  // useEffect ( async()=>{
+  //   try{
+  //       // const qr_response = await SendDataSignLogin()
+  //   }
+  //   catch (error){
+  //     console.log("qr_res error = ", error)
 
-    }
+  //   }
 
-  }, [])
+  // }, [])
 
   return (
     <div className="flex flex-col items-center p-4">
@@ -65,6 +66,8 @@ const Qr_res = () => {
           <strong>Scan Result:</strong> {scanResult}
         </div>
       )}
+
+      <QrvarificationG1g2 Qrvalue = {scanResult}/>
     </div>
   );
 };
