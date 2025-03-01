@@ -4,7 +4,7 @@ import Middle_upper from "./Middle_upper";
 import MiddlemiddleComp from "./Middle_middle_comp";
 // import { useAuth0 } from "@auth0/auth0-react";
 import { AppContext } from "../ContextApi/FisrtContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import UserProfile from "./User_Profile";
 import Todo_Page from "./Todo_redir";
@@ -13,6 +13,30 @@ import CommunityForum from "./Community_chat";
 function UserHome() {
     const { SendDataSignLogin } = useContext(AppContext);
     const G_user = localStorage.getItem("userGdata");
+
+
+
+    const [clickType, setClickType] = useState(null);
+    useEffect(() => {
+        const buttonType = localStorage.getItem("buttonClickType");
+        if (buttonType) {
+            setClickType(buttonType);
+        }
+    }, []);
+    
+    const clickHandler = (props) => {
+        setClickType((prevType) => {
+            const newType = prevType === props ? null : props; // Toggle logic
+            if (newType) {
+                localStorage.setItem("buttonClickType", newType);
+            } else {
+                localStorage.removeItem("buttonClickType");
+            }
+            return newType;
+        });
+    };
+
+
 
     useEffect(() => {
         const sendUserData = async () => {
@@ -73,9 +97,9 @@ function UserHome() {
         name: "Go To All"
     }
     const logout = {
-        url : '/logout',
-        head : 'Logout',
-        para : "want to logout ?",
+        url: '/logout',
+        head: 'Logout',
+        para: "want to logout ?",
         name: "logout"
     }
 
@@ -109,6 +133,14 @@ function UserHome() {
             <div className="left-div flex flex-col w-full bg-emerald-700/20 border-2 border-b-blue-800 md:w-1/5 p-4 mt-4 rounded-2xl relative">
                 <UserProfile props={userInfo} />
                 <LeftDivComp props={leftEditor} />
+
+
+                <div className="middle-upper-1 flex flex-col relative bg-black border-amber-300 border-2 justify-center items-center p-1 overflow-hidden ml-1 mr-1 md:w-3/3 rounded-2xl h-auto gap-2 m-2 content-center hover:bg-emerald-400 bg-gradient-to-r  from-green-400 to-blue-900 ">
+                    <button
+                        onClick={() => clickHandler("Search")}
+                    >Search Attendance by Sub</button>
+                </div>
+
                 <LeftDivComp props={userInfo} />
                 <LeftDivComp props={logout} />
 
@@ -128,6 +160,7 @@ function UserHome() {
                 <div className="middle flex justify-center items-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative h-1/2 w-full">
                     <MiddlemiddleComp />
                     <MiddlemiddleComp />
+                    {clickType === "Search" ? (<h1 className="bg-red-400 h-20">hello working fine ji</h1>) : ("")}
                 </div>
 
                 {/* Bottom Section */}

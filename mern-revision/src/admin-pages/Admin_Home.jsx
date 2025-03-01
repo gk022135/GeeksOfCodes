@@ -18,8 +18,6 @@ function AdminHome() {
             setSelectedButton(parsedData.BtnName);
         }
     }, []);
-
-    
     function handleButtonClick(buttonName) {
         setSelectedButton(buttonName);
         localStorage.setItem("buttonClickType", JSON.stringify({ BtnName: buttonName }));

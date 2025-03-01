@@ -18,6 +18,7 @@ import All_Class_adm from "./admin-pages/All_Class_Ad";
 import TodoHome from "./components/TodoHome";
 import All_Class_Std from "./user-pages/All_class_std";
 import All_Class from "./user-pages/All_Class";
+import PopComponent from "./UiComponents/PopupComponent";
 
 
 
@@ -48,6 +49,7 @@ function App() {
             <Route path="/all-classes-student" element = {<All_Class_Std />} />
 
             <Route path="/all-classes" element = {<All_Class />} />
+            <Route path="/popcomp" element = {<PopComponent />} />
 
 
           </Routes>
