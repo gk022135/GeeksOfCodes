@@ -21,6 +21,7 @@ import All_Class from "./user-pages/All_Class";
 import PopComponent from "./UiComponents/PopupComponent";
 import AddEntryExitQr from "./admin-pages/AddEntryExitQr";
 import EntriesLog from "./admin-pages/AllEntryExits";
+import DeleteCourse from "./admin-pages/Delete_Class";
 
 
 
@@ -53,6 +54,8 @@ function App() {
             <Route path="/all-classes" element = {<All_Class />} />
             <Route path="/popcomp" element = {<PopComponent />} />
             <Route path="/qrrr" element={<AddEntryExitQr />} />
+            <Route path="/delete" element={<DeleteCourse/>} />
+            
             {/* <Route path="/xyz" element={<EntriesLog />} /> */}
 
 

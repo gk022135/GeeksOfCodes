@@ -14,6 +14,8 @@ const AdminLogin = require('../Controllers/AdminLogin')
 const ClassCreate = require('../Controllers/Class_Create')
 const Attendance_marking = require('../Controllers/Attendance_Marking')
 
+const DeleteCourse = require('../Controllers/DeleteRequest')
+ 
 
 
 //todos imports
@@ -34,6 +36,9 @@ router.post('/admin-login',AdminLogin)
 
 router.post('/ClassCreate', ClassCreate)
 router.post('/attendance-marking',Attendance_marking)
+
+
+router.delete('/delete-course/:courseId', DeleteCourse);
 
 
 

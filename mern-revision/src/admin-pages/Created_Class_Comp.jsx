@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../ContextApi/FisrtContext";
+import DeleteCourse from "./Delete_Class";
 
 
 function ClassComponent({ course }) {
@@ -33,6 +34,7 @@ function ClassComponent({ course }) {
                 <p style={{ backgroundColor: course.isActive ? "green" : "red" }}
                 className="flex rounded-2xl p-2"
                 > {course.isActive ? "Attendance Live" : "Attendance Off"} </p>
+                <DeleteCourse props = {course.courseCode}/>
 
             </div>
             <h1 className="flex content-center justify-center text-2xl font-bold p-2 border-2  h-12 m-2 rounded-2xl bg-gradient-to-tl from-red-500 to-yellow-300 bg-clip-text text-transparent/90">{course.courseName}</h1>

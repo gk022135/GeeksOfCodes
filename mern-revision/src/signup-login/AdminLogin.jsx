@@ -30,6 +30,7 @@ import { useNavigate } from "react-router-dom";
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        console.log("NormaluserData")
         const response = await SendDataSignLogin('admin-login',NormaluserData);
         console.log("login response for frtend ",response);
 

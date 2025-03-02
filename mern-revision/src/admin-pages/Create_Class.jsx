@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../ContextApi/FisrtContext";
+import { ToastContainer, toast } from 'react-toastify'
 
 function Create_class() {
-  const {SendDataSignLogin} = useContext(AppContext)
+  const { SendDataSignLogin } = useContext(AppContext)
+  const [res, setRes] = useState(null)
   const [courseData, setCourseData] = useState({
     courseName: "",
     Teacher: "",
@@ -22,11 +24,19 @@ function Create_class() {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitted Course Data:", courseData);
-    try {
-      // Example API call (replace with your actual API call)
-      const response = await SendDataSignLogin("ClassCreate",courseData)
 
-      const result = await response.json();
+    try {
+      const response = await SendDataSignLogin("ClassCreate", courseData)
+      setRes(response);
+      console.log("hello ji", response)
+
+      if (response.success) {
+        toast.success(response.message)
+      }
+      if (!response.success) {
+        toast.error(response.message)
+      }
+
       console.log("Server response:", result);
       // Reset form after submission
       setCourseData({
@@ -96,7 +106,14 @@ function Create_class() {
           Create A Class
         </button>
       </form>
-      
+      {res && (
+        <h1 className={res.success ? " bg-green-500 rounded p-2 w-1/6 font-bold text-black" : "bg-red-500 rounded p-2 w-1/6 font-bold text-black"}>
+          {res.message}
+        </h1>
+      )}
+
+
+      <ToastContainer />
     </div>
   );
 }
