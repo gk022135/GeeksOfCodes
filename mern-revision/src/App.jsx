@@ -22,6 +22,7 @@ import PopComponent from "./UiComponents/PopupComponent";
 import AddEntryExitQr from "./admin-pages/AddEntryExitQr";
 import EntriesLog from "./admin-pages/AllEntryExits";
 import DeleteCourse from "./admin-pages/Delete_Class";
+import HomeDiscussion from "./Discusion/HomeDiscussion";
 
 
 
@@ -55,6 +56,7 @@ function App() {
             <Route path="/popcomp" element = {<PopComponent />} />
             <Route path="/qrrr" element={<AddEntryExitQr />} />
             <Route path="/delete" element={<DeleteCourse/>} />
+            <Route path="/discussion" element={<HomeDiscussion/>} />
             
             {/* <Route path="/xyz" element={<EntriesLog />} /> */}
 

@@ -32,6 +32,8 @@ const Navbar = () => {
             <NavLink to="/user-home" className="opacity-100 hover:opacity-100 hover:text-xl hover:font-bold">About</NavLink>
             <NavLink to="/login" className="opacity-100 hover:opacity-100 hover:text-xl hover:font-bold">{data.success|| isAuthenticated ? <LogoutButton /> : "Login"}</NavLink>
             <NavLink to="/Contact" className="opacity-100 hover:opacity-100 hover:text-xl hover:font-bold">Contact</NavLink>
+
+            <NavLink to="/discussion" className="opacity-100 hover:opacity-100 hover:text-xl hover:font-bold">Community</NavLink>
           </div>
 
          

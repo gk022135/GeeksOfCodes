@@ -90,7 +90,7 @@ function Normaluser() {
     console.log("your ", IsPassMatch)
 
     return (
-        <div>
+        <div className="">
             <form className="form " onSubmit={submitHandler}>
                 <label htmlFor="name">User Name</label>
                 <input
@@ -142,23 +142,16 @@ function Normaluser() {
                     </span>
                 </label>
 
-                <label htmlFor="gen">Gender</label>
-                <input
-                    type="text"
-                    id="gen"
-                    name="gender"
-                    value={NormaluserData.gender}
-                    onChange={changeHandler}
-                />
+                
 
-                <label htmlFor="con">Contact</label>
+                {/* <label htmlFor="con">Contact</label>
                 <input
                     type="number"
                     id="con"
                     name="contact"
                     value={NormaluserData.contact}
                     onChange={changeHandler}
-                />
+                /> */}
 
                 <button type="submit">Sign Up</button>
                 <span className="border rounded-md p-2 ml-2 text-red-500">Already Account ?
@@ -170,7 +163,7 @@ function Normaluser() {
                     </NavLink>
                 </span>
 
-                <span className="flex flex-row gap-2 border-2 border-blue-700 rounded-md justify-center items-center p-1 mt-2 text-white hover:bg-amber-800/50 cursor-pointer w-auto">
+                <span className="flex flex-row gap-2 border-2 border-blue-700 rounded-md justify-center items-center content-center p-1 mt-2 text-white hover:bg-amber-800/50 cursor-pointer w-auto">
                     {<FcGoogle size={30} />} <h2> {<LoginButton />}</h2>
                 </span>
             </form>

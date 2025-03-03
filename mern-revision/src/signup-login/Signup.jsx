@@ -24,13 +24,13 @@ function Signup() {
       {loading ? (
         <HashLoader />
       ) : (
-        <div className="flex flex-col justify-center content-center items-center p-1 m-3 w-[400px] bg-blue-600/75 text-blue-50 gap-2">
+        <div className="flex flex-col rounded-2xl justify-center content-center items-center p-1 m-3 w-[400px] bg-black text-blue-50 gap-2">
           {/* Buttons with active state styling */}
           <div>
             <button
-              className={`border-2 px-2 rounded-md h-10 m-2 transition-all 
+              className={` px-2 rounded-md h-10 m-2 transition-all 
               ${
-                isTrue ? "bg-green-400 text-white font-bold" : "bg-amber-700/90"
+                isTrue ? "bg-green-400 text-black font-bold border-2 border-white" : "bg-amber-700/90"
               }`}
               onClick={() => setIsTrue(true)}
             >
@@ -38,10 +38,10 @@ function Signup() {
             </button>
 
             <button
-              className={`border-2 px-2 rounded-md h-10 m-2 transition-all 
+              className={` px-2 rounded-md h-10 m-2 transition-all 
               ${
                 !isTrue
-                  ? "bg-green-400 text-white font-bold"
+                  ? "bg-green-400 border-2 border-white  text-black font-bold"
                   : "bg-amber-700/90"
               }`}
               onClick={() => setIsTrue(false)}
