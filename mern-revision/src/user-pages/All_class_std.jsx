@@ -46,7 +46,7 @@ function All_Class_Std({x}) {
         <div>
             {classData ? (
 
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 gap-2 bg-black">
                     {(!x ? classData.filter(course => course.isActive) : classData)
                         .map((course, index) => (
                             <div key={index} className="shadow-md p-2 rounded-lg">

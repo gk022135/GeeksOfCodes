@@ -127,7 +127,7 @@ function UserHome() {
 
 
     return (
-        <div className="main flex flex-col md:flex-row bg-black relative min-h-screen mt-[80px] gap-4">
+        <div className="main flex flex-col md:flex-row bg-black relative min-h-screen mt-[64px] gap-4">
 
             {/* Left Sidebar */}
             <div className="left-div flex flex-col w-full bg-emerald-700/20 border-2 border-b-blue-800 md:w-1/5 p-4 mt-4 rounded-2xl relative">

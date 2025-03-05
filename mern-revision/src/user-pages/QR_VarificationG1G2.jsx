@@ -30,7 +30,7 @@ function QrvarificationG1g2({ Qrvalue }) {
                     setScanning(true);
                     varifcation();
                 }}
-                className="px-4 py-2 bg-blue-500 text-white rounded"
+                className="px-4 py-2 bg-blue-800 text-white rounded"
             >
                 Check Status
             </button>

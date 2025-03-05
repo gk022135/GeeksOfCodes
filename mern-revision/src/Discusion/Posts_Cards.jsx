@@ -1,102 +1,112 @@
-import { useState } from "react"
-import white_flower from '../assets/white-flowers.jpg'
-
-import { FcDislike, FcLike } from "react-icons/fc";
-import { FcLikePlaceholder } from "react-icons/fc";
-
-
-import { FaCalendarCheck, FaComment, FaRegComment } from "react-icons/fa";
-
+import { useEffect, useState } from "react";
+import white_flower from "../assets/white-flowers.jpg";
+import { FcDislike, FcLike, FcLikePlaceholder } from "react-icons/fc";
+import { FaRegComment } from "react-icons/fa";
+import CommentsSection from "./CommentSection";
+import img2 from '../assets/headphones.jpg'
 
 function Posts_Cards(props) {
-    const [comment, setComment] = useState({
-        comment: ""
-    });
+    const [comment, setComment] = useState("");
+    const [btncomment, setBtnComment] = useState("");
+
+
+    useEffect(() => {
+        const commentBtn = localStorage.getItem("commentBtn");
+        if (commentBtn) {
+            setBtnComment(JSON.parse(commentBtn).commetnBtn);
+        }
+    }, []);
 
     const postDetails = {
         useremail: "Gk022135@gmail.com",
-        postHeader: "i just try to implement the community posts feature for making class disussion available 24x7, anyone from university can communicate and delivery the usefull content",
-        postImage: white_flower,
+        postHeader: "I just tried to implement the community posts feature for making class discussions available 24x7. Anyone from the university can communicate and deliver useful content.",
+        postImage: img2,
         tags: "",
-        coments: "20",
+        comments: "20",
         likes: "512",
         dislikes: "123",
-    }
+    };
 
-    function ChangeeHndler(event) {
-        const { name, value } = event.target;
-        // setComment(...prevState, [name] = event.target.value)
+    function handleChange(event) {
+        setComment(event.target.value);
     }
 
     async function makelike() {
-        //post request hai like inrement by +1
-
-        /**
-         * requirement user email-->get by local storage
-         * nothing else 
-         */
-
+        // Handle like functionality (POST request)
     }
+
     async function makedislikes() {
-        /**
-         * requirement user email-->get by local storage
-         * nothing else 
-         */
-
+        // Handle dislike functionality (POST request)
     }
-    async function makeComments() {
-        //post request
-        //arr of string, add a new string
-        /**
-         * requirement user email-->get by local storage
-         * comment body---> can be get by input field, usestate and Change Handler
-         * nothing else 
-         */
+
+    async function makeComments(props) {
+        setBtnComment(props)
+
+        localStorage.setItem("commentBtn", JSON.stringify({ commetnBtn: props }))
+        console.log("Comment submitted:", comment);
+        setComment("");
     }
 
     return (
-        <div className="relative w-2/3 sm:w-3/5 bg-gradient-to-tr from-blue-950 to-green-500 p-2 rounded-2xl">
-            <div className="flex p-2 border-b-2 relative">
-                <h1 className="flex border-2 border-yellow-300 p-2 rounded-full text-xl font-bold bg-gray-400 mr-2">{postDetails.useremail[0].toUpperCase()}</h1>
+        <div className="relative w-auto sm:w-3/7 text-white bg-white/10 p-2 rounded-2xl">
+            {/* Header Section */}
+            <div>
+                <div className="flex p-2 border-b-2 border-white/30">
+                    <h1 className="border-1 border-yellow-300 p-2 rounded-full text-xl font-bold bg-black mr-2">
+                        {postDetails.useremail[0].toUpperCase()}
+                    </h1>
+                    <h1 className="mt-2 text-white/50 text-sm">{postDetails.useremail}</h1>
+                </div>
 
-                
-                <h1 className="flex mt-2 text-white ">{postDetails.useremail}</h1>
-            </div>
+                {/* Post Content */}
+                <p className="text-amber-50 p-2 text-sm">{postDetails.postHeader}</p>
+                <img
+                    src={postDetails.postImage}
+                    alt="Post"
+                    width={"200px"}
+                    height={"200px"}
+                    className="p-1 w-3/4 sm:h-2/5 m-5 rounded-2xl"
+                />
 
-            <p className="flex text-amber-50 antialiased p-2">{postDetails.postHeader}</p>
-            <img src={postDetails.postImage} width={"400px"} height={"300px"}
-            className="flex relative w-3/4 h-[300px] m-5 ml-20 rounded-2xl"
-            />
+                {/* Actions Section */}
+                <div className="flex flex-row text-white p-2 justify-evenly">
+                    <div className="flex flex-row">
+                        {/* Like Button */}
+                        <div className="flex flex-col bg-black/50 rounded-2xl p-2 m-2 hover:bg-green-800">
+                            <button onClick={makelike}>
+                                <FcLike size={25} />
+                            </button>
+                            <p className="text-sm">{postDetails.likes}</p>
+                        </div>
 
-            <div className="flex flex-row text-white p-2 justify-evenly">
-                <div className="flex flex-row">
-                    <div className="flex flex-col bg-black/50 rounded-2xl p-2 m-2">
-                        <button onClick={makelike}
-                        className=""
-                        >{}<FcLike size={25}/></button>
-                        <p className="text-sm">{postDetails.likes}</p>
+                        {/* Dislike Button */}
+                        <div className="flex flex-col bg-black/50 rounded-2xl p-2 m-2 hover:bg-red-600">
+                            <button onClick={makedislikes}>
+                                <FcLikePlaceholder size={25} />
+                            </button>
+                            <p className="text-sm">{postDetails.dislikes}</p>
+                        </div>
                     </div>
-                    <div className="flex flex-col  bg-black/50 rounded-2xl p-2 m-2">
-                        <button onClick={makedislikes}>
-                            {<FcLikePlaceholder size={25}/>}</button>
 
-                        <p className="text-sm">{postDetails.dislikes}</p>
+                    {/* Comment Input Section */}
+                    <div className="flex flex-row rounded-2xl bg-black/50 m-2 p-2 hover:bg-white/40">
+                        <button onClick={() => (makeComments("comment"))} className="m-1">
+                            <FaRegComment size={25} />
+                        </button>
+                        {/* <textarea
+                        value={comment}
+                        onChange={handleChange}
+                        placeholder="Write a comment..."
+                        className="bg-gray-400 text-sm rounded w-3/4 p-1 text-black"
+                    /> */}
                     </div>
                 </div>
-                <div className="flex flex-row rounded-2xl bg-black/50  m-2 relative">
-                    <button onClick={makeComments}
-                    className="m-1"
-                    >{<FaRegComment size={25} />}</button>
-                    <input type="text" 
-                    placeholder="make comment here"
-                    className="bg-gray-400 text-sm rounded w-3/4 h-3/6 mt-4 mr-2 p-1 text-black"
-                    ></input>
-                </div>
             </div>
-
-
+            {
+                btncomment === "comment" ? (<CommentsSection />) : ("")
+            }
         </div>
-    )
+    );
 }
 
 export default Posts_Cards;

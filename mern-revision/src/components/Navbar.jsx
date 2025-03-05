@@ -19,21 +19,27 @@ const Navbar = () => {
 
 
   return (
-    <nav className="sticky top-0 z-10 bg-gradient-to-br from-black to-green-600 backdrop-blur-lg text-black font-medium">
+    <nav className="sticky top-0 z-10 bg-black backdrop-blur-lg text-black font-medium">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <span className="bg-gradient-to-tl from-yellow-500 to-red-600 bg-clip-text text-transparent text-3xl opacity-80 font-bold font-mono hover:shadow-xl hover:shadow-emerald-300/50
- p-1">Uniator</span>
+ p-2 rounded-2xl">Uniator</span>
 
         
           <div className="hidden md:flex space-x-5 bg-gradient-to-br from-yellow-500 to-red-600 bg-clip-text text-transparent text-lg font-bold">
-            <NavLink to="/"  className="opacity-100 hover:opacity-100 hover:text-xl hover:font-bold">Home</NavLink>
-            <NavLink to="/user-home" className="opacity-100 hover:opacity-100 hover:text-xl hover:font-bold">About</NavLink>
-            <NavLink to="/login" className="opacity-100 hover:opacity-100 hover:text-xl hover:font-bold">{data.success|| isAuthenticated ? <LogoutButton /> : "Login"}</NavLink>
-            <NavLink to="/Contact" className="opacity-100 hover:opacity-100 hover:text-xl hover:font-bold">Contact</NavLink>
+            <NavLink to="/"  className="hover:text-white hover:opacity-100 hover:scale-120 hover:border-b-2 hover:font-bold hover:border-blue-400">Home</NavLink>
 
-            <NavLink to="/discussion" className="opacity-100 hover:opacity-100 hover:text-xl hover:font-bold">Community</NavLink>
+
+            <NavLink to="/user-home" className="hover:text-white hover:opacity-100 hover:scale-120 hover:border-b-2 hover:font-bold hover:border-blue-400">User-Access</NavLink>
+
+
+            <NavLink to="/login" className="hover:text-white hover:opacity-100 hover:scale-120 hover:border-b-2 hover:font-bold hover:border-blue-400">{data.success|| isAuthenticated ? <LogoutButton /> : "Login"}</NavLink>
+
+
+            <NavLink to="/Contact" className="hover:text-white hover:opacity-100 hover:scale-120 hover:border-b-2 hover:font-bold hover:border-blue-400">Contact</NavLink>
+
+            <NavLink to="/discussion" className="hover:text-white hover:opacity-100 hover:scale-120 hover:border-b-2 hover:font-bold hover:border-blue-400">Community</NavLink>
           </div>
 
          

@@ -31,7 +31,7 @@ const Qr_res = () => {
   // }, [])
 
   return (
-    <div className="flex flex-col items-center p-4">
+    <div className="flex flex-col items-center p-4 bg-black text-white">
       <h1 className="text-2xl font-bold mb-4">React QR Code Scanner</h1>
       <QrScanner
         onScanSuccess={handleScanSuccess}
@@ -42,7 +42,7 @@ const Qr_res = () => {
       <div className="flex gap-4 mt-4">
         <button
           className={`px-4 py-2 rounded-lg ${
-            isScanning ? "bg-gray-400" : "bg-green-500"
+            isScanning ? "bg-gray-800" : "bg-green-600"
           } text-white`}
           disabled={isScanning}
           onClick={() => setIsScanning(true)}
@@ -52,7 +52,7 @@ const Qr_res = () => {
 
         <button
           className={`px-4 py-2 rounded-lg ${
-            isScanning ? "bg-red-500" : "bg-gray-400"
+            isScanning ? "bg-red-500" : "bg-gray-800"
           } text-white`}
           disabled={!isScanning}
           onClick={() => setIsScanning(false)}
@@ -62,7 +62,7 @@ const Qr_res = () => {
       </div>
 
       {scanResult && (
-        <div className="mt-4 p-2 bg-green-100 rounded">
+        <div className="mt-4 p-2 bg-black border-1 rounded">
           <strong>Scan Result:</strong> {scanResult}
         </div>
       )}

@@ -23,6 +23,7 @@ import AddEntryExitQr from "./admin-pages/AddEntryExitQr";
 import EntriesLog from "./admin-pages/AllEntryExits";
 import DeleteCourse from "./admin-pages/Delete_Class";
 import HomeDiscussion from "./Discusion/HomeDiscussion";
+import MakePost from "./Discusion/MakePost";
 
 
 
@@ -34,7 +35,7 @@ function App() {
           <Navbar />
         </div>
 
-        <div className='w-full h-screen bg-amber-400 mt-17'>
+        <div className='w-full h-screen bg-blue-300 mt-16'>
           <Routes>
             <Route path="/" element={<Signup />} />
             <Route path="/user-home" element={<UserHome />} />
@@ -57,6 +58,7 @@ function App() {
             <Route path="/qrrr" element={<AddEntryExitQr />} />
             <Route path="/delete" element={<DeleteCourse/>} />
             <Route path="/discussion" element={<HomeDiscussion/>} />
+            <Route path="/discussion/makepost" element={<MakePost />} />
             
             {/* <Route path="/xyz" element={<EntriesLog />} /> */}
 

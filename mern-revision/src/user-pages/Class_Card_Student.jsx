@@ -42,27 +42,27 @@ function Class_Card_Component({ course, x }) {
     const percentage = parseInt((AttendByYou/total_class) * 100)
 
     return (
-        <div className="flex flex-col bg-gradient-to-tl from-black to-blue-900  sm:w-[400px] sm:h-[350px] justify-center content-center border-2 rounded-2xl mb-2 relative">
+        <div className="flex flex-col text-white bg-white/15  sm:w-[400px] sm:h-[300px] justify-center content-center border-2 rounded-2xl m-2 hover:shadow-2xl shadow-blue-500 relative transition-transform duration-300 hover:scale-105">
             <div className="flex sm:flex-row justify-evenly">
-                <p className="flex overflow-hidden left-0 top-0 text-amber-50  p-2">{course.createdAt.slice(0, 10)}</p>
+                <p className="flex overflow-hidden left-0 top-0   p-2">{course.createdAt.slice(0, 10)}</p>
                 <p style={{ backgroundColor: course.isActive ? "green" : "red" }}
                     className="flex rounded-2xl p-2"
                 > {course.isActive ? "Attendance Live" : "Attendance Off"} </p>
 
             </div>
-            <h1 className="flex content-center justify-center text-2xl font-bold p-2 border-2  h-12 m-2 rounded-2xl bg-gradient-to-tl from-red-500 to-yellow-300 bg-clip-text text-transparent/90">{course.courseName}</h1>
+            <h1 className="flex content-center justify-center text-2xl border-2  h-10 m-2 w-3/4 rounded-2xl">{course.courseName.toUpperCase()}</h1>
 
-            <h1 className="flex content-center justify-center text-2xl font-bold p-2 border-2 border-green-300 h-12 m-2 rounded-2xl bg-gradient-to-tl from-red-500 to-yellow-300 bg-clip-text text-transparent/90">Teacher: {course.Teacher}</h1>
+            <h1 className="flex content-center justify-center text-2xl w-3/4 border-2 h-10 m-2 rounded-2xl ">Teacher: {course.Teacher}</h1>
 
-            <h1 className="flex content-center justify-center text-2xl font-bold p-2 border-2 border-green-300 h-12 m-2 rounded-2xl bg-gradient-to-tl from-red-500 to-yellow-300 bg-clip-text text-transparent/90">Course Code: {course.courseCode}</h1>
+            <h1 className="flex content-center justify-center text-2xl border-2 w-3/4  h-10 m-2 rounded-2xl ">Course Code: {course.courseCode}</h1>
 
-            {!x ? (<button className="bg-gradient-to-br from-green-500 to-red-500 w-1/2 p-1 ml-20 rounded-2xl hover:bg-emerald-300 "
+            {!x ? (<button className="bg-blue-800 font-bold w-1/2 p-1 ml-20 rounded-2xl hover:bg-green-600 "
                 onClick={MakeAttendance}
             >Mark Attendance</button>) : ("")}
-            <div className="flex overflow-hidden p-2 gap-2">
-                <a href="#" className="bg-green-500 w-1/5 ml-5 rounded-xl"> more Info</a>
+            <div className="flex overflow-hidden p-1 gap-2">
+                <a href="#" className="bg-green-700 w-2/5 ml-1 text-center rounded-xl font-bold"> more Info</a>
                 <h1
-                className="text-white font-bold border-2 p-1 rounded-2xl w-7/10"
+                className="text-white font-bold border-2 p-1 rounded-2xl w-7/12"
                 > Your Atd:- {AttendByYou}/{total_class} = {percentage}%</h1>
             </div>
 

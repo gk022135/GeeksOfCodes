@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Posts_Cards from "./Posts_Cards";
+import CommentsSection from "./CommentSection";
+import UserProfile from "../user-pages/User_Profile";
 
 
 function HomeDiscussion (){
@@ -22,13 +24,13 @@ function HomeDiscussion (){
 
 
     return (
-        <div className="relative flex flex-col h-[800px] bg-gradient-to-tr from-red-700 to-green-500">
-           <div className="bg-amber-300 p-2 h-[40px]">
+        <div className="relative flex flex-col h-auto">
+           <div className="bg-black text-white text-2xl text-center p-4 h-auto border rounded-2xl">
             <h1> Community Discussion </h1>
            </div>
-           <div className="relative flex flex-row">
-               <div className="flex flex-col bg-black w-1/4 h-screen p-2 text-white m-2 rounded">
-                <h1>User Profile</h1>
+           <div className="relative flex flex-row" >
+               <div className="flex flex-col bg-black w-1/4 h-screen p-2 text-white  rounded-2xl border-1">
+               {/* <UserProfile /> */}
 
                <button onClick={ () => clickHandler("all-posts")}
                 className="border-2 border-emerald-400 rounded-2xl p-2 m-2 "
@@ -51,11 +53,12 @@ function HomeDiscussion (){
                
                </div>
 
-               <div className="bg-amber-200 w-3/4 h-screen p-2 m-2 rounded"
+               <div className="bg-black w-3/4 relative h-screen p-2 border rounded-2xl"
                > 
                <h1>kya render ho rha hai ji {isparams}</h1>
                   
                   {isparams === "all-posts" ? ( <Posts_Cards />) : ("")}
+                  {/* {isparams === "comment" ? (<CommentsSection />) : ("null")} */}
                </div>
            </div>
         </div>

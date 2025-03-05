@@ -53,18 +53,18 @@ function TodoHome() {
     };
 
     return (
-        <div className="flex flex-col gap-2 justify-center items-center text-white bg-opacity-50 ">
+        <div className="flex flex-col gap-2 justify-center items-center text-white bg-black h-screen">
 
 
 
 
-            <h1 className="h-10 bg-black content-center text-blue-300 p-2 rounded-xl border-spacing-3">Make your to-do here</h1>
+            <h1 className="h-10 bg-black content-center text-blue-300 text-3xl font-bold border-b-2  border-spacing-3">Make Your Daily Task Here</h1>
 
             <label className="flex flex-col m-2 p-2 border rounded-xl content-center gap-3 hover:text-yellow-200 pl-3 md:w-[600px] md:p-4">
 
                 Make task here:
                 <input
-                    className="bg-slate-300 bg-opacity-40 h-16 content-center rounded-lg pl-3 text-black"
+                    className="border-red-100 h-16 content-center rounded-lg pl-3 text-white bg-white/10"
                     type="text"
                     placeholder="Add task"
                     name="task"
@@ -84,7 +84,7 @@ function TodoHome() {
                         <div className="flex flex-row gap-3 items-center justify-between w-full">
                             <label className="flex items-center gap-2">
                                 <input
-                                    className="rounded-xl p-1 pl-3 w-20 bg-slate-300 bg-opacity-40 border border-gray-300"
+                                    className="rounded-xl p-1 pl-3 w-20 bg-opacity-40 border border-gray-300"
                                     type="number"
                                     name={`percentage-${index}`}
                                     onChange={(e) => percentHandler(index, e)}
@@ -92,7 +92,7 @@ function TodoHome() {
                                 />
                             </label>
                             <button
-                                className="h-8 px-4 rounded-xl bg-gradient-to-tr from-emerald-950 text-cyan-300 hover:bg-black"
+                                className="h-8 px-4 rounded-xl bg-blue-600 text-white text-sm hover:bg-green-600"
                                 onClick={() => removeHandler(index)}
                             >
                                 % Done
