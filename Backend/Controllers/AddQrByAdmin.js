@@ -1,4 +1,5 @@
 const AdminModel = require('../Models/AdminModel');
+const Adminstrator = require('../Models/AminstratorModel')
 
 async function AddQrData(req, res) {
     try {
@@ -13,8 +14,9 @@ async function AddQrData(req, res) {
         }
 
         // Check if admin exists
-        const isAdmin = await AdminModel.findOne({ AdminEmail });
+        const isAdmin = await Adminstrator.findOne({ email : AdminEmail });
         if (!isAdmin) {
+            console.log("not authorize")
             return res.status(403).json({
                 message: "You are not authorized as an admin",
                 success: false
@@ -22,8 +24,8 @@ async function AddQrData(req, res) {
         }
 
         // Update QR values
-        const updatedData = await AdminModel.findOneAndUpdate(
-            { AdminEmail },
+        const updatedData = await Adminstrator.findOneAndUpdate(
+            { email:AdminEmail },
             { Exit_Qr, Entry_Qr },
             { new: true, runValidators: true } // Return updated document and validate inputs
         );

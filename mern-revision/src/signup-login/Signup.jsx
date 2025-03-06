@@ -34,7 +34,7 @@ function Signup() {
               }`}
               onClick={() => setIsTrue(true)}
             >
-              Admin-user
+              Teacher
             </button>
 
             <button
@@ -46,7 +46,7 @@ function Signup() {
               }`}
               onClick={() => setIsTrue(false)}
             >
-              Normal-user
+              Student
             </button>
           </div>
 

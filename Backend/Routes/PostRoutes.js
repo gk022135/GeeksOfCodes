@@ -15,6 +15,9 @@ const ClassCreate = require('../Controllers/Class_Create')
 const Attendance_marking = require('../Controllers/Attendance_Marking')
 
 const DeleteCourse = require('../Controllers/DeleteRequest')
+
+
+const AdminstratorLogin = require('../Controllers/Adminstrator/AdmistrtorLogin')
  
 
 
@@ -25,7 +28,7 @@ const DeleteCourse = require('../Controllers/DeleteRequest')
 // const completedTasks = require('../controllers/CompletedTask');
 // const Alltasks = require('../controllers/all-gets/Alltasks');
 
-
+// 
 // router.post('/signup',signUpValidation, signupctrl);
 router.post('/login', LoginCtrl);
 // router.post('/optvarification', OtpVarification);
@@ -40,6 +43,9 @@ router.post('/attendance-marking',Attendance_marking)
 
 router.delete('/delete-course/:courseId', DeleteCourse);
 
+
+//admins works from here
+router.post('/adminstrator-login',AdminstratorLogin)
 
 
 

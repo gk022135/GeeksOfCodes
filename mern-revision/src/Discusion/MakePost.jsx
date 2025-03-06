@@ -1,9 +1,11 @@
 
 
-function MakePost (){
+function MakePost() {
+    
     return (
-        <div>
-            
+        <div className="bg- relative w-3/4">
+           
+
         </div>
     )
 }

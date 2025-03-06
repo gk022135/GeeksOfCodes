@@ -1,6 +1,7 @@
 const UserModel = require("../Models/UserSchema");
 const GatepassModel = require("../Models/GatepassModel");
 const AdminModel = require("../Models/AdminModel"); // Assuming AdminModel is used
+const Adminstrator = require("../Models/AminstratorModel")
 
 async function QrvarificationG1G2(req, res) {
   try {
@@ -15,7 +16,7 @@ async function QrvarificationG1G2(req, res) {
     }
 
     const qrPrefix = qrvalue.substring(0, 4).toUpperCase(); // Fix function name
-    const adminData = await AdminModel.findOne().select("Entry_Qr Exit_Qr");
+    const adminData = await Adminstrator.findOne().select("Entry_Qr Exit_Qr");
 
     console.log(adminData)
 

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 const BASE_URL = "http://localhost:3000/mern-revision/v1";
 
@@ -21,14 +20,7 @@ function AddEntryExitQr() { //  Don't use async here! may cause infinite render
         console.log("Your QR Data:", qrData);
 
         const userData = localStorage.getItem("UserData");
-        const AdminInfo = userData ? JSON.parse(userData) : "null";
-
-        if(!AdminInfo.data.role === "" && AdminInfo.data.email){
-              toast.error("your not Admin Broo!!");
-              console.log("error your not admin");
-              return ;
-        }
-        const AdminEmail =  AdminInfo.data.email
+        const AdminEmail = userData ? JSON.parse(userData).email : "null";
 
         const updatedData = {
             Entry_Qr: qrData.Entry_Qr,

@@ -24,6 +24,10 @@ import EntriesLog from "./admin-pages/AllEntryExits";
 import DeleteCourse from "./admin-pages/Delete_Class";
 import HomeDiscussion from "./Discusion/HomeDiscussion";
 import MakePost from "./Discusion/MakePost";
+import ImageUpload from "./Discusion/ImageUploadComp";
+import SuperUserHome from "./Adminstrator/Super_User_home";
+import SUlogin from "./Adminstrator/AdminstratorLogin";
+import FacultyDetails from "./Adminstrator/Faculty_Details";
 
 
 
@@ -59,6 +63,14 @@ function App() {
             <Route path="/delete" element={<DeleteCourse/>} />
             <Route path="/discussion" element={<HomeDiscussion/>} />
             <Route path="/discussion/makepost" element={<MakePost />} />
+            <Route path="/upload" element={<ImageUpload />} />
+
+            <Route path="/adminstrator" element={<SuperUserHome />} />
+            <Route path="/admistrator-login" element={<SUlogin />} />
+           
+            
+
+            
             
             {/* <Route path="/xyz" element={<EntriesLog />} /> */}
 
@@ -72,6 +84,10 @@ function App() {
             <a href="/admin-dashboard">admin-dashboard</a>
             <a href="/admin-login">admin-login</a>
             <a href="/user-home">user-home</a>
+            <a href="/discussion/makepost">Mkae posts</a>
+            <a href="/upload">Image Upload</a>
+            <a href="/adminstrator">Adminstrator Dashboard</a>
+            <a href="/admistrator-login">Administrator Login</a>
           </div>
         </div>
 

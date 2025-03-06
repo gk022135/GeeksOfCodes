@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import white_flower from "../assets/white-flowers.jpg";
 import { FcDislike, FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { FaRegComment } from "react-icons/fa";
+import { BiSolidUpvote } from "react-icons/bi";
+import { BiSolidDownvote } from "react-icons/bi";
+
 import CommentsSection from "./CommentSection";
 import img2 from '../assets/headphones.jpg'
 
@@ -74,7 +77,7 @@ function Posts_Cards(props) {
                         {/* Like Button */}
                         <div className="flex flex-col bg-black/50 rounded-2xl p-2 m-2 hover:bg-green-800">
                             <button onClick={makelike}>
-                                <FcLike size={25} />
+                                <BiSolidUpvote size={25} />
                             </button>
                             <p className="text-sm">{postDetails.likes}</p>
                         </div>
@@ -82,7 +85,7 @@ function Posts_Cards(props) {
                         {/* Dislike Button */}
                         <div className="flex flex-col bg-black/50 rounded-2xl p-2 m-2 hover:bg-red-600">
                             <button onClick={makedislikes}>
-                                <FcLikePlaceholder size={25} />
+                                <BiSolidDownvote size={25} />
                             </button>
                             <p className="text-sm">{postDetails.dislikes}</p>
                         </div>
@@ -103,7 +106,7 @@ function Posts_Cards(props) {
                 </div>
             </div>
             {
-                btncomment === "comment" ? (<CommentsSection />) : ("")
+                btncomment === "comment" ? ("") : ("")
             }
         </div>
     );
