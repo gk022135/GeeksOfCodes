@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import QRCode from "react-qr-code";
 import { Canvg } from "canvg";
-import AddEntryExitQr from "../admin-pages/AddEntryExitQr";
+import AddEntryExitQr from "../Teacher-pages/AddEntryExitQr";
 
 const QrGenerator = () => {
   const [text, setText] = useState("");

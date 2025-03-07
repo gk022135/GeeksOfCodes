@@ -11,6 +11,7 @@ import Todo_Page from "./Todo_redir";
 import CommunityForum from "./Community_chat";
 
 function UserHome() {
+    console.log("user auth home per hai")
     const { SendDataSignLogin } = useContext(AppContext);
     const G_user = localStorage.getItem("userGdata");
 

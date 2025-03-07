@@ -21,9 +21,10 @@ async function SendAllClass(req, res) {
                 success: false
             });
         }
+        const deparment = AdminAvailable.Department
 
         // Fetch all class data
-        const AllClassData = await ClassModel.find().select("courseCode courseName Teacher createdAt isActive");
+        const AllClassData = await ClassModel.find({Department : deparment}).select("courseCode courseName Teacher createdAt isActive Department enddate startEntry endEntry");
 
         return res.status(200).json({
             message: "Fetched all classes successfully",

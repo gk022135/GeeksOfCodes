@@ -23,7 +23,7 @@ function All_Class_adm() {
 
             try {
                 const response = await AllGetReq("get-all-class-adm", { email: AdminInfo.email, role: AdminInfo.role });
-                console.log(response);
+                console.log("course ",response);
 
 
                 if (!response) {

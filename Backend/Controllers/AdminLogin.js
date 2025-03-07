@@ -25,6 +25,7 @@ const AminLogin = async (req, res) => {
                 success: false
             })
         }
+        console.log("user dep",isUserExists.Department)
 
         const passwordVerify = await bcrypt.compare(password, isUserExists.password)
         if (!passwordVerify) {
@@ -54,6 +55,7 @@ const AminLogin = async (req, res) => {
                 role: isUserExists.role,
                 name: isUserExists.AdminName,
                 email: isUserExists.AdminEmail,
+                Department : isUserExists.Department
             });
 
 

@@ -46,7 +46,7 @@ function SUlogin() {
             console.log("helloooo")
             toast.success(response.message)
             setTimeout(() => {
-                navigate("/adminstrator");
+                navigate("/administrator");
             }, 1000);
             
         }

@@ -11,7 +11,9 @@ import FacultyDetails from "./Faculty_Details";
 function SuperUserHome() {
     const [selectedButton, setSelectedButton] = useState(null);
 
-    // Load last clicked button from localStorage on page reload
+    // Load last clicked button from localStorage on pag'e reload
+    const AdmsInfo = localStorage.getItem("UserData");
+    const email = AdmsInfo ? JSON.parse(AdmsInfo).data.email : ""
     useEffect(() => {
         const storedData = localStorage.getItem("buttonClickType");
         if (storedData) {
@@ -72,7 +74,7 @@ function SuperUserHome() {
                     {selectedButton === "entrieslog" && <EntriesLog />}
 
                     {selectedButton === "faculty" && (<h1 className="text-white">hello  Fucklty</h1>)}
-                    {selectedButton === "student" && (<FacultyDetails email={"hell@gmail.om"}  userType={"student"} removeUrl={"remove props"} DetailsUrl={"details props"} heading={"Student Detailse"} />)}
+                    {selectedButton === "student" && (<FacultyDetails email={email}  userType={"student"} removeUrl={"remove props"} DetailsUrl={"details props"} heading={"Student Detailse"} />)}
                     
                     {/* Default Content when no button is clicked */}
                     {!selectedButton && <h1 className="text-white text-2xl">Select an option from the sidebar</h1>}

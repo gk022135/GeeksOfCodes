@@ -53,8 +53,8 @@ function AdminLogin() {
         <div className="flex justify-center h-screen items-center content-center align-bottom">
             <div className="">
                 <form className="form " onSubmit={submitHandler}>
-                    <h1 className="text-2xl text-blue-400 border-b-2">Admin Login</h1>
-                    <label htmlFor="name">Admin Name</label>
+                    <h1 className="text-2xl text-blue-400 border-b-2">Teacher Login</h1>
+                    <label htmlFor="name">Teacher Name</label>
                     <input
                         type="text"
                         id="name"
@@ -64,7 +64,7 @@ function AdminLogin() {
                         required
                     />
 
-                    <label htmlFor="email">Admin Email</label>
+                    <label htmlFor="email">Teacher Email</label>
                     <input
                         type="email"
                         id="email"

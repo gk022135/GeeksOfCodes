@@ -4,11 +4,13 @@ const bcrypt = require('bcrypt')
 
 async function AdmSignup(req, res) {
     try {
-        const { email, name, password, role } = req.body;
+        const { email, name, password, role, FuckltyOf
+        } = req.body;
 
         console.log("data",req.body)
 
-        if (!email || !password || !name || !role) {
+        if (!email || !password || !name || !role || !FuckltyOf
+        ) {
             return res.status(400).json({
                 message: "all fields are required",
                 success: false
@@ -31,6 +33,7 @@ async function AdmSignup(req, res) {
                     AdminEmail: email,
                     password: hashedPassword,
                     role: role,
+                    Department: FuckltyOf,
                 };
 
                 const newUser = new AdminModel(newObj);

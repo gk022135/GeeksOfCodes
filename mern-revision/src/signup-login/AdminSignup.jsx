@@ -16,6 +16,8 @@ function Adminuser() {
     email: "",
     password: "",
     role: "Admin-user",
+    FuckltyOf: "",
+
   });
 
 
@@ -33,6 +35,7 @@ function Adminuser() {
     email: NormaluserData.email,
     password: NormaluserData.password,
     role: NormaluserData.role,
+    FuckltyOf :NormaluserData.FuckltyOf
   }
 
 
@@ -46,7 +49,7 @@ function Adminuser() {
         navigate('/admin-login')
       }, 1000)
     }
-    if(!response.success)toast.error(response.message)
+    if (!response.success) toast.error(response.message)
 
     console.log("response for admin: ", response);
     console.log("Your form data saved successfully", NormaluserData);
@@ -57,7 +60,7 @@ function Adminuser() {
   return (
     <div>
       <form className="Admin-form" onSubmit={submitHandler}>
-        <label htmlFor="name">Admin Name</label>
+        <label htmlFor="name">Teacher Name</label>
         <input
           type="text"
           id="name"
@@ -67,7 +70,7 @@ function Adminuser() {
           required
         />
 
-        <label htmlFor="email">Amdin Email</label>
+        <label htmlFor="email">Teacher Email</label>
         <input
           type="email"
           id="email"
@@ -76,6 +79,28 @@ function Adminuser() {
           onChange={changeHandler}
           required
         />
+
+        <div>
+          <label htmlFor="facultyof">Faculty Of </label>
+          <select
+          id="facultyof"
+          name="FuckltyOf"
+          value={NormaluserData.FuckltyOf}
+          onChange={changeHandler}
+          className="text-white border rounded h-10 bg-black"
+          >
+            <option value= "">Select An Option</option>
+            <option value= "CSE">Computer Science & Engineering</option>
+            <option value= "ECE">Electronic Communication & Engineering</option>
+            <option value= "EE">Electrical Engineering</option>
+            <option value= "CE">Civil Engineering</option>
+            <option value= "MEC">Mechinical Engineering</option>
+            <option value= "BIOTECH">Biotechnology and Engineering</option>
+            <option value= "BBA">Bachelors of Bussiness Adminstrative</option>
+            <option value= "MBA">Masters In Bussiness Adminstrative</option>
+          </select>
+        </div>
+
 
         <label htmlFor="pass">Password</label>
         <input

@@ -92,7 +92,7 @@ function Normaluser() {
     return (
         <div className="">
             <form className="form " onSubmit={submitHandler}>
-                <label htmlFor="name">User Name</label>
+                <label htmlFor="name">Student Name</label>
                 <input
                     type="text"
                     id="name"
@@ -102,7 +102,7 @@ function Normaluser() {
                     required
                 />
 
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">Student Email</label>
                 <input
                     type="email"
                     id="email"
