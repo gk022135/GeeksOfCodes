@@ -48,7 +48,6 @@ function App() {
           <Routes>
             <Route element={<AdminstratorAuth />}>
               <Route path="/qrgenerator" element={<QrGenerator />} />
-              <Route path="/qrscanner" element={<Qr_res />} />
               <Route path="/delete" element={<DeleteCourse />} />
               <Route path="/administrator" element={<SuperUserHome />} />
               <Route path="/qrrr" element={<AddEntryExitQr />} />
@@ -63,8 +62,8 @@ function App() {
               <Route path='/admin-dashboard' element={<AdminHome />} />
               <Route path="/create-class" element={<Create_class />} />
               <Route path="/all-classes-adm" element={<All_Class_adm />} />
-              <Route path="/all-classes-student" element={<All_Class_Std />} />
-              <Route path="/all-classes" element={<All_Class />} />
+              
+             
             </Route>
 
 
@@ -84,6 +83,9 @@ function App() {
 
 
             <Route path="/popcomp" element={<PopComponent />} />
+            <Route path="/qrscanner" element={<Qr_res />} />
+            <Route path="/all-classes" element={<All_Class />} />
+            <Route path="/all-classes-student" element={<All_Class_Std />} />
 
 
 
