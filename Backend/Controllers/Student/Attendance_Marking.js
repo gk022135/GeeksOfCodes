@@ -1,5 +1,5 @@
-const AttendanceModel = require('../Models/Attendance');
-const UserModel = require('../Models/UserSchema')
+const AttendanceModel = require('../../Models/Attendance');
+const UserModel = require('../../Models/UserSchema')
 
 async function Attendance_marking(req, res) {
     try {

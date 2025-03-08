@@ -1,9 +1,9 @@
 const express = require('express');
 const getrouter = express.Router();
 
-const AllClassData = require('../Controllers/Send_All_class');
-const AllClasstudent = require('../Controllers/AllClassStudent')
-const All_Class_Std = require('../Controllers/Student_Subjectwise')
+const AllClassData = require('../Controllers/Teacher/Send_All_class');
+const AllClasstudent = require('../Controllers/Student/AllClassStudent')
+const All_Class_Std = require('../Controllers/Student/Student_Subjectwise')
 const QrvarificationG1G2 = require('../Controllers/QrvarificationG1G2')
 const AllEntries = require('../Controllers/AllEntries')
 

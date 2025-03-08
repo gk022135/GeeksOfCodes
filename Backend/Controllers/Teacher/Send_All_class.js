@@ -1,7 +1,7 @@
-const ClassModel = require('../Models/ClassModel');
-const UserModel = require('../Models/UserSchema');
+const ClassModel = require('../../Models/ClassModel');
+const AdminModel = require('../../Models/AdminModel');
 
-async function AllClasstudent(req, res) {
+async function SendAllClass(req, res) {
     try {
         const { email, role } = req.query; 
         console.log("Data received:", req.query);
@@ -13,18 +13,18 @@ async function AllClasstudent(req, res) {
             });
         }
 
-        const StudentAvailable = await UserModel.findOne({ email: email });
-        console.log("rollll ",StudentAvailable)
+        const AdminAvailable = await AdminModel.findOne({ AdminEmail: email });
 
-        if (!StudentAvailable || StudentAvailable.role !== role) {
+        if (!AdminAvailable || AdminAvailable.role !== role) {
             return res.status(403).json({
                 message: "Unauthorized: You are not an admin or account does not exist.",
                 success: false
             });
         }
+        const deparment = AdminAvailable.Department
 
         // Fetch all class data
-        const AllClassData = await ClassModel.find().select("courseCode courseName Teacher createdAt isActive");
+        const AllClassData = await ClassModel.find({Department : deparment}).select("courseCode courseName Teacher createdAt isActive Department enddate startEntry endEntry");
 
         return res.status(200).json({
             message: "Fetched all classes successfully",
@@ -42,4 +42,4 @@ async function AllClasstudent(req, res) {
     }
 }
 
-module.exports = AllClasstudent;
+module.exports = SendAllClass;

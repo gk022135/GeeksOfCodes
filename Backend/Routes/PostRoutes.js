@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const signupctrl  = require('../Controllers/SignCtrl');
+const signupctrl  = require('../Controllers/Student/SignCtrl');
 const signUpValidation = require('../Middlewares/SignMidware');
 const LoginValid = require('../Middlewares/LoginMidware')
-const LoginCtrl = require('../Controllers/LoginCtr')
+const LoginCtrl = require('../Controllers/Student/LoginCtr')
 const OtpVarification = require('../Controllers/OtpVarification');
 const GoogleLogin = require('../Controllers/GoogleSignup')
 const QrVarifi = require('../Controllers/Qr_varifi')
 
-const AdminSignup = require('../Controllers/AdminSignup')
-const AdminLogin = require('../Controllers/AdminLogin')
-const ClassCreate = require('../Controllers/Class_Create')
-const Attendance_marking = require('../Controllers/Attendance_Marking')
+const AdminSignup = require('../Controllers/Teacher/AdminSignup')
+const AdminLogin = require('../Controllers/Teacher/AdminLogin')
+const ClassCreate = require('../Controllers/Teacher/Class_Create')
+const Attendance_marking = require('../Controllers/Student/Attendance_Marking')
 
-const DeleteCourse = require('../Controllers/DeleteRequest')
+const DeleteCourse = require('../Controllers/Teacher/DeleteRequest')
 
 
 const AdminstratorLogin = require('../Controllers/Adminstrator/AdmistrtorLogin')

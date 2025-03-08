@@ -1,6 +1,6 @@
-const UserModel = require("../Models/UserSchema");
-const CourseModel = require("../Models/ClassModel");
-const AttendanceModel = require("../Models/Attendance");
+const UserModel = require("../../Models/UserSchema");
+const CourseModel = require("../../Models/ClassModel");
+const AttendanceModel = require("../../Models/Attendance");
 
 async function Student_Subjectwise(req, res) {
     const { courseId, email } = req.query;

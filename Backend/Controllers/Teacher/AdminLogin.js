@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
 
-const AdmnModel = require('../Models/AdminModel');
+const AdmnModel = require('../../Models/AdminModel');
 
 const AminLogin = async (req, res) => {
     try {

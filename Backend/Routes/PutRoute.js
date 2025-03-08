@@ -2,7 +2,7 @@ const express = require('express');
 const putrouter = express.Router();
 
 
-const ToggleAttendance = require('../Controllers/ToggleAttendance')
+const ToggleAttendance = require('../Controllers/Teacher/ToggleAttendance')
 const AddQrData = require('../Controllers/AddQrByAdmin')
 
 putrouter.put('/toggleattendance/:id', ToggleAttendance);

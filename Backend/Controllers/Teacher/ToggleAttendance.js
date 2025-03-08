@@ -1,5 +1,5 @@
 const express = require("express");
-const CourseModel = require("../Models/ClassModel");
+const CourseModel = require("../../Models/ClassModel");
 
 async function ToggleAttendance (req, res){
     try {

@@ -1,10 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const UserModel = require('../Models/UserSchema');
-const GeneratedOtp = require('./OtpGenerator');
-const EmailSender = require('./EmailToUser');
+const UserModel = require('../../Models/UserSchema');
+const GeneratedOtp = require('../OtpGenerator');
+const EmailSender = require('../EmailToUser');
 
-const client = require('../client');
+const client = require('../../client');
 
 
 const SignupCtrl = async (req, res) => {

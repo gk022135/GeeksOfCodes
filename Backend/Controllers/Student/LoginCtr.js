@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
+const Department = require('./SelectDepartment');
 
-const userModel = require('../Models/UserSchema');
+const userModel = require('../../Models/UserSchema');
 
 const LoginCtrl = async (req, res) => {
     try {
@@ -26,6 +27,13 @@ const LoginCtrl = async (req, res) => {
                 success: false
             })
         }
+
+        //defining student department
+        const StudentYearAndDep = email.substring(0, 8)
+        
+
+
+
 
         const passwordVerify = await bcrypt.compare(password, isUserExists.password)
         if (!passwordVerify) {
@@ -67,6 +75,7 @@ const LoginCtrl = async (req, res) => {
                 role: isUserExists.role,
                 name: isUserExists.username,
                 email: isUserExists.email,
+                StudentDepAndYear : StudentYearAndDep,
             });
 
 

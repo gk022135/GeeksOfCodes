@@ -1,7 +1,8 @@
-const ClassModel = require('../Models/ClassModel');
-const AdminModel = require('../Models/AdminModel');
+const ClassModel = require('../../Models/ClassModel');
+const UserModel = require('../../Models/UserSchema');
+const SelectStudentDep = require('./SelectDepartment');
 
-async function SendAllClass(req, res) {
+async function AllClasstudent(req, res) {
     try {
         const { email, role } = req.query; 
         console.log("Data received:", req.query);
@@ -13,18 +14,28 @@ async function SendAllClass(req, res) {
             });
         }
 
-        const AdminAvailable = await AdminModel.findOne({ AdminEmail: email });
+        const StudentAvailable = await UserModel.findOne({ email: email });
+        console.log("rollll ",StudentAvailable)
 
-        if (!AdminAvailable || AdminAvailable.role !== role) {
+        if (!StudentAvailable || StudentAvailable.role !== role) {
             return res.status(403).json({
                 message: "Unauthorized: You are not an admin or account does not exist.",
                 success: false
             });
         }
-        const deparment = AdminAvailable.Department
+
+        //finding department of student
+        const StudentDepAndYear = email.substring(0,8);
+        const extractEmail = email.substring(2,2+3);
+        const StudentDep = SelectStudentDep(extractEmail);
+
 
         // Fetch all class data
-        const AllClassData = await ClassModel.find({Department : deparment}).select("courseCode courseName Teacher createdAt isActive Department enddate startEntry endEntry");
+        const AllClassData = await ClassModel.find({
+            Department: StudentDep,
+            startEntry: { $lte: StudentDepAndYear },
+            endEntry: { $gte: StudentDepAndYear }
+        }).select("courseCode courseName Teacher createdAt isActive startEntry endEntry");
 
         return res.status(200).json({
             message: "Fetched all classes successfully",
@@ -42,4 +53,4 @@ async function SendAllClass(req, res) {
     }
 }
 
-module.exports = SendAllClass;
+module.exports = AllClasstudent;

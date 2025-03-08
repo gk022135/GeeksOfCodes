@@ -1,5 +1,5 @@
-const CourseModel = require('../Models/ClassModel');
-const AdminModel = require('../Models/AdminModel');
+const CourseModel = require('../../Models/ClassModel');
+const AdminModel = require('../../Models/AdminModel');
 
 async function DeletedCourse(req, res) {
     try {
