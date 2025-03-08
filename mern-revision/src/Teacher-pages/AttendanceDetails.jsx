@@ -24,6 +24,8 @@ function Attendance() {
     
 
     async function CourseWiseAtt() {
+
+        //get-attendace-all-course
         try {
             const CourseCode = course.courseCode1.trim();
             if (!CourseCode) {
@@ -32,7 +34,7 @@ function Attendance() {
             }
 
             console.log("Fetching attendance for Course:", CourseCode);
-            const response = await AllGetReq("api-url", { courseCode: CourseCode });
+            const response = await AllGetReq("get-attendace-all-course", { courseCode: CourseCode });
 
             if (!response || !response.success) {
                 toast.error("Error fetching data");
