@@ -24,7 +24,7 @@ async function Attendance_marking(req, res) {
         const userId = studentExist._id;
 
         // Find attendance for the given class on today's date
-        const today = new Date().setHours(0, 0, 0, 0)  //.setHours(0, 0, 0, 0)
+        const today = new Date()  //.setHours(0, 0, 0, 0)
         let attendance = await AttendanceModel.findOne({ course: classId, date: today });
 
         if (!attendance) {

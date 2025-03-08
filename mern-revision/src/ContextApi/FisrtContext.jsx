@@ -48,7 +48,7 @@ export default function AppContextProvider({ children }) {
     
             const responseData = await result.json();
     
-            // ✅ Check for HTTP errors but return the response instead of throwing
+            // Check for HTTP errors but return the response instead of throwing
             if (!result.ok) {
                 console.warn(`HTTP Error: ${result.status} - ${responseData.message}`);
                 return responseData; // Return response even if it's an error

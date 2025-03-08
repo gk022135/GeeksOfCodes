@@ -27,7 +27,7 @@ function AdminHome() {
     return (
         <div className="flex flex-col">
             <div className="flex z-10 justify-center content-center bg-black/80  w-full">
-                <h1 className="z-20 text-3xl p-4 font-bold bg-gradient-to-tr from-pink-500 to-blue-500 bg-clip-text text-transparent/20">
+                <h1 className="text-3xl p-4 font-bold bg-gradient-to-tr from-pink-500 to-blue-500 bg-clip-text text-transparent/20">
                    Teacher Dashboard
                 </h1>
             </div>

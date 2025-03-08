@@ -6,7 +6,7 @@ const AttendanceSchema = new Schema({
     date: {
         type: Date,
         required: true,
-        default: () => new Date().setHours(0, 0, 0, 0), // Store date only (no time).setHours(0, 0, 0, 0)
+        default: () => new Date(), // Store date only (no time).setHours(0, 0, 0, 0)
     },
     attendanceRecords: [
         {
