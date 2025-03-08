@@ -29,9 +29,9 @@ const AdminstratorLogin = require('../Controllers/Adminstrator/AdmistrtorLogin')
 // const Alltasks = require('../controllers/all-gets/Alltasks');
 
 // 
-// router.post('/signup',signUpValidation, signupctrl);
+router.post('/signup',signUpValidation, signupctrl);
 router.post('/login', LoginCtrl);
-// router.post('/optvarification', OtpVarification);
+router.post('/optvarification', OtpVarification);
 router.post('/google-login-data', GoogleLogin);
 router.post('/qr-scan-varification',QrVarifi);
 router.post('/admin-sign-up', AdminSignup);

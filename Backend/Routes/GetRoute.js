@@ -10,7 +10,8 @@ const AllEntries = require('../Controllers/AllEntries')
 
 
 //teacher Imports
-const AttendByStudentEntry = require('../Controllers/Teacher/AttendanceByEntry')
+const AttendByStudentEntry = require('../Controllers/Teacher/AttendanceByEntry');
+const AllStudentAttendance = require('../Controllers/Teacher/AttendanceByCourse');
 
 //all get routes are here
 
@@ -23,6 +24,7 @@ getrouter.get('/qrvarification-of-user',QrvarificationG1G2);
 
 //teachers routes
 getrouter.get('/get-student-attendance-by-entry',AttendByStudentEntry)
+getrouter.get('/get-attendace-all-course',AllStudentAttendance)
 
 getrouter.get('/all-entries-of-user',AllEntries);
 module.exports = getrouter;
