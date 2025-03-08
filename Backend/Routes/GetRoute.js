@@ -13,12 +13,18 @@ const AllEntries = require('../Controllers/AllEntries')
 const AttendByStudentEntry = require('../Controllers/Teacher/AttendanceByEntry');
 const AllStudentAttendance = require('../Controllers/Teacher/AttendanceByCourse');
 
-//all get routes are here
+//Adminstrator Get Routes
+const StudentDeletion = require('../Controllers/Adminstrator/DeleteStudent');
+
+
+
+
+//Adminstrator controllers
+getrouter.get('/delete-student-adminstrator',StudentDeletion)
 
 getrouter.get('/get-all-class-adm', AllClassData);
 getrouter.get('/get-all-class-students', AllClasstudent);
 getrouter.get('/student-sub-detail-attendance', All_Class_Std);
-
 getrouter.get('/qrvarification-of-user',QrvarificationG1G2);
 
 

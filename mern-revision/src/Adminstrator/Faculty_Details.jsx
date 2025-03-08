@@ -17,8 +17,9 @@ import { toast, ToastContainer } from "react-toastify";
 function FacultyDetails({ email, userType, removeUrl, DetailsUrl, heading }) {
 
     // console.log(email, userType, removeUrl, DetailsUrl, heading)
-    const { AllGetReq, SendDataSignLogin } = useContext(AppContext);
+    const { AllGetReq } = useContext(AppContext);
     const [res, setRes] = useState("");
+
 
     const [data, setData] = useState({
         userEmail: "",
@@ -51,7 +52,7 @@ function FacultyDetails({ email, userType, removeUrl, DetailsUrl, heading }) {
 
     const removeUser = async () => {
         try {
-            const response = await SendDataSignLogin(removeUrl, { AdminEmail: email, userEmail: data.userEmail });
+            const response = await AllGetReq(removeUrl, { AdminEmail: email, userEmail: data.userEmail });
 
             if (!response) {
                 toast.error("Error, try again!");
