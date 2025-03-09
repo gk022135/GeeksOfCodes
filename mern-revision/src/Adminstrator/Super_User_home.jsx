@@ -75,10 +75,10 @@ function SuperUserHome() {
 
                     {selectedButton === "faculty" && (<h1 className="text-white">hello  Fucklty</h1>)}
 
-                    {selectedButton === "student" && (<FacultyDetails email={email}  userType={"student"} removeUrl={"remove props"} DetailsUrl={"details props"} heading={"Student Detailse"} />)}
+                    {selectedButton === "student" && (<FacultyDetails email={email}  userType={"student"} removeUrl={"delete-student-adminstrator"} DetailsUrl={"details props"} heading={"Student Detailse"} />)}
                     
 
-                    
+
                     {/* Default Content when no button is clicked */}
                     {!selectedButton && <h1 className="text-white text-2xl">Select an option from the sidebar</h1>}
                 </div>
