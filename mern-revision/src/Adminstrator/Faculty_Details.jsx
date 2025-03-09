@@ -1,28 +1,14 @@
-
-
-/**
- * props = {
- * Adminstrate email : local already available,
- * User : Name(faculty ot students),
- * url1 : "",
- * url2 : "",
- * head : ""
- * 
- * } 
- */
 import { useContext, useState } from "react";
 import { AppContext } from "../ContextApi/FisrtContext";
 import { toast, ToastContainer } from "react-toastify";
 
 function FacultyDetails({ email, userType, removeUrl, DetailsUrl, heading }) {
-
-    // console.log(email, userType, removeUrl, DetailsUrl, heading)
     const { AllGetReq } = useContext(AppContext);
     const [res, setRes] = useState("");
 
-
     const [data, setData] = useState({
         userEmail: "",
+        removeEmail: "", // ✅ Added removeEmail field
     });
 
     const onChangeHandler = (event) => {
@@ -52,7 +38,8 @@ function FacultyDetails({ email, userType, removeUrl, DetailsUrl, heading }) {
 
     const removeUser = async () => {
         try {
-            const response = await AllGetReq(removeUrl, { AdminEmail: email, userEmail: data.userEmail });
+            console.log("Removing user:", data.removeEmail);
+            const response = await AllGetReq(removeUrl, { AdminEmail: email, userEmail: data.removeEmail.trim() });
 
             if (!response) {
                 toast.error("Error, try again!");
@@ -83,7 +70,7 @@ function FacultyDetails({ email, userType, removeUrl, DetailsUrl, heading }) {
                     value={data.userEmail}
                     onChange={onChangeHandler}
                     placeholder="Enter email"
-                    className="w-full p-2 mt-2 border rounded-md text-white"
+                    className="w-full p-2 mt-2 border rounded-md text-white bg-gray-700"
                 />
                 <button
                     onClick={facultyDetails}
@@ -98,11 +85,11 @@ function FacultyDetails({ email, userType, removeUrl, DetailsUrl, heading }) {
                 <h2 className="text-lg font-semibold">Remove {userType}</h2>
                 <input
                     type="email"
-                    name="userEmail2"
-                    value={data.userEmail2}
+                    name="removeEmail" // ✅ Corrected name attribute
+                    value={data.removeEmail} // ✅ Corrected state reference
                     onChange={onChangeHandler}
                     placeholder="Enter email"
-                    className="w-full p-2 mt-2 border rounded-md text-white"
+                    className="w-full p-2 mt-2 border rounded-md text-white bg-gray-700"
                 />
                 <button
                     onClick={removeUser}
@@ -124,3 +111,7 @@ function FacultyDetails({ email, userType, removeUrl, DetailsUrl, heading }) {
 }
 
 export default FacultyDetails;
+
+
+
+//43215678

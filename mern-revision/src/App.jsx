@@ -71,7 +71,7 @@ function App() {
             <Route element={<StudentAuthorise />}>
               <Route path="/user-home" element={<UserHome />} />
               <Route path="/todo-home" element={<TodoHome />} />
-              <Route path="/otpvarification" element={<Otpvarifiacation />} />
+              
               <Route path="/qrscanner" element={<Qr_res />} />
               <Route path="/discussion" element={<HomeDiscussion />} />
               <Route path="/discussion/makepost" element={<MakePost />} />
@@ -86,6 +86,7 @@ function App() {
             <Route path="/qrscanner" element={<Qr_res />} />
             <Route path="/all-classes" element={<All_Class />} />
             <Route path="/all-classes-student" element={<All_Class_Std />} />
+            <Route path="/otpvarification" element={<Otpvarifiacation />} />
 
 
 
