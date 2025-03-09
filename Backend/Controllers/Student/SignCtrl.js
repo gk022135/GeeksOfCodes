@@ -1,10 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const UserModel = require('../Models/UserSchema');
-const GeneratedOtp = require('./OtpGenerator');
-const EmailSender = require('./EmailToUser');
+const UserModel = require('../../Models/UserSchema');
+const GeneratedOtp = require('../OtpGenerator');
+const EmailSender = require('../EmailToUser');
 
-const client = require('../client');
+const client = require('../../client');
 
 
 const SignupCtrl = async (req, res) => {
@@ -37,7 +37,7 @@ const SignupCtrl = async (req, res) => {
         // console.log("generated otp", otp);
         const saveOtp_to_redis =await client.set(`otp:${email}`, otp); //ise save krna hai in redis db
 
-        // console.log("otp saved to redis", saveOtp_to_redis);
+        console.log("otp saved to redis", saveOtp_to_redis);
 
         //email send to user 
         

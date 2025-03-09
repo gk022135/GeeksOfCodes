@@ -19,7 +19,7 @@ async function OtpVarification(req, res) {
 
         // Get user data from Redis
         const userDataRedis = await client.get(`data:${dataObject.email}`);
-        // console.log("user data redis", userDataRedis);
+        console.log("user data redis", userDataRedis);
 
         if (!userDataRedis && userDataRedis.email != dataObject.email) {
             return res.status(400).json({

@@ -6,7 +6,10 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     role: { type: String, required: true },
-    userPost: { type: Array, default: [] },
+    userPost: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+
+    currentTask : { type: Array, default: [] },
+    completedTask : { type: Array, default: [] },
 });
 
 // Convert Schema to Model

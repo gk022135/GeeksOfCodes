@@ -2,22 +2,21 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
 
-const userModel = require('../Models/UserSchema');
+const AdmnModel = require('../../Models/AdminModel');
 
-const LoginCtrl = async (req, res) => {
+const AminLogin = async (req, res) => {
     try {
         dotenv.config();
         const { username, email, password } = req.body;
-        console.log("login info", username, email, password);
 
         if (!username || !email || !password) {
             return res.status(400).json({
-                message: "bro conf inputs",
+                message: "Amd conf inputs",
                 success: false
             })
         }
 
-        const isUserExists = await userModel.findOne({ email: email })
+        const isUserExists = await AdmnModel.findOne({ AdminEmail: email })
         console.log(isUserExists);
 
         if (!isUserExists) {
@@ -26,11 +25,12 @@ const LoginCtrl = async (req, res) => {
                 success: false
             })
         }
+        console.log("user dep",isUserExists.Department)
 
         const passwordVerify = await bcrypt.compare(password, isUserExists.password)
         if (!passwordVerify) {
             return res.status(400).json({
-                message: "Bro Wrong password",
+                message: "Adm Wrong password",
                 success: false,
             })
         }
@@ -41,21 +41,9 @@ const LoginCtrl = async (req, res) => {
             { expiresIn: '24h' }
         )
 
-        //Method 01 to sending data to frontend 
-
-        // return res.status(200).json({
-        //     message : "login successfully",
-        //     success : true,
-        //     Myjwt,
-        //     role : isUserExists.role,
-        //     name : isUserExists.username,
-        //     email : isUserExists.email,
-        // })
-
-        // method 02:- to sending data to frontend :---> use of cookies
         return res
             .status(200)
-            .cookie("Myjwt", Myjwt, {
+            .cookie("AdminCookie", Myjwt, {
                 httpOnly: true, // Prevent client-side JavaScript access
                 secure: true,   // Send only over HTTPS (enable in production)
                 sameSite: "Strict", // Prevent CSRF attacks
@@ -65,8 +53,9 @@ const LoginCtrl = async (req, res) => {
                 message: "Login successfully",
                 success: true,
                 role: isUserExists.role,
-                name: isUserExists.username,
-                email: isUserExists.email,
+                name: isUserExists.AdminName,
+                email: isUserExists.AdminEmail,
+                Department : isUserExists.Department
             });
 
 
@@ -80,4 +69,4 @@ const LoginCtrl = async (req, res) => {
     }
 }
 
-module.exports = LoginCtrl;
+module.exports = AminLogin;

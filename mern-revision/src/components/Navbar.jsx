@@ -3,40 +3,43 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import {NavLink} from "react-router-dom"
 import Logout from "./Logout";
 import LogoutButton from "../Google Auth/Logout";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
-  
+  const {isAuthenticated} = useAuth0();  
   const [isOpen, setIsOpen] = useState(false);
 
   const localData = localStorage.getItem("userData");
-  console.log(localData)
   let data = localData ? JSON.parse(localData) : {}; // Ensure `data` is an object
   
   // Ensure `data.success` is always a boolean
   if (typeof data.success !== "boolean") {
     data.success = false;
   }
-  console.log("hi ", data.success)
-  
-
- 
 
 
   return (
-    <nav className="sticky top-0 z-10 bg-black/50 backdrop-blur-lg text-white">
+    <nav className="sticky top-0 z-10 bg-black backdrop-blur-lg text-black font-medium">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <span className="text-2xl font-semibold opacity-80">Logo
-            <h1>{<LogoutButton />}</h1>
-          </span>
+          <span className="bg-gradient-to-tl from-yellow-500 to-red-600 bg-clip-text text-transparent text-3xl opacity-80 font-bold font-mono hover:shadow-xl hover:shadow-emerald-300/50
+ p-2 rounded-2xl">Uniator</span>
 
         
-          <div className="hidden md:flex space-x-5">
-            <NavLink to="/"  className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">Home</NavLink>
-            <NavLink to="/user-home" className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">About</NavLink>
-            <NavLink to="/login" className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">{data.success ? <Logout /> : "Login"}</NavLink>
-            <NavLink to="/Contact" className="opacity-70 hover:opacity-100 hover:text-xl hover:font-bold">Contact</NavLink>
+          <div className="hidden md:flex space-x-5 bg-gradient-to-br from-yellow-500 to-red-600 bg-clip-text text-transparent text-lg font-bold">
+            <NavLink to="/"  className="hover:text-white hover:opacity-100 hover:scale-120 hover:border-b-2 hover:font-bold hover:border-blue-400">Home</NavLink>
+
+
+            <NavLink to="/user-home" className="hover:text-white hover:opacity-100 hover:scale-120 hover:border-b-2 hover:font-bold hover:border-blue-400">User-Access</NavLink>
+
+
+            <NavLink to="/login" className="hover:text-white hover:opacity-100 hover:scale-120 hover:border-b-2 hover:font-bold hover:border-blue-400">{data.success|| isAuthenticated ? <LogoutButton /> : "Login"}</NavLink>
+
+
+            <NavLink to="/Contact" className="hover:text-white hover:opacity-100 hover:scale-120 hover:border-b-2 hover:font-bold hover:border-blue-400">Contact</NavLink>
+
+            <NavLink to="/discussion" className="hover:text-white hover:opacity-100 hover:scale-120 hover:border-b-2 hover:font-bold hover:border-blue-400">Community</NavLink>
           </div>
 
          

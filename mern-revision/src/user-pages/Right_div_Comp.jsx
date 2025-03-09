@@ -1,5 +1,6 @@
 
 function RightDivComp({props}) {
+    console.log("ky inag ",props.picture)
 
 
     return (
@@ -7,6 +8,9 @@ function RightDivComp({props}) {
             <p>Hello, {props.name}</p>
             <p>Email: {props.email}</p>
             <p>Role: {props.role}</p>
+            <img src={encodeURI(props.picture)} alt="Profile" />
+
+            <p>{props.nickname}</p>
         </div>
     )
 }
