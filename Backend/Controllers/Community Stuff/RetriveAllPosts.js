@@ -41,12 +41,13 @@ async function RetriveAllPosts(req, res) {
                 const student = await UserModel.findById(post.userId).select("email");
 
                 return {
+                    postId : post._id,
                     email: student?.email || "Unknown",
                     postBody: post.postBody,
                     postImg: post.postImg || null,
-                    LikeCount: post.postLikes.length,
-                    DislikeCount: post.postDisLikes.length,
-                    CommentCount: post.postComments.length,
+                    LikeCount: post.postLikes.length || 0,
+                    DislikeCount: post.postDisLikes.length || 0,
+                    CommentCount: post.postComments.length || 0,
                     createdAt: post.createdAt
                 };
             })
