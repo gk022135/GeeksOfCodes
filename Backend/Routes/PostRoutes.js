@@ -18,6 +18,10 @@ const DeleteCourse = require('../Controllers/Teacher/DeleteRequest')
 
 
 const AdminstratorLogin = require('../Controllers/Adminstrator/AdmistrtorLogin')
+
+
+//COMMUNITY IMPORT HERE
+const MakeApost = require('../Controllers/CommunityStuff/MakePost')
  
 
 
@@ -46,6 +50,12 @@ router.delete('/delete-course/:courseId', DeleteCourse);
 
 //admins works from here
 router.post('/adminstrator-login',AdminstratorLogin)
+
+
+
+//COMMUNITY STUFF HERE
+router.post('/make-a-post',MakeApost);
+
 
 
 

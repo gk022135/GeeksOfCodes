@@ -17,11 +17,15 @@ const AllStudentAttendance = require('../Controllers/Teacher/AttendanceByCourse'
 const StudentDeletion = require('../Controllers/Adminstrator/DeleteStudent');
 
 
+//COMMUNITY IMPORTS
+const RetriveAllPost = require('../Controllers/CommunityStuff/RetriveAllPosts');
+const ShowCommentOnPost = require('../Controllers/CommunityStuff/ShowCommentOnPost');
+
+
 
 
 //Adminstrator controllers
 getrouter.get('/delete-student-adminstrator',StudentDeletion)
-
 getrouter.get('/get-all-class-adm', AllClassData);
 getrouter.get('/get-all-class-students', AllClasstudent);
 getrouter.get('/student-sub-detail-attendance', All_Class_Std);
@@ -31,6 +35,11 @@ getrouter.get('/qrvarification-of-user',QrvarificationG1G2);
 //teachers routes
 getrouter.get('/get-student-attendance-by-entry',AttendByStudentEntry)
 getrouter.get('/get-attendace-all-course',AllStudentAttendance)
-
 getrouter.get('/all-entries-of-user',AllEntries);
+
+
+//Community  get routes
+getrouter.get('/get-all-post',RetriveAllPost);
+getrouter.get('/comments-of-post',ShowCommentOnPost);
+
 module.exports = getrouter;
