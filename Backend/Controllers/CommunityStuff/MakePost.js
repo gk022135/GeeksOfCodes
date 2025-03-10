@@ -7,15 +7,15 @@
  * 
  * //post request hoga
  */
-const UserModel = require('../../Models')
-const PostModel = require('../../Models')
+const UserModel = require('../../Models/UserSchema')
+const PostModel = require('../../Models/PostsSchema')
 
 
 async function MakePost(req, res) {
     try {
         const { email, PostBody, ImageUrl } = req.body;
 
-        if (!email || !PostBody || !ImageUrl) {
+        if (!email || !PostBody) {
             return res.status(400).json({
                 message: "Data Sahi Se Nahi Aa rha bhai",
                 success: false
@@ -41,6 +41,7 @@ async function MakePost(req, res) {
         const SaveToPostModel = new PostModel({
             userId: UserId,
             postBody: PostBody,
+            postImg : ImageUrl || null,
             createdAt: new Date().setHours(0, 0, 0, 0),
             email: email
         });
