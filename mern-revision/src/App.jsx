@@ -96,6 +96,7 @@ function App() {
             <Route path='/admin-login' element={<AdminLogin />} />
             <Route path="/administrator-login" element={<SUlogin />} />
 
+
           </Routes>
 
 
@@ -104,8 +105,8 @@ function App() {
             <a href="/otpvarification">otpvarification</a>
             <a href="/qrscanner">qrscanner</a>
             <a href="/qrgenerator">qrgenerator</a>
-            <a href="/admin-dashboard">admin-dashboard</a>
-            <a href="/admin-login">admin-login</a>
+            <a href="/admin-dashboard">teacher-dashboard</a>
+            <a href="/admin-login">Teacher-login</a>
             <a href="/user-home">user-home</a>
             <a href="/discussion/makepost">Mkae posts</a>
             <a href="/upload">Image Upload</a>
