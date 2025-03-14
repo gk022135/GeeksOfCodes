@@ -97,7 +97,7 @@ function App() {
             <Route path='/admin-login' element={<AdminLogin />} />
             <Route path="/administrator-login" element={<SUlogin />} />
 
-            <Route path="/comnavbar"element = {<CommunityNavbar />} />
+            <Route path="/makepost"element = {<MakePost />} />
 
 
           </Routes>

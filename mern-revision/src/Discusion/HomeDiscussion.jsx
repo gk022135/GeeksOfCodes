@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Posts_Cards from "./Posts_Cards";
 import CommentsSection from "./CommentSection";
 import UserProfile from "../user-pages/User_Profile";
+import CommunityNavbar from "./CommunityNavbar";
 
 
 function HomeDiscussion (){
@@ -25,11 +26,12 @@ function HomeDiscussion (){
 
     return (
         <div className="relative flex flex-col h-auto">
-           <div className="bg-black text-white text-2xl text-center p-4 h-auto border rounded-2xl">
-            <h1> Community Discussion </h1>
+           <div >
+              <CommunityNavbar />
            </div>
            <div className="relative flex flex-row" >
-               <div className="flex flex-col bg-black w-1/4 h-screen p-2 text-white  rounded-2xl border-1">
+
+               <div className="hidden bg-black w-0 sm:w-1/4 h-screen p-2 text-white  rounded-2xl border-1 sm:flex sm:flex-col">
                {/* <UserProfile /> */}
 
                <button onClick={ () => clickHandler("all-posts")}
@@ -53,7 +55,7 @@ function HomeDiscussion (){
                
                </div>
 
-               <div className="bg-black w-3/4 relative h-screen p-2 border rounded-2xl"
+               <div className="bg-black w-full sm:w-3/4 relative h-screen p-2 border rounded-2xl"
                > 
                <h1>kya render ho rha hai ji {isparams}</h1>
                   
