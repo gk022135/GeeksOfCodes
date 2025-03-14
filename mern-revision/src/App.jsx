@@ -31,6 +31,7 @@ import FacultyDetails from "./Adminstrator/Faculty_Details";
 import StudentAuthorise from "./Authorization/StudentAuthorise";
 import AdminstratorAuth from "./Authorization/AdminstratorAuth";
 import TeacherAuthorise from "./Authorization/TeacherAuthorise";
+import CommunityNavbar from "./Discusion/CommunityNavbar";
 
 
 
@@ -95,6 +96,8 @@ function App() {
             <Route path="/otpvarification" element={<Otpvarifiacation />} />
             <Route path='/admin-login' element={<AdminLogin />} />
             <Route path="/administrator-login" element={<SUlogin />} />
+
+            <Route path="/makepost"element = {<MakePost />} />
 
 
           </Routes>

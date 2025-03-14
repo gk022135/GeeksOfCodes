@@ -1,16 +1,75 @@
-
+import { useState } from "react";
+import ImageUpload from "./ImageUploadComp";
 
 function MakePost() {
-    
-    return (
-        <div className="bg- relative w-3/4">
-           
+    const [data, setData] = useState({
+        tags: "",
+        heading: "",
+        body: ""
+    });
 
+    function onChangeHandler(event) {
+        const { name, value } = event.target;
+        setData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    }
+
+    return (
+        <div className="relative w-3/4 p-4 bg-gray-900 text-white rounded-lg">
+            <div className="flex flex-col gap-4">
+                {/* Tags Input */}
+                <label className="flex flex-col">
+                    Tags:
+                    <input
+                        type="text"
+                        placeholder="#topics"
+                        name="tags"
+                        value={data.tags}
+                        onChange={onChangeHandler}
+                        className="p-2  rounded"
+                    />
+                </label>
+
+                {/* Heading Input */}
+                <label className="flex flex-col">
+                    Heading:
+                    <input
+                        type="text"
+                        placeholder="Heading"
+                        name="heading"
+                        value={data.heading}
+                        onChange={onChangeHandler}
+                        className="p-2 rounded"
+                    />
+                </label>
+
+                {/* Body Input */}
+                <label className="flex flex-col">
+                    Post Details:
+                    <input
+                        type="text"
+                        placeholder="Post Details"
+                        name="body"
+                        value={data.body}
+                        onChange={onChangeHandler}
+                        className="p-2  rounded"
+                    />
+                </label>
+
+                {/* Image Upload Section (Placeholder) */}
+                <div className="p-2 bg-gray-800 rounded text-center">
+                    
+                    <ImageUpload />
+                </div>
+            </div>
         </div>
-    )
+    );
 }
 
 export default MakePost;
+
 
 /**
  * what is logi behind the making the post 
