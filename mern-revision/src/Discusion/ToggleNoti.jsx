@@ -17,3 +17,6 @@ function ToggleNoti() {
     )
 }
 export default ToggleNoti;
+
+
+//it is just a navigation bar 

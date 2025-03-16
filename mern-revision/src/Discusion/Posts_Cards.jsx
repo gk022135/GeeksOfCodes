@@ -113,3 +113,7 @@ function Posts_Cards(props) {
 }
 
 export default Posts_Cards;
+
+
+
+//just a card which will show all post 
