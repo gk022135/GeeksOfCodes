@@ -58,7 +58,7 @@ function Adminuser() {
 
 
   return (
-    <div>
+    <div className="relative flex justify-center">
       <form className="Admin-form" onSubmit={submitHandler}>
         <label htmlFor="name">Teacher Name</label>
         <input

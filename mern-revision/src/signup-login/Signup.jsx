@@ -8,42 +8,41 @@ import HashLoader from "react-spinners/HashLoader";
 
 function Signup() {
 
-  
-//   const [active, setactive] = useState(true);
-  const [isTrue, setIsTrue] = useState(true); 
+
+  //   const [active, setactive] = useState(true);
+  const [isTrue, setIsTrue] = useState(true);
 
   const { loading, setLoading } = useContext(AppContext);
 
-//   function isAdmin() {
-//     setTrue(!istrue);
-//   }
+  //   function isAdmin() {
+  //     setTrue(!istrue);
+  //   }
 
   return (
-    <div className="bg-amber-900">
-      <Design />
+    <div className="flex justify-center w-full p-4 relative">
       {loading ? (
         <HashLoader />
       ) : (
-        <div className="flex flex-col rounded-2xl justify-center content-center items-center p-1 m-3 w-[400px] bg-black text-blue-50 gap-2">
+        <div className="relative flex flex-col rounded-2xl justify-center items-center p-4 m-3 w-1/1 md:w-2/7 border-2 bg-black text-blue-50 gap-4">
           {/* Buttons with active state styling */}
-          <div>
+          <div className="flex w-3/5 rounded-2xl border-2 justify-center">
             <button
-              className={` px-2 rounded-md h-10 m-2 transition-all 
-              ${
-                isTrue ? "bg-green-400 text-black font-bold border-2 border-white" : "bg-amber-700/90"
-              }`}
+              className={`px-4 py-2 rounded-md h-10 m-2 transition-all 
+            ${isTrue
+                  ? "bg-green-400 text-black font-bold border-2 border-white"
+                  : "bg-amber-700/90"
+                }`}
               onClick={() => setIsTrue(true)}
             >
               Teacher
             </button>
 
             <button
-              className={` px-2 rounded-md h-10 m-2 transition-all 
-              ${
-                !isTrue
-                  ? "bg-green-400 border-2 border-white  text-black font-bold"
+              className={`px-4 py-2 rounded-md h-10 m-2 transition-all 
+            ${!isTrue
+                  ? "bg-green-400 border-2 border-white text-black font-bold"
                   : "bg-amber-700/90"
-              }`}
+                }`}
               onClick={() => setIsTrue(false)}
             >
               Student
@@ -52,16 +51,17 @@ function Signup() {
 
           {/* Apply effect on this div when button is clicked */}
           <div
-            className={`w-auto justify-center content-center items-center h-auto 
-              ${isTrue ? "bg-black text-white" : "bg-gray-900 text-gray-200"}`}
+            className={`relative p-4 w-1/1 rounded-lg h-auto text-center
+          ${isTrue ? "text-white" : "text-gray-200"}`}
           >
             {isTrue ? <Adminuser /> : <Normaluser />}
           </div>
         </div>
       )}
     </div>
+
   );
 }
 
-   
+
 export default Signup;
