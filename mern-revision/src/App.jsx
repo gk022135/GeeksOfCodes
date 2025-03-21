@@ -32,6 +32,8 @@ import StudentAuthorise from "./Authorization/StudentAuthorise";
 import AdminstratorAuth from "./Authorization/AdminstratorAuth";
 import TeacherAuthorise from "./Authorization/TeacherAuthorise";
 import CommunityNavbar from "./Discusion/CommunityNavbar";
+import Footer from "./UiComponents/Footer";
+import LandingPage from "./Landingpage/Landing_page";
 
 
 
@@ -91,7 +93,7 @@ function App() {
 
 
 
-            <Route path="/" element={<Signup />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/otpvarification" element={<Otpvarifiacation />} />
             <Route path='/admin-login' element={<AdminLogin />} />
@@ -103,8 +105,8 @@ function App() {
           </Routes>
 
 
-          <HashLoader color='green' />
-          <div className="flex flex-col text-xl z-20 border-2 ">
+          {/* <HashLoader color='green' /> */}
+          <div className="grid grid-cols-3 text-xl text-white bg-black z-20 p-5 ">
             <a href="/otpvarification">otpvarification</a>
             <a href="/qrscanner">qrscanner</a>
             <a href="/qrgenerator">qrgenerator</a>
@@ -116,6 +118,7 @@ function App() {
             <a href="/administrator">Adminstrator Dashboard</a>
             <a href="/administrator-login">Administrator Login</a>
           </div>
+          <Footer />
         </div>
 
 

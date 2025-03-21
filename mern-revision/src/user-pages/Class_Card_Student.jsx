@@ -43,6 +43,8 @@ function Class_Card_Component({ course, x }) {
 
     return (
         <div className="flex flex-col text-white bg-white/15  sm:w-[400px] sm:h-[300px] justify-center content-center border-2 rounded-2xl m-2 hover:shadow-2xl shadow-blue-500 relative transition-transform duration-300 hover:scale-105">
+
+
             <div className="flex sm:flex-row justify-evenly">
                 <p className="flex overflow-hidden left-0 top-0   p-2">{course.createdAt.slice(0, 10)}</p>
                 <p style={{ backgroundColor: course.isActive ? "green" : "red" }}
@@ -50,19 +52,19 @@ function Class_Card_Component({ course, x }) {
                 > {course.isActive ? "Attendance Live" : "Attendance Off"} </p>
 
             </div>
-            <h1 className="flex content-center justify-center text-2xl border-2  h-10 m-2 w-3/4 rounded-2xl">{course.courseName.toUpperCase()}</h1>
+            <h1 className="flex content-center justify-center text-xl  h-10 m-2 w-3/4">{course.courseName.toUpperCase()}</h1>
 
-            <h1 className="flex content-center justify-center text-2xl w-3/4 border-2 h-10 m-2 rounded-2xl ">Teacher: {course.Teacher}</h1>
+            <h1 className="flex content-center justify-center text-xl w-3/4 h-10 m-2 ">Teacher: {course.Teacher}</h1>
 
-            <h1 className="flex content-center justify-center text-2xl border-2 w-3/4  h-10 m-2 rounded-2xl ">Course Code: {course.courseCode}</h1>
+            <h1 className="flex content-center justify-center text-xl w-3/4  h-10 m-2 ">Course Code: {course.courseCode}</h1>
 
             {!x ? (<button className="bg-blue-800 font-bold w-1/2 p-1 ml-20 rounded-2xl hover:bg-green-600 "
                 onClick={MakeAttendance}
             >Mark Attendance</button>) : ("")}
             <div className="flex overflow-hidden p-1 gap-2">
-                <a href="#" className="bg-green-700 w-2/5 ml-1 text-center rounded-xl font-bold"> more Info</a>
+                <a href="#" className="bg-green-700 w-2/5 ml-1 text-center rounded-xl font-bold"> More Info</a>
                 <h1
-                className="text-white font-bold border-2 p-1 rounded-2xl w-7/12"
+                className="text-white font-bold border-1 p-1 rounded-xl w-6/12"
                 > Your Atd:- {AttendByYou}/{total_class} = {percentage}%</h1>
             </div>
 

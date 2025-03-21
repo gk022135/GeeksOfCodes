@@ -10,6 +10,11 @@ import UserProfile from "./User_Profile";
 import Todo_Page from "./Todo_redir";
 import CommunityForum from "./Community_chat";
 
+import X from '../assets/X.png';
+import Git from '../assets/Github.png'
+import Linked from '../assets/InkedIn.png';
+import Insta from '../assets/Instagram.jpeg';
+
 function UserHome() {
     console.log("user auth home per hai")
     const { SendDataSignLogin } = useContext(AppContext);
@@ -24,7 +29,7 @@ function UserHome() {
             setClickType(buttonType);
         }
     }, []);
-    
+
     const clickHandler = (props) => {
         setClickType((prevType) => {
             const newType = prevType === props ? null : props; // Toggle logic
@@ -128,53 +133,109 @@ function UserHome() {
 
 
     return (
-        <div className="main flex flex-col md:flex-row bg-black relative min-h-screen mt-[64px] gap-4">
+        <div className="flex flex-col">
 
-            {/* Left Sidebar */}
-            <div className="left-div flex flex-col w-full bg-emerald-700/20 border-2 border-b-blue-800 md:w-1/5 p-4 mt-4 rounded-2xl relative">
-                <UserProfile props={userInfo} />
-                <LeftDivComp props={leftEditor} />
-
-
-                <div className="middle-upper-1 flex flex-col relative bg-black border-amber-300 border-2 justify-center items-center p-1 overflow-hidden ml-1 mr-1 md:w-3/3 rounded-2xl h-auto gap-2 m-2 content-center hover:bg-emerald-400 bg-gradient-to-r  from-green-400 to-blue-900 ">
-                    <button
-                        onClick={() => clickHandler("Search")}
-                    >Search Attendance by Sub</button>
+            <div className="flex flex-col relative bg-black items-center justify-center md:p-5 p-10 text-white">
+                <h1 className=" text-3xl text-white font-bold"> <span className="text-3xl text-red-500 font-bold">Hello !</span>
+                    <span className="text-3xl text-yellow-300 font-bold"> Student </span>
+                    How's Your class going</h1>
+                <br></br>
+                <h1 className="text-2xl text-white font-bold">
+                    Your <span className="text-2xl text-red-500 font-bold">Ultimate</span> Utilty Hub!
+                </h1>
+                <div className="flex items-center md:ml-50 md:mr-50">
+                    <p className="text-gray-400 p-10 items-center">Welcome to <span className="text-2xl text-yellow-300">Uniator</span>, A versatile web platform integrating real-time code collaboration, a secure gate pass system with QR scanning, an attendance tracker, an advanced to-do list with backend support, and a community discussion forum. making it an all-in-one students, and organizations.</p>
                 </div>
-
-                <LeftDivComp props={userInfo} />
-                <LeftDivComp props={logout} />
-
             </div>
 
-            {/* Middle Section */}
-            <div className="middle-div flex flex-col items-center justify-center bg-blue-400/20 md:h-full md:w-3/5 p-4 rounded-2xl relative gap-4">
 
-                {/* Upper Section */}
-                <div className="middle flex flex-col md:flex-row justify-center items-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative md:w-full gap-4 h-1/4">
-                    <Middle_upper props={QRComponent} color={"#13180f"} />
-                    <Middle_upper props={attendance} color={"#13180f"} />
-                    <Middle_upper props={AvailableClasses} color={"#13180f"} />
+
+
+            <div className="main flex flex-col md:flex-row bg-black relative min-h-screen gap-4 content-center items-center md:items-start p-2">
+
+                {/* Left Sidebar */}
+                <div className="left-div flex flex-col w-3/4 bg-white/10 border-2 md:w-1/5 p-4 rounded-2xl relative md:gap-5 md:h-screen">
+                    <UserProfile props={userInfo} />
+                    <LeftDivComp props={leftEditor} />
+
+                    <LeftDivComp props={userInfo} />
+                    <LeftDivComp props={logout} />
+
                 </div>
 
                 {/* Middle Section */}
-                <div className="middle flex justify-center items-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative h-1/2 w-full">
-                    <MiddlemiddleComp />
-                    <MiddlemiddleComp />
-                    {clickType === "Search" ? (<h1 className="bg-red-400 h-20">hello working fine ji</h1>) : ("")}
+                <div className="middle-div flex flex-col items-center justify-center bg-white/10 md:h-screen md:w-3/5 p-4 rounded-2xl relative gap-4 content-center w-3/4">
+
+                    {/* Upper Section */}
+                    <div className="middle flex flex-col md:flex-row justify-center items-center border-0 rounded-2xl border-b-emerald-600  text-white mt-2 mb-2 relative md:w- md:h-[200px] gap-4 h-1/4">
+                        <Middle_upper props={QRComponent} color={"#13180f"} />
+                        <Middle_upper props={attendance} color={"#13180f"} />
+                        <Middle_upper props={AvailableClasses} color={"#13180f"} />
+                    </div>
+
+                    {/* Middle Section */}
+                    <div className="middle flex justify-center items-center rounded-2xl  text-white mt-2 mb-2 relative h-1/2 w-3/4 md:w- md:h-[200px] md:gap-5">
+                        <MiddlemiddleComp />
+                        <MiddlemiddleComp />
+                        {/* {clickType === "Search" ? (<h1 className="bg-red-400 h-20">hello working fine ji</h1>) : ("")} */}
+                    </div>
+
+                    {/* Bottom Section */}
+                    <div className="middle flex justify-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative h-1/4 w-full">
+                        <h1>Your Recent Activities</h1>
+                    </div>
                 </div>
 
-                {/* Bottom Section */}
-                <div className="middle flex justify-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative h-1/4 w-full">
-                    <h1>Your Recent Activities</h1>
+                {/* Right Sidebar */}
+                <div className="right-div bg-white/10 h-full md:w-1/5 p-4 rounded-2xl relative md:h-screen">
+                    <Todo_Page />
+                    <CommunityForum />
+                    <RightDivComp props={userInfo} />
                 </div>
+
             </div>
 
-            {/* Right Sidebar */}
-            <div className="right-div bg-emerald-500/30 h-full md:w-1/5 p-4 mt-4 rounded-2xl relative">
-                <Todo_Page />
-                <CommunityForum />
-                <RightDivComp props={userInfo} />
+
+
+            <div className="flex flex-col bg-black text-white h-full justify-center content-center items-center">
+                <h1 className="p-5 text-2xl md:text-7xl antialiased">
+                    Connect With Our Community !!
+                </h1>
+                <div className="relative grid grid-cols-2 grid-rows-2 gap-4 md:grid-cols-4 md:grid-rows-1 w-3/4">
+
+
+                    <div className="flex flex-col items-center justify-center w-full aspect-square bg-white/10 text-white text-lg font-semibold rounded-lg transition-all duration-300 hover:border-2 hover:border-white">
+                        <img src={X} alt="Description" className="w-1/4 h-1/4 rounded-2xl" />
+                        <h1>
+                            <a href="#" className="hover:underline">LinkedIn</a>
+                        </h1>
+                    </div>
+
+
+                    <div className="flex flex-col items-center justify-center w-full aspect-square bg-white/10 text-white text-lg font-semibold rounded-lg transition-all duration-300 hover:border-2 hover:border-white">
+                        <img src={Git} alt="Description" className="w-1/4 h-1/4 rounded-2xl" />
+                        <h1>
+                            <a href="#" className="hover:underline">LinkedIn</a>
+                        </h1>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center w-full aspect-square bg-white/10 text-white text-lg font-semibold rounded-lg transition-all duration-300 hover:border-2 hover:border-white">
+                        <img src={Linked} alt="Description" className="w-1/4 h-1/4 rounded-2xl" />
+                        <h1>
+                            <a href="#" className="hover:underline">LinkedIn</a>
+                        </h1>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center w-full aspect-square bg-white/10 text-white text-lg font-semibold rounded-lg transition-all duration-300 hover:border-2 hover:border-white">
+                        <img src={Insta} alt="Description" className="w-1/4 h-1/4 rounded-2xl" />
+                        <h1>
+                            <a href="#" className="hover:underline">LinkedIn</a>
+                        </h1>
+                    </div>
+
+                </div>
+
+
             </div>
 
         </div>
