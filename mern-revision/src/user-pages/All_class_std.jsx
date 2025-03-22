@@ -43,7 +43,7 @@ function All_Class_Std({x}) {
     // console.log("first course", classData[1])
 
     return (
-        <div>
+        <div className="min-h-screen flex items-center justify-center bg-black px-6 py-10">
             {classData ? (
 
                 <div className="grid grid-cols-1 md:grid-cols-3 bg-black p-10">
