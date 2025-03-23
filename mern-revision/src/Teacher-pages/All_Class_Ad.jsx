@@ -23,7 +23,7 @@ function All_Class_adm() {
 
             try {
                 const response = await AllGetReq("get-all-class-adm", { email: AdminInfo.email, role: AdminInfo.role });
-                console.log("course ",response);
+                console.log("course ", response);
 
 
                 if (!response) {
@@ -42,21 +42,22 @@ function All_Class_adm() {
     // console.log("first course", classData[1])
 
     return (
-        <div>
-            {classData ? (
-               
-               <div className="grid grid-cols-3 gap-2">
-               {classData.map((course, index) => (
-                 <div key={index} className="shadow-md p-2 rounded-lg ">
-                   <ClassComponent course={course} />
-                 </div>
-               ))}
-             </div>
-            ) : (
-                <p>Loading...</p>
-            )}
-            
+        <div className=" min-h-screen flex items-center justify-center px-6 py-10">
+            <div className="h-[500px] w-1/1 overflow-y-scroll">
+                {classData ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
+                        {classData.map((course, index) => (
+                            <div key={index} className="shadow-md p-2 rounded-lg">
+                                <ClassComponent course={course} />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </div>
         </div>
+
     );
 }
 

@@ -34,6 +34,7 @@ import TeacherAuthorise from "./Authorization/TeacherAuthorise";
 import CommunityNavbar from "./Discusion/CommunityNavbar";
 import Footer from "./UiComponents/Footer";
 import LandingPage from "./Landingpage/Landing_page";
+import ClassDetailParticular from "./user-pages/ClassDetailParicular";
 
 
 
@@ -45,7 +46,7 @@ function App() {
           <Navbar />
         </div>
 
-        <div className='w-full h-screen bg-blue-300 mt-16'>
+        <div className='w-full h-screen bg-black/90 mt-16'>
 
 
           <Routes>
@@ -89,6 +90,11 @@ function App() {
             <Route path="/qrscanner" element={<Qr_res />} />
             <Route path="/all-classes" element={<All_Class />} />
             <Route path="/all-classes-student" element={<All_Class_Std />} />
+
+
+{/* Dynamic route for each course sending details with query params */}
+            <Route path="/all-classes-student/:courseCode/:courseName/:Teacher" element={<ClassDetailParticular />} />
+
             <Route path="/otpvarification" element={<Otpvarifiacation />} />
 
 
