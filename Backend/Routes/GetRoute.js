@@ -7,6 +7,8 @@ const All_Class_Std = require('../Controllers/Student/Student_Subjectwise')
 const QrvarificationG1G2 = require('../Controllers/QrvarificationG1G2')
 const AllEntries = require('../Controllers/AllEntries')
 
+const SingleClassDetail = require('../Controllers/Student/SingleClassDetails')
+
 
 
 //teacher Imports
@@ -41,5 +43,9 @@ getrouter.get('/all-entries-of-user',AllEntries);
 //Community  get routes
 getrouter.get('/get-all-post',RetriveAllPost);
 getrouter.get('/comments-of-post',ShowCommentOnPost);
+
+
+//student 
+getrouter.get('/get-single-class-details',SingleClassDetail);
 
 module.exports = getrouter;
