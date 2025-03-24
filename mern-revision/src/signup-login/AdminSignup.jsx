@@ -51,81 +51,102 @@ function Adminuser() {
     }
     if (!response.success) toast.error(response.message)
 
-    console.log("response for admin: ", response);
-    console.log("Your form data saved successfully", NormaluserData);
+    // console.log("response for admin: ", response);
+    // console.log("Your form data saved successfully", NormaluserData);
   };
 
 
 
   return (
-    <div className="relative flex justify-center">
-      <form className="Admin-form" onSubmit={submitHandler}>
-        <label htmlFor="name">Teacher Name</label>
-        <input
-          type="text"
-          id="name"
-          name="username"
-          value={NormaluserData.username}
-          onChange={changeHandler}
-          required
-        />
+    <div className="flex justify-center items-center min-h-screen bg-gray-900 px-4">
+    <div className="w-full max-w-lg bg-gray-800/50 backdrop-blur-lg shadow-lg rounded-lg p-6 md:p-8">
+        <form className="flex flex-col" onSubmit={submitHandler}>
+            {/* Title */}
+            <h1 className="text-2xl font-semibold text-blue-400 border-b-2 pb-2 text-center">
+                Admin Signup
+            </h1>
 
-        <label htmlFor="email">Teacher Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={NormaluserData.email}
-          onChange={changeHandler}
-          required
-        />
+            {/* Name Field */}
+            <label htmlFor="name" className="mt-4 text-gray-300">Teacher Name</label>
+            <input
+                type="text"
+                id="name"
+                name="username"
+                value={NormaluserData.username}
+                onChange={changeHandler}
+                required
+                className="w-full px-4 py-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+            />
 
-        <div>
-          <label htmlFor="facultyof">Faculty Of </label>
-          <select
-          id="facultyof"
-          name="FuckltyOf"
-          value={NormaluserData.FuckltyOf}
-          onChange={changeHandler}
-          className="text-white border rounded h-10 bg-black"
-          >
-            <option value= "">Select An Option</option>
-            <option value= "CSE">Computer Science & Engineering</option>
-            <option value= "ECE">Electronic Communication & Engineering</option>
-            <option value= "EE">Electrical Engineering</option>
-            <option value= "CE">Civil Engineering</option>
-            <option value= "MEC">Mechinical Engineering</option>
-            <option value= "BIOTECH">Biotechnology and Engineering</option>
-            <option value= "BBA">Bachelors of Bussiness Adminstrative</option>
-            <option value= "MBA">Masters In Bussiness Adminstrative</option>
-          </select>
-        </div>
+            {/* Email Field */}
+            <label htmlFor="email" className="mt-4 text-gray-300">Teacher Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value={NormaluserData.email}
+                onChange={changeHandler}
+                required
+                className="w-full px-4 py-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+            />
 
+            {/* Faculty Dropdown */}
+            <label htmlFor="facultyof" className="mt-4 text-gray-300">Faculty Of</label>
+            <select
+                id="facultyof"
+                name="FacultyOf"
+                value={NormaluserData.FuckltyOf}
+                onChange={changeHandler}
+                className="w-full px-4 py-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+            >
+                <option value="">Select An Option</option>
+                <option value="CSE">Computer Science & Engineering</option>
+                <option value="ECE">Electronic Communication & Engineering</option>
+                <option value="EE">Electrical Engineering</option>
+                <option value="CE">Civil Engineering</option>
+                <option value="MEC">Mechanical Engineering</option>
+                <option value="BIOTECH">Biotechnology and Engineering</option>
+                <option value="BBA">Bachelors of Business Administration</option>
+                <option value="MBA">Masters in Business Administration</option>
+            </select>
 
-        <label htmlFor="pass">Password</label>
-        <input
-          type="password"
-          id="pass"
-          name="password"
-          value={NormaluserData.password}
-          onChange={changeHandler}
-          required
-        />
+            {/* Password Field */}
+            <label htmlFor="pass" className="mt-4 text-gray-300">Password</label>
+            <input
+                type="password"
+                id="pass"
+                name="password"
+                value={NormaluserData.password}
+                onChange={changeHandler}
+                required
+                className="w-full px-4 py-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+            />
 
-        <label htmlFor="con-pass">Confirm Password</label>
-        <input
-          type="password"
-          id="con-pass"
-          name="confirmpass"
-          value={NormaluserData.confirmpass}
-          onChange={changeHandler}
-          required
-        />
+            {/* Confirm Password Field */}
+            <label htmlFor="con-pass" className="mt-4 text-gray-300">Confirm Password</label>
+            <input
+                type="password"
+                id="con-pass"
+                name="confirmpass"
+                value={NormaluserData.confirmpass}
+                onChange={changeHandler}
+                required
+                className="w-full px-4 py-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+            />
 
-        <button type="submit">Sign Up</button>
-      </form>
-      <ToastContainer />
+            {/* Submit Button */}
+            <button 
+                type="submit" 
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md mt-6 font-semibold transition-all hover:scale-105"
+            >
+                Sign Up
+            </button>
+        </form>
     </div>
+
+    <ToastContainer />
+</div>
+
   );
 }
 

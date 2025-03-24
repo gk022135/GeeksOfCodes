@@ -35,6 +35,10 @@ import CommunityNavbar from "./Discusion/CommunityNavbar";
 import Footer from "./UiComponents/Footer";
 import LandingPage from "./Landingpage/Landing_page";
 import ClassDetailParticular from "./user-pages/ClassDetailParicular";
+import QrWorking from "./Documention/QrWorking";
+import ClassCreate from "./Documention/ClassCreate";
+import GatePassWorking from "./Documention/GatePassWorking";
+import AttendanceMarking from "./Documention/AttendanceMarking";
 
 
 
@@ -82,6 +86,12 @@ function App() {
               <Route path="/upload" element={<ImageUpload />} />
             </Route>
 
+
+{/* Documentation of project */}
+            <Route path="/Qr-working-docs" element={<QrWorking />} />
+            <Route path= "/attendace-marking-docs" element = {<AttendanceMarking />} />
+            <Route path="/class-creating-docs" element = {<ClassCreate />} />
+            <Route path="/gatepss-working-docs" element = {<GatePassWorking />} />
 
 
 

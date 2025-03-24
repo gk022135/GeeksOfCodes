@@ -7,18 +7,21 @@ function Middle_upper({ props, color }) {
 
     return (
         <div
-            className="middle-upper-1 flex flex-row relative bg-black border-amber-300 border-2 justify-center items-center p-1 overflow-hidden ml-1 mr-1 md:w-1/3 rounded-2xl h-3/4 content-center hover:bg-emerald-400 bg-gradient-to-r  from-green-400 to-blue-900 "
-        // style={{ background: `${color}` }}
+            className="flex flex-col md:flex-col relative text-white font-semibold bg-black/70 border-gray-400 border-2 justify-between p-5 overflow-hidden w-full md:w-1/3 rounded-2xl h-auto gap-"
         >
-            <div className='flex flex-col'>
-                <h1 className='text-xl text-black font-bold mt-2'>{props.head}</h1>
-                <p className='text-sm text-black/80'>{props.para}</p>
-
+            <div className="flex flex-col text-center p-1 w-1/3 h-1/1">
+                <h1 className="text-xl text-white font-bold">{props.head}</h1>
+                <p className="text-sm text-white/80">{props.para}</p>
             </div>
-            <a href={props.url}
-                className='border-2 rounded-2xl bg-red-400 text-black p-1'
-            >{props.name}</a>
+
+            <a
+                href={props.url}
+                className="border-2 rounded-2xl bg-blue-700 text-white font-bold px-4 py-2 hover:bg-blue-800 transition duration-300"
+            >
+                {props.name}
+            </a>
         </div>
+
 
     )
 }
