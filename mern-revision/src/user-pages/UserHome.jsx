@@ -82,18 +82,13 @@ function UserHome() {
         userInfo = G_User2
     }
 
-    if (G_User2 == null && userInfo != null) {
-
-    }
-
-    if (userInfo == null || G_User2 == null) {
-        userInfo = {
-            name: "",
-            email: "",
-            role: "",
-        }
-    }
-    console.log(userInfo)
+    // if (userInfo == null || G_User2 == null) {
+    //     userInfo = {
+    //         name: "",
+    //         email: "",
+    //         role: "",
+    //     }
+    // }
 
     // which data to be displayed 
     const leftEditor = {
@@ -113,20 +108,17 @@ function UserHome() {
     const AvailableClasses = {
         url: "/all-classes",
         head: "All Available",
-        para: "Here is All Classes that are held",
         name: "Go To All"
     }
     const attendance = {
         url: "/all-classes-student",
-        head: "Mark Your Attendance",
-        para: "now you can mark your attendance subject wise",
+        head: "Mark Attendance",
         name: "Mark Attendance"
     }
 
     const QRComponent = {
         url: "/qrscanner",
         head: "G1/G2 Entries",
-        para: "scan Qr for making entries from university gate",
         name: "Scan Qr"
     }
 
@@ -150,50 +142,47 @@ function UserHome() {
 
 
 
-
-            <div className="main flex flex-col md:flex-row bg-black relative min-h-screen gap-4 content-center items-center md:items-start p-2">
+            <div className="main flex flex-col md:flex-row bg-black relative min-h-screen gap-2 p-4">
 
                 {/* Left Sidebar */}
-                <div className="left-div flex flex-col w-3/4 bg-white/10 border-2 md:w-1/5 p-4 rounded-2xl relative md:gap-5 md:h-screen">
+                <div className="left-div flex flex-col w-full md:w-1/5 bg-white/15 border-2 pl-1 pr-4 pt-5 rounded-2xl relative gap-5 md:h-screen">
                     <UserProfile props={userInfo} />
                     <LeftDivComp props={leftEditor} />
-
                     <LeftDivComp props={userInfo} />
                     <LeftDivComp props={logout} />
-
                 </div>
 
                 {/* Middle Section */}
-                <div className="middle-div flex flex-col items-center justify-center bg-white/10 md:h-screen md:w-3/5 p-4 rounded-2xl relative gap-4 content-center w-3/4">
+                <div className="middle-div flex flex-col items-center justify-center bg-white/10 w-full md:w-3/5 p-2 rounded-2xl relative gap-4">
 
                     {/* Upper Section */}
-                    <div className="middle flex flex-col md:flex-row justify-center items-center border-0 rounded-2xl border-b-emerald-600  text-white mt-2 mb-2 relative md:w- md:h-[200px] gap-4 h-1/4">
+                    <div className="middle flex flex-col md:flex-row justify-center border-0 rounded-2xl  text-white mt-2 mb-2 relative w-full md:h-[200px] gap-4">
                         <Middle_upper props={QRComponent} color={"#13180f"} />
                         <Middle_upper props={attendance} color={"#13180f"} />
                         <Middle_upper props={AvailableClasses} color={"#13180f"} />
                     </div>
 
                     {/* Middle Section */}
-                    <div className="middle flex justify-center items-center rounded-2xl  text-white mt-2 mb-2 relative h-1/2 w-3/4 md:w- md:h-[200px] md:gap-5">
+                    <div className="middle flex justify-center rounded-2xl text-white relative h-1/1 w-full md:h-[200px] md:gap-5">
                         <MiddlemiddleComp />
                         <MiddlemiddleComp />
-                        {/* {clickType === "Search" ? (<h1 className="bg-red-400 h-20">hello working fine ji</h1>) : ("")} */}
                     </div>
 
                     {/* Bottom Section */}
-                    <div className="middle flex justify-center border-0 rounded-2xl border-b-emerald-600 bg-black text-white mt-2 mb-2 relative h-1/4 w-full">
+                    <div className="middle flex justify-center border-0 rounded-2xl border-b-emerald-600 bg-white/10 text-white mt-2 mb-2 relative h-1/4 w-full p-4">
                         <h1>Your Recent Activities</h1>
                     </div>
                 </div>
 
                 {/* Right Sidebar */}
-                <div className="right-div bg-white/10 h-full md:w-1/5 p-4 rounded-2xl relative md:h-screen">
+                <div className="right-div bg-white/10 w-full md:w-1/5 p-4 rounded-2xl relative md:h-screen">
                     <Todo_Page />
                     <CommunityForum />
                     <RightDivComp props={userInfo} />
                 </div>
 
             </div>
+
 
 
 
@@ -243,4 +232,3 @@ function UserHome() {
     )
 }
 export default UserHome;
-

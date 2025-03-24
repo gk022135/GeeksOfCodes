@@ -35,7 +35,7 @@ function Login() {
     const submitHandler = async (e) => {
         e.preventDefault();
         const response = await SendDataSignLogin('login', NormaluserData);
-        console.log("login form send succes", response);
+        // console.log("login form send succes", response);
 
         //local storage mein save kr rha hu
 
@@ -59,55 +59,81 @@ function Login() {
         }
     };
     return (
-        <div className="flex justify-center h-screen items-center content-center align-bottom">
-            <div>
-                <form className="form " onSubmit={submitHandler}>
-                    <h1 className="text-2xl text-cyan-500 border-b-2">User Login</h1>
-                    <label htmlFor="name">User Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="username"
-                        value={NormaluserData.username}
-                        onChange={changeHandler}
-                        required
-                    />
+        <div className="flex justify-center items-center min-h-screen bg-gray-900 px-4">
+    <div className="w-full max-w-lg bg-gray-800/50 backdrop-blur-lg shadow-lg rounded-lg p-6 md:p-8">
+        <form className="flex flex-col" onSubmit={submitHandler}>
+            {/* Title */}
+            <h1 className="text-2xl font-semibold text-cyan-400 border-b-2 pb-2 text-center">
+                User Login
+            </h1>
 
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={NormaluserData.email}
-                        onChange={changeHandler}
-                        required
-                    />
+            {/* Name Field */}
+            <label htmlFor="name" className="mt-4 text-gray-300">User Name</label>
+            <input
+                type="text"
+                id="name"
+                name="username"
+                value={NormaluserData.username}
+                onChange={changeHandler}
+                required
+                className="w-full px-4 py-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded-md focus:ring-2 focus:ring-cyan-500 outline-none"
+            />
 
-                    <label htmlFor="pass-login">Password
-                        <input
-                            type={showpass ? ("text") : ("password")}
-                            id="pass-login"
-                            name="password"
-                            value={NormaluserData.password}
-                            onChange={changeHandler}
-                            required
-                        />
-                        <span onClick={() => { SetShowpass(!showpass) }}>
-                            {showpass ? <FaRegEye /> : <FaEyeSlash />}
-                        </span>
-                    </label>
+            {/* Email Field */}
+            <label htmlFor="email" className="mt-4 text-gray-300">Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value={NormaluserData.email}
+                onChange={changeHandler}
+                required
+                className="w-full px-4 py-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded-md focus:ring-2 focus:ring-cyan-500 outline-none"
+            />
 
-                    <div className="flex flex-row gap-5 p-2 rounded-xl">
-                        <button type="submit">Login</button>
+            {/* Password Field */}
+            <label htmlFor="pass-login" className="mt-4 text-gray-300 flex justify-between items-center">
+                Password
+                <span 
+                    onClick={() => { SetShowpass(!showpass) }} 
+                    className="cursor-pointer text-gray-400 hover:text-white"
+                >
+                    {showpass ? <FaRegEye /> : <FaEyeSlash />}
+                </span>
+            </label>
+            <input
+                type={showpass ? "text" : "password"}
+                id="pass-login"
+                name="password"
+                value={NormaluserData.password}
+                onChange={changeHandler}
+                required
+                className="w-full px-4 py-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded-md focus:ring-2 focus:ring-cyan-500 outline-none"
+            />
 
-                        <span className="flex flex-row gap-2 border-2 rounded-md justify-center items-center p-1 text-white hover:bg-amber-800/50 cursor-pointer">
-                            {<FcGoogle size={30} />} <h2>{<LoginButton />}</h2>
-                        </span>
-                    </div>
-                </form>
+            {/* Buttons */}
+            <div className="flex flex-col md:flex-row gap-4 mt-6">
+                {/* Login Button */}
+                <button 
+                    type="submit" 
+                    className="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-2 rounded-md font-semibold transition-all hover:scale-105"
+                >
+                    Login
+                </button>
+
+                {/* Google Login */}
+                <span 
+                    className="w-full flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-md cursor-pointer transition-all hover:scale-105"
+                >
+                    <FcGoogle size={24} /> <h2>{<LoginButton />}</h2>
+                </span>
             </div>
-            <ToastContainer />
-        </div>
+        </form>
+    </div>
+
+    <ToastContainer />
+</div>
+
     );
 }
 
