@@ -1,69 +1,101 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { TfiMenuAlt } from "react-icons/tfi";
+import { IoMdAdd } from "react-icons/io";
 import Posts_Cards from "./Posts_Cards";
-import CommentsSection from "./CommentSection";
-import UserProfile from "../user-pages/User_Profile";
 import CommunityNavbar from "./CommunityNavbar";
 
+import { MdExpandLess } from "react-icons/md";
+import { MdExpandMore } from "react-icons/md";
 
-function HomeDiscussion (){
-    const [isparams, setParams] = useState(null);
+import { FaGreaterThan } from "react-icons/fa6";
+import { PiLessThanLight } from "react-icons/pi";
+import { CiMenuBurger } from "react-icons/ci";
 
-    useEffect ( ()=>{
-        const storedData = localStorage.getItem("buttonClickType");
-        if (storedData) {
-            const parsedData = JSON.parse(storedData);
-            setParams(parsedData.BtnName);
-        }
-    },[])
+import Explore from "./Explore";
 
+function HomeDiscussion() {
+    const [selectedParam, setSelectedParam] = useState(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    function clickHandler (params) {
-        setParams(params);
-        localStorage.setItem("buttonClickType", JSON.stringify({BtnName : isparams}))
-        console.log("params ",isparams)
+    function handleSelection(param) {
+        setSelectedParam(param);
     }
 
+    const menuItems = [
+        { label: "All Posts", value: "all-posts" },
+        { label: "Explore", value: "explore" },
+        { label: "Your Posts", value: "your-all-posts" },
+        { label: "Make A Post", value: "make-posts" },
+    ];
 
     return (
         <div className="relative flex flex-col h-auto">
-           <div >
-              <CommunityNavbar />
-           </div>
-           <div className="relative flex flex-row" >
+            {/* Navbar */}
+            <div>
+                <CommunityNavbar fun={handleSelection} />
+            </div>
 
-               <div className="hidden bg-black w-0 sm:w-1/4 h-screen p-2 text-white  rounded-2xl border-1 sm:flex sm:flex-col">
-               {/* <UserProfile /> */}
+            {/* Main Content with Sidebar */}
+            <div className="flex relative transition-all duration-300 ease-in-out">
+                {/* Sidebar (Sliding Panel) */}
+                <div
+                    className={`fixed relative transition-all duration-300 ${
+                        isSidebarOpen ? "w-1/4 md:w-90" : "w-0 md:w-16"
+                    } bg-black/80 text-white h-screen shadow-lg border-r-2 border-gray-400`}
+                >
+                    {/* Sidebar Toggle Button */}
+                    <button
+                        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                        className="absolute top-5 left-5 z-50 bg-black/80 text-white p-2 rounded-full shadow-md border "
+                    >
+                        {isSidebarOpen  ? (<PiLessThanLight size={25} /> ): < CiMenuBurger size={25} color="white"/>}
+                    </button>
 
-               <button onClick={ () => clickHandler("all-posts")}
-                className="border-2 border-emerald-400 rounded-2xl p-2 m-2 "
-                >All POsts</button>
+                    {/* Sidebar Content */}
+                    <div className={`h-full overflow-hidden transition-all duration-300 ${isSidebarOpen ? "opacity-100" : "opacity-0 hidden"}`}>
+                    
 
+                        {/* Menu List */}
+                        <ul className="p-6 space-y-4 mt-10">
+                            {menuItems.map((item) => (
+                                <li key={item.value} className="rounded text-start">
+                                    <button
+                                        onClick={() => handleSelection(item.value)}
+                                        className="block w-full text-start rounded-xl p-2 pl-4 hover:bg-white/20"
+                                    >
+                                        {item.label}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
 
-               <button onClick={ () => clickHandler("last-hours")}
-                className="border-2 border-emerald-400 rounded-2xl p-2 m-2 "
-                >last hOurs</button>
+                        {/* Community Sections */}
+                        {[...Array(2)].map((_, index) => (
+                            <div key={index} className="border-t border-gray-400 w-3/4 ml-5 flex flex-col">
+                                <h1 className="text-center m-1 font-bold text-gray-400">Create your Community</h1>
+                                <button className="flex m-1 gap-2 w-full text-start rounded-xl p-2 pl-4 hover:bg-white/20">
+                                    <IoMdAdd size={25} /> Create Community
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
+                {/* Right Content Adjusting Dynamically */}
+                <div
+                    className={`transition-all duration-300 ease-in-out ${
+                        isSidebarOpen ? "w-3/4 md:w-full" : "ml-0 md:w-full"
+                    }`}
+                >
+                    <div className="bg-black w-full content-center items-center relative h-screen p-2 border rounded-2xl justify-center md:pl-60 overflow-y-scroll">
+                        {selectedParam === "all-posts" && <Posts_Cards />}
 
-               <button onClick={ () => clickHandler("Your-all-posts")}
-                className="border-2 border-emerald-400 rounded-2xl p-2 m-2 "
-                >Your Posts</button>
-
-               
-               <button onClick={ () => clickHandler("make-posts")}
-                className="border-2 border-emerald-400 rounded-2xl p-2 m-2 "
-                >Make A posts</button>
-               
-               </div>
-
-               <div className="bg-black w-full sm:w-3/4 relative h-screen p-2 border rounded-2xl"
-               > 
-               <h1>kya render ho rha hai ji {isparams}</h1>
-                  
-                  {isparams === "all-posts" ? ( <Posts_Cards />) : ("")}
-                  {/* {isparams === "comment" ? (<CommentsSection />) : ("null")} */}
-               </div>
-           </div>
+                        {selectedParam === "explore" && <Explore />}
+                    </div>
+                </div>
+            </div>
         </div>
-    )
+    );
 }
+
 export default HomeDiscussion;
