@@ -5,7 +5,8 @@ const cookieParser = require("cookie-parser");
 const cors = require('cors')
 
 
-
+const FileUpload = require('express-fileupload');
+const clodinaryConnect = require('./Configs/CloudinaryConfig')
 const DB_connect = require('./Configs/DatabaseConfig')
 
 const route = require('./Routes/PostRoutes')
@@ -14,7 +15,14 @@ const putrouter = require('./Routes/PutRoute')
 
 
 const app = express();
+
+
+
+app.use(FileUpload({useTempFiles : true, tempFileDir : "./temp/"}));
 dotenv.config();
+
+
+
 app.use(
     cors({
       origin: "http://localhost:5173", // ✅ Allow only your frontend's origin
@@ -44,5 +52,6 @@ app.listen(3000, () => {
 const URL = process.env.MONGO_URL;
 console.log("hi",URL)
 
-//url ko argument mein pass kiya
+
 DB_connect(URL);  // db ko call kiye taki db connect function run ho
+clodinaryConnect();  //jsut call the function for connection to cloudinary 

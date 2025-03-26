@@ -1,26 +1,51 @@
-// image uplaod component :- image will be upload to cloudinary
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiImageFill } from "react-icons/ri";
 
 function ImageUpload() {
+    const Upload_Url = "http://localhost:3000/mern-revision/v1//upload-the-image";
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [isClicked, setClicked] = useState(false);
     const [uploading, setUploading] = useState(false);
 
-    function ClickHandler() {
-        setClicked(!isClicked);
-    }
+    const [email, setEmail] = useState("")
+
+
+    useEffect( ()=>{
+        const userInfo = localStorage.getItem("UserData");
+        const userEmail = userInfo ? JSON.parse(userInfo).email : "";
+        setEmail(userEmail);
+        console.log("usremail", userEmail)
+    }, [])
+
+
+    // Allowed file types and max size (1MB)
+    const supportedFileTypes = ["jpg", "jpeg", "png"];
+    const maxSizeMB = 1 * 1024 * 1024; // 1MB in bytes
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
+
+        if (!file) return;
+
+        const fileType = file.name.split(".").pop().toLowerCase();
+        const fileSize = file.size;
+
+        // Validate file type
+        if (!supportedFileTypes.includes(fileType)) {
+            alert("Unsupported file type! Please upload JPG, JPEG, or PNG.");
+            return;
+        }
+
+        // Validate file size
+        if (fileSize > maxSizeMB) {
+            alert("File is too large! Max size allowed is 1MB.");
+            return;
+        }
+
         setSelectedFile(file);
-        console.log(selectedFile)
-        setPreview(URL.createObjectUwRL(file));
+        setPreview(URL.createObjectURL(file));
     };
 
-    // Upload to Cloudinary
     const uploadToCloudinary = async () => {
         if (!selectedFile) {
             alert("Please select an image first.");
@@ -29,56 +54,45 @@ function ImageUpload() {
 
         setUploading(true);
 
+
+        //in inbuilt formData
         const formData = new FormData();
-        formData.append("file", selectedFile);
-        formData.append("upload_preset", "your_upload_preset"); // Replace with your Cloudinary upload preset
+        formData.append("gkcloud", selectedFile);
+        formData.append("email", email);
+
 
         try {
-            const response = await fetch("https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", {
+            const response = await fetch(Upload_Url, {
                 method: "POST",
-                body: formData
+                body: formData,
             });
+            console.log("ye upload wala maal hai", response)
 
-            const data = await response.json();
-            if (data.secure_url) {
-                console.log("Uploaded Image URL:", data.secure_url);
-                sendImageUrlToBackend(data.secure_url);
+            const Imagedata = await response.json();
+            if (Imagedata.success) {
+                const ImageObject = {
+                    secure_url: Imagedata.data.secure_url,
+                    public_id: Imagedata.data.public_id
+                }
+                localStorage.setItem("ImageData", JSON.stringify(ImageObject));
+                alert("Image uploaded successfully!");
             } else {
                 alert("Upload failed.");
             }
         } catch (error) {
             console.error("Error uploading image:", error);
+            alert("Something went wrong!");
         } finally {
             setUploading(false);
         }
     };
 
-    const sendImageUrlToBackend = async (imageUrl) => {
-        try {
-            const response = await fetch("hello/v1/gkkk", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ imageUrl })
-            });
-
-            const data = await response.json();
-            console.log("Backend Response:", data);
-            alert("Image URL sent to backend!");
-        } catch (error) {
-            console.error("Error sending image URL to backend:", error);
-        }
-    };
-
     return (
         <div className="p-4 bg-gray-800 text-white rounded-md">
-            <button onClick={ClickHandler} className="mb-4">
-                <RiImageFill size={50} color={isClicked ? "white" : "black"} />
-            </button>
-
-            {/* File Input */}
-            <input type="file" accept="image/*" onChange={handleFileChange} className="block text-sm" />
+            <label className="cursor-pointer">
+                <RiImageFill size={50} color="white" />
+                <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+            </label>
 
             {/* Image Preview */}
             {preview && (
@@ -88,8 +102,8 @@ function ImageUpload() {
             )}
 
             {/* Upload Button */}
-            <button 
-                onClick={uploadToCloudinary} 
+            <button
+                onClick={uploadToCloudinary}
                 disabled={uploading}
                 className="mt-4 px-4 py-2 bg-blue-500 rounded text-white"
             >

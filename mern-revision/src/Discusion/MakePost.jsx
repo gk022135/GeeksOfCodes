@@ -1,102 +1,68 @@
 import { useState } from "react";
 import ImageUpload from "./ImageUploadComp";
 
-function MakePost() {
-    const [data, setData] = useState({
-        tags: "",
-        heading: "",
-        body: ""
-    });
-
-    function onChangeHandler(event) {
-        const { name, value } = event.target;
-        setData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
+export default function CreatePost() {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!title.trim()) {
+      alert("Title is required");
+      return;
     }
+    console.log("Post Submitted", { title, body });
+  };
+  const userInfo = localStorage.getItem("UserData");
+  const userEmail = userInfo ? JSON.parse(userInfo).email : "";
 
-    return (
-        <div className="relative w-3/4 p-4 bg-gray-900 text-white rounded-lg">
-            <div className="flex flex-col gap-4">
-                {/* Tags Input */}
-                <label className="flex flex-col">
-                    Tags:
-                    <input
-                        type="text"
-                        placeholder="#topics"
-                        name="tags"
-                        value={data.tags}
-                        onChange={onChangeHandler}
-                        className="p-2  rounded"
-                    />
-                </label>
 
-                {/* Heading Input */}
-                <label className="flex flex-col">
-                    Heading:
-                    <input
-                        type="text"
-                        placeholder="Heading"
-                        name="heading"
-                        value={data.heading}
-                        onChange={onChangeHandler}
-                        className="p-2 rounded"
-                    />
-                </label>
 
-                {/* Body Input */}
-                <label className="flex flex-col">
-                    Post Details:
-                    <input
-                        type="text"
-                        placeholder="Post Details"
-                        name="body"
-                        value={data.body}
-                        onChange={onChangeHandler}
-                        className="p-2  rounded"
-                    />
-                </label>
 
-                {/* Image Upload Section (Placeholder) */}
-                <div className="p-2 bg-gray-800 rounded text-center">
-                    
-                    <ImageUpload />
-                </div>
-            </div>
+  return (
+    <div className="max-w-xl mx-auto bg-gray-900 p-6 rounded-lg shadow-md text-white">
+      <h2 className="text-xl font-semibold mb-4">Create Post</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label className="block text-sm font-medium">Title *</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className={`w-full p-2 mt-1 border ${
+              !title.trim() ? "border-red-500" : "border-gray-600"
+            } bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            placeholder="Enter title"
+          />
+          {!title.trim() && (
+            <p className="text-red-500 text-sm mt-1">Please fill out this field.</p>
+          )}
         </div>
-    );
+        <div className="mb-4">
+          <label className="block text-sm font-medium">Body</label>
+          <textarea
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            className="w-full p-2 mt-1 border border-gray-600 bg-gray-800 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="4"
+            placeholder="Enter post content"
+          ></textarea>
+        </div>
+
+        <ImageUpload />
+        <div className="flex gap-2">
+          <button type="button" className="bg-gray-700 px-4 py-2 rounded text-gray-400 cursor-not-allowed">Save Draft</button>
+          <button
+            type="submit"
+            className={`px-4 py-2 rounded ${
+              title.trim() ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-700 cursor-not-allowed"
+            } text-white`}
+            disabled={!title.trim()}
+          >
+            Post
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 }
-
-export default MakePost;
-
-
-/**
- * what is logi behind the making the post 
- * requirement 
- * 1. user email ---> resolve by localstorage 
- * 2. post text data ----> resolve by input fields
- * 3. if any image ---> how can be resolve this
- *       1. upload image to cloudinary get image url
- *       2. then make object which contains text data and image url 
- *   but how can we get image url at the same time of making posts
- */
-
-/**
- * making schema 
- *   1. schema one which contains all post with user id 
- *   2. in user schema add a userPosts array which contains post _id in this array of user only
- * 
- *   for like
- *  make a likeCount Array in posts which contains user id who has been like to the paritcular post
- *   similar for dislike
- *   
- * comment 
- * make array of object which contains
- *  const arrayOfcomment = {
- * _id : userid
- *   comment : postId
- *   commentBody : " comment text here"
- * }
- *  
- */
