@@ -88,7 +88,7 @@ function ImageUpload() {
     };
 
     return (
-        <div className="p-4 bg-gray-800 text-white rounded-md">
+        <div className="p-4 bg-white/10 text-white rounded-md">
             <label className="cursor-pointer">
                 <RiImageFill size={50} color="white" />
                 <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
