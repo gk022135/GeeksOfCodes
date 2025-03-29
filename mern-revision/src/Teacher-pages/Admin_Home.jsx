@@ -7,6 +7,7 @@ import Attendance from "./AttendanceDetails";
 import AdminPro from './AdminPro'
 import QrGenerator from "../QR/QrGenerator";
 import EntriesLog from "./AllEntryExits";
+import SetLocation from "./SetLoaction";
 
 function AdminHome() {
     const [selectedButton, setSelectedButton] = useState(null);
@@ -27,7 +28,7 @@ function AdminHome() {
             <div className="mt-20 flex flex-col relative bg-black items-center justify-center md:p-5 p-10 text-white">
                 <h1 className=" text-3xl text-white font-bold"> <span className="text-3xl text-red-500 font-bold">Welcome !</span> to
                     <span className="text-3xl text-yellow-300 font-bold"> Teacher Dashbord </span>
-                   Ultimate Class Managing Web-App</h1>
+                    Ultimate Class Managing Web-App</h1>
                 <br></br>
                 <h1 className="text-2xl text-white font-bold">
                     Your <span className="text-2xl text-red-500 font-bold">Ultimate</span> Classess Manage Hub!
@@ -54,6 +55,10 @@ function AdminHome() {
                         Attendance Details
                     </button>
 
+                    <button onClick={() => handleButtonClick("setlocation")} className="border-2 border-cyan-500 rounded-2xl text-white p-2  m-2 w-9/10">
+                        Set Location & Radius
+                    </button>
+
 
                 </div>
 
@@ -64,6 +69,8 @@ function AdminHome() {
                     {selectedButton === "Create_Class" && <Create_class />}
 
                     {selectedButton === "Attendance" && <Attendance />}
+
+                    {selectedButton === "setlocation" && <SetLocation />}
 
 
 

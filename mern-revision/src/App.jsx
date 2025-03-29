@@ -39,6 +39,8 @@ import QrWorking from "./Documention/QrWorking";
 import ClassCreate from "./Documention/ClassCreate";
 import GatePassWorking from "./Documention/GatePassWorking";
 import AttendanceMarking from "./Documention/AttendanceMarking";
+import SetLocation from "./Teacher-pages/SetLoaction";
+import VarifyLocation from "./user-pages/VarifiyLocation";
 
 
 
@@ -116,6 +118,9 @@ function App() {
             <Route path="/administrator-login" element={<SUlogin />} />
 
             <Route path="/makepost"element = {<MakePost />} />
+
+            <Route path="/setlocation" element = {<SetLocation />} />
+            <Route path= "/varifylocaation/:_id" element = {<VarifyLocation />} />
 
 
           </Routes>
