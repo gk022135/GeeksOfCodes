@@ -45,6 +45,7 @@ export default function CreatePost() {
         if (response.success) {
             toast.success("Yay! Your post is done");
             setTimeout(() => {
+                localStorage.removeItem("ImageData")
                 navigate("/post-all");
             }, 2000);
         }
