@@ -24,6 +24,7 @@ const StudentDeletion = require('../Controllers/Adminstrator/DeleteStudent');
 //COMMUNITY IMPORTS
 const RetriveAllPost = require('../Controllers/CommunityStuff/RetriveAllPosts');
 const ShowCommentOnPost = require('../Controllers/CommunityStuff/ShowCommentOnPost');
+const FetchAllPost = require('../Controllers/CommunityStuff/FetchAllPosts')
 
 
 
@@ -45,6 +46,7 @@ getrouter.get('/all-entries-of-user',AllEntries);
 //Community  get routes
 getrouter.get('/get-all-post',RetriveAllPost);
 getrouter.get('/comments-of-post',ShowCommentOnPost);
+getrouter.get('/all-posts',FetchAllPost);
 
 
 //student 
