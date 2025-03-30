@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
 import white_flower from "../assets/white-flowers.jpg";
-import { FcDislike, FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { FaRegComment } from "react-icons/fa";
-import { BiSolidUpvote } from "react-icons/bi";
-import { BiSolidDownvote } from "react-icons/bi";
+import { BiSolidUpvote, BiSolidDownvote } from "react-icons/bi";
 
-import CommentsSection from "./CommentSection";
-import img2 from '../assets/headphones.jpg'
-
-function Posts_Cards(props) {
+function Posts_Cards({ posts }) {
     const [comment, setComment] = useState("");
     const [btncomment, setBtnComment] = useState("");
-
 
     useEffect(() => {
         const commentBtn = localStorage.getItem("commentBtn");
@@ -20,100 +14,73 @@ function Posts_Cards(props) {
         }
     }, []);
 
-    const postDetails = {
-        useremail: "Gk022135@gmail.com",
-        postHeader: "I just tried to implement the community posts feature for making class discussions available 24x7. Anyone from the university can communicate and deliver useful content.",
-        postImage: img2,
-        tags: "",
-        comments: "20",
-        likes: "512",
-        dislikes: "123",
-    };
-
     function handleChange(event) {
         setComment(event.target.value);
     }
 
     async function makelike() {
-        // Handle like functionality (POST request)
+        // Handle like functionality
     }
 
     async function makedislikes() {
-        // Handle dislike functionality (POST request)
+        // Handle dislike functionality
     }
 
     async function makeComments(props) {
-        setBtnComment(props)
-
-        localStorage.setItem("commentBtn", JSON.stringify({ commetnBtn: props }))
-        console.log("Comment submitted:", comment);
+        setBtnComment(props);
+        localStorage.setItem("commentBtn", JSON.stringify({ commetnBtn: props }));
         setComment("");
     }
 
     return (
-        <div className="relative w-auto sm:w-3/7 text-white bg-white/10 p-2 rounded-2xl">
+        <div className="max-w-lg w-full mx-auto bg-gray-900 text-white shadow-lg rounded-xl overflow-hidden mb-6 transition-all duration-300 hover:shadow-2xl">
             {/* Header Section */}
-            <div>
-                <div className="flex p-2 border-b-2 border-white/30">
-                    <h1 className="border-1 border-yellow-300 p-2 rounded-full text-xl font-bold bg-black mr-2">
-                        {postDetails.useremail[0].toUpperCase()}
-                    </h1>
-                    <h1 className="mt-2 text-white/50 text-sm">{postDetails.useremail}</h1>
+            <div className="flex items-center gap-3 p-4 border-b border-gray-700">
+                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white font-bold text-lg">
+                    {posts.email?.[0]?.toUpperCase() || "U"}
                 </div>
-
-                {/* Post Content */}
-                <p className="text-amber-50 p-2 text-sm">{postDetails.postHeader}</p>
-                <img
-                    src={postDetails.postImage}
-                    alt="Post"
-                    width={"200px"}
-                    height={"200px"}
-                    className="p-1 w-3/4 sm:h-2/5 m-5 rounded-2xl"
-                />
-
-                {/* Actions Section */}
-                <div className="flex flex-row text-white p-2 justify-evenly">
-                    <div className="flex flex-row">
-                        {/* Like Button */}
-                        <div className="flex flex-col bg-black/50 rounded-2xl p-2 m-2 hover:bg-green-800">
-                            <button onClick={makelike}>
-                                <BiSolidUpvote size={25} />
-                            </button>
-                            <p className="text-sm">{postDetails.likes}</p>
-                        </div>
-
-                        {/* Dislike Button */}
-                        <div className="flex flex-col bg-black/50 rounded-2xl p-2 m-2 hover:bg-red-600">
-                            <button onClick={makedislikes}>
-                                <BiSolidDownvote size={25} />
-                            </button>
-                            <p className="text-sm">{postDetails.dislikes}</p>
-                        </div>
-                    </div>
-
-                    {/* Comment Input Section */}
-                    <div className="flex flex-row rounded-2xl bg-black/50 m-2 p-2 hover:bg-white/40">
-                        <button onClick={() => (makeComments("comment"))} className="m-1">
-                            <FaRegComment size={25} />
-                        </button>
-                        {/* <textarea
-                        value={comment}
-                        onChange={handleChange}
-                        placeholder="Write a comment..."
-                        className="bg-gray-400 text-sm rounded w-3/4 p-1 text-black"
-                    /> */}
-                    </div>
+                <div>
+                    <h3 className="text-sm font-semibold">{posts.email || "Unknown User"}</h3>
+                    <p className="text-xs text-gray-400">{new Date().toLocaleDateString()}</p>
                 </div>
             </div>
-            {
-                btncomment === "comment" ? ("") : ("")
-            }
+
+            {/* Post Content */}
+            <div className="p-4">
+                <p className="text-gray-300 text-sm mb-3">{posts.title}</p>
+                <img
+                    src={posts.postImg || white_flower}
+                    alt="Post"
+                    className="w-full h-64 object-cover rounded-lg"
+                />
+            </div>
+
+            {/* Actions Section */}
+            <div className="flex justify-between items-center px-4 pb-4">
+                {/* Like & Dislike Buttons */}
+                <div className="flex gap-5">
+                    <button onClick={makelike} className="flex items-center gap-1 text-gray-300 hover:text-green-500 transition">
+                        <BiSolidUpvote size={22} />
+                        <span className="text-sm">{posts.postLikes?.length || 0}</span>
+                    </button>
+
+                    <button onClick={makedislikes} className="flex items-center gap-1 text-gray-300 hover:text-red-500 transition">
+                        <BiSolidDownvote size={22} />
+                        <span className="text-sm">{posts.postDislies?.length || 0}</span>
+                    </button>
+                </div>
+
+                {/* Comment Button */}
+                <button
+                    onClick={() => makeComments("comment")}
+                    className="flex items-center gap-1 text-gray-300 hover:text-blue-400 transition"
+                >
+                    <FaRegComment size={22} />
+                    <span className="text-sm">Comment</span>
+                </button>
+            </div>
         </div>
     );
 }
 
 export default Posts_Cards;
-
-
-
-//just a card which will show all post 

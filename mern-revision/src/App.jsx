@@ -41,6 +41,7 @@ import GatePassWorking from "./Documention/GatePassWorking";
 import AttendanceMarking from "./Documention/AttendanceMarking";
 import SetLocation from "./Teacher-pages/SetLoaction";
 import VarifyLocation from "./user-pages/VarifiyLocation";
+import FetchAllPost from "./Discusion/FetchAllPost";
 
 
 
@@ -121,6 +122,7 @@ function App() {
 
             <Route path="/setlocation" element = {<SetLocation />} />
             <Route path= "/varifylocaation/:_id" element = {<VarifyLocation />} />
+            <Route path="/all-posts" element={<FetchAllPost />} />
 
 
           </Routes>

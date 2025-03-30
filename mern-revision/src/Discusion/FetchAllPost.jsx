@@ -10,56 +10,68 @@
  * 5. use Redux toolkit query :-explore about it on youtube and internet
  */
 
-import { useState, useEffect, useContext } from "react";
-import AppContext from '../ContextApi/FisrtContext'
+import { useState, useEffect, useContext, useCallback } from "react";
+import { AppContext } from "../ContextApi/FisrtContext";
+import Posts_Cards from "./Posts_Cards";
 
 const FetchAllPost = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [cursor, setCursor] = useState(null);
+    const [cursor, setCursor] = useState("");
     const [hasMore, setHasMore] = useState(true);
 
     const {AllGetReq} = useContext(AppContext)
 
-    const fetchPosts = async () => {
-        if (!hasMore) return;
+    const fetchPosts = useCallback(async () => {
+        if (!hasMore || loading) return;
         setLoading(true);
+
+        const queryparams = {
+            limit: 10,
+            cursor: cursor
+        };
+
         try {
-            const res = await AllGetReq(`/api/posts?limit=10&cursor=${cursor || ""}`, null);
-            const data = await res.json();
+            const data = await AllGetReq("all-posts", queryparams);
+            // const data = await res.json();
+            console.log("all posts data", data);
 
             setPosts((prev) => [...prev, ...data.posts]);
-            setCursor(data.nextCursor);
-            setHasMore(!!data.nextCursor);  //!! mean it boolean
+            setCursor((prevCursor) => data.nextCursor || prevCursor);
+            setHasMore(Boolean(data.nextCursor));
         } catch (error) {
             console.error("Error fetching posts:", error);
         }
         setLoading(false);
-    };
+    }, [cursor, hasMore, loading, AllGetReq]);
 
     useEffect(() => {
         fetchPosts();
-    }, []);
+    }, [cursor]);
 
     useEffect(() => {
+        let timeout;
         const handleScroll = () => {
-            if (
-                window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 &&
-                !loading
-            ) {
-                fetchPosts();
-            }
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                if (
+                    window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 &&
+                    !loading
+                ) {
+                    fetchPosts();
+                }
+            }, 200);
         };
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [loading]);
+    }, [loading, fetchPosts]);
 
     return (
         <div>
             {posts.map((post) => (
                 <div key={post._id}>
-                    <img src={post.imageUrl} alt={post.caption} width="300px" />
-                    <p>{post.caption}</p>
+                    <Posts_Cards  posts = {post}/>
                 </div>
             ))}
             {loading && <p>Loading...</p>}

@@ -12,6 +12,7 @@ import { PiLessThanLight } from "react-icons/pi";
 import { CiMenuBurger } from "react-icons/ci";
 
 import Explore from "./Explore";
+import FetchAllPost from "./FetchAllPost";
 
 function HomeDiscussion() {
     const [selectedParam, setSelectedParam] = useState(null);
@@ -88,7 +89,7 @@ function HomeDiscussion() {
                     }`}
                 >
                     <div className="bg-black w-full content-center items-center relative h-screen p-2 border rounded-2xl justify-center md:pl-60 overflow-y-scroll">
-                        {selectedParam === "all-posts" && <Posts_Cards />}
+                        {selectedParam === null && <FetchAllPost />}
 
                         {selectedParam === "explore" && <Explore />}
                     </div>

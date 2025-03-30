@@ -4,6 +4,8 @@ const PostModel = require('../../Models/PostsSchema')
 
 async function FetchAllPosts(req, res) {
     try {
+
+        //your api call url will be :- base-url/get/all-posts?limit=10&cursor=null
         const { limit = 10, cursor } = req.query;
         console.log("details for fetching post", req.query);
 
