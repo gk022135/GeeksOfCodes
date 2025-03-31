@@ -1,11 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import white_flower from "../assets/white-flowers.jpg";
 import { FaRegComment } from "react-icons/fa";
 import { BiSolidUpvote, BiSolidDownvote } from "react-icons/bi";
+import { AppContext } from "../ContextApi/FisrtContext";
+import { toast } from "react-toastify";
 
 function Posts_Cards({ posts }) {
     const [comment, setComment] = useState("");
     const [btncomment, setBtnComment] = useState("");
+    const {PutRequets} = useContext(AppContext);
+
+    const [liked, setLiked] = useState(false);
+    const [disliked, setDisLiked] = useState(false);
+
+    const userInfo = localStorage.getItem("UserData");
+    const userEmail = userInfo ? JSON.parse(userInfo).email : "";
 
     useEffect(() => {
         const commentBtn = localStorage.getItem("commentBtn");
@@ -19,11 +28,40 @@ function Posts_Cards({ posts }) {
     }
 
     async function makelike() {
-        // Handle like functionality
+        //make-like-on-post
+        setLiked(true);
+        console.log("is post ki id ye hai beti chod",posts._id)
+        console.log("user email:-",userEmail)
+        const body = {
+            PostId : posts._id,
+            email : userEmail
+        }
+        const resposne = await PutRequets("", body, "make-like-on-post");
+        if(!resposne.success){
+            setLiked(false);
+            alert("failed to like post")
+        }
+        if(resposne.success){
+            alert("post liked successfully")
+        }
     }
 
     async function makedislikes() {
-        // Handle dislike functionality
+        setDisLiked(true);
+        console.log("is post ki id ye hai beti chod",posts._id)
+        console.log("user email:-",userEmail)
+        const body = {
+            PostId : posts._id,
+            email : userEmail
+        }
+        const resposne = await PutRequets("", body, "make-dislike-on-post");
+        if(!resposne.success){
+            setDisLiked(false);
+            alert("failed to Dislike post")
+        }
+        if(resposne.success){
+            alert("post Disliked successfully")
+        }
     }
 
     async function makeComments(props) {
@@ -47,12 +85,20 @@ function Posts_Cards({ posts }) {
 
             {/* Post Content */}
             <div className="p-4">
-                <p className="text-gray-300 text-sm mb-3">{posts.title}</p>
-                <img
-                    src={posts.postImg || white_flower}
-                    alt="Post"
-                    className="w-full h-64 object-cover rounded-lg"
-                />
+                <a href={`/posts/detail/${posts._id}`}>
+                <p className="text-gray-300 mb-3 text-xl">{posts.title}</p>
+                </a>
+               
+                <p className="text-gray-300 text-sm mb-3">{posts.postBody}</p>
+                {
+                    posts.postImg ? (
+                        <img
+                            src={posts.postImg || white_flower}
+                            alt="Post"
+                            className="w-full h-64 object-cover rounded-lg"
+                        />
+                    ) : ("")
+                }
             </div>
 
             {/* Actions Section */}
@@ -60,13 +106,13 @@ function Posts_Cards({ posts }) {
                 {/* Like & Dislike Buttons */}
                 <div className="flex gap-5">
                     <button onClick={makelike} className="flex items-center gap-1 text-gray-300 hover:text-green-500 transition">
-                        <BiSolidUpvote size={22} />
+                        <BiSolidUpvote size={22} color={liked ? "green" : ""}/>
                         <span className="text-sm">{posts.postLikes?.length || 0}</span>
                     </button>
 
                     <button onClick={makedislikes} className="flex items-center gap-1 text-gray-300 hover:text-red-500 transition">
-                        <BiSolidDownvote size={22} />
-                        <span className="text-sm">{posts.postDislies?.length || 0}</span>
+                        <BiSolidDownvote size={22} color={disliked ? "red" : ""}/>
+                        <span className="text-sm">{posts.postDisLikes?.length || 0}</span>
                     </button>
                 </div>
 

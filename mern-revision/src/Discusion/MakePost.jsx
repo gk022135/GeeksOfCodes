@@ -27,7 +27,7 @@ export default function CreatePost() {
 
         const objectToSend = {
             email: UserEmail,
-            url: ImageUrl,
+            url: ImageUrl || "",
             title: title,
             body: body,
         };
@@ -46,7 +46,7 @@ export default function CreatePost() {
             toast.success("Yay! Your post is done");
             setTimeout(() => {
                 localStorage.removeItem("ImageData")
-                navigate("/post-all");
+                navigate("/discussion");
             }, 2000);
         }
     };
