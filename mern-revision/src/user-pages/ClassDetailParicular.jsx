@@ -3,10 +3,12 @@ import GridCards from "../Landingpage/GridLayout";
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../ContextApi/FisrtContext";
 import { ToastContainer, toast } from "react-toastify";
+import TestModel from "./Test";
 
 const ClassDetailParticular = () => {
     const { courseCode, courseName, Teacher } = useParams();
     const { AllGetReq, loading, setLoading } = useContext(AppContext);
+    const [isDetailopen, SetIsDetailOpen] = useState(false);
 
     const [attendance, setAttendance] = useState({
         total_class: 0,
@@ -25,13 +27,13 @@ const ClassDetailParticular = () => {
                 toast.error("Try again, something went wrong!");
                 return;
             }
-            
+
             setAttendance({
                 total_class: response.totalClass,
                 AttendByYou: response.attendendClass
             });
-            console.log("hello ji res",response)
-            
+            console.log("hello ji res", response)
+
         } catch (error) {
             console.error("Error fetching attendance details:", error);
         }
@@ -41,7 +43,7 @@ const ClassDetailParticular = () => {
     useEffect(() => {
         ShowAttendanceDetail();
     }, [courseCode]); // Re-fetch if courseCode changes
-    console.log("hello ji",attendance)
+    console.log("hello ji", attendance)
 
     let { total_class, AttendByYou } = attendance;
     const percentage = total_class ? ((AttendByYou / total_class) * 100).toFixed(2) : 0;
@@ -87,11 +89,23 @@ const ClassDetailParticular = () => {
                         <p className="text-lg">
                             Percentage: <span className="font-semibold text-yellow-400">{percentage}%</span>
                         </p>
-                        <button className="text-black p-2 font-bold bg-green-500 rounded-xl w-2/5">Refresh</button>
+                        <button
+                            onClick={() => window.location.reload()}
+                            className="text-black p-2 font-bold bg-green-500 rounded-xl w-2/5 hover:cursor-pointer"
+                        >
+                            Refresh
+                        </button>
+
                     </div>
                     <div className="p-6 border rounded-2xl bg-white/10 shadow-lg flex flex-col items-center justify-center">
                         <h1 className="text-xl font-bold">📜 Details View</h1>
                         <p className="text-sm text-gray-300">Click to expand course details</p>
+                        <button
+                            className="text-black p-2 font-bold bg-green-500 rounded-xl w-2/5 hover:cursor-pointer"
+                            onClick={() => SetIsDetailOpen(true)}
+                        >
+                            Show More
+                        </button>
                     </div>
 
                     {/* Notices & Class Info */}
@@ -103,8 +117,11 @@ const ClassDetailParticular = () => {
 
             </div>
 
+            {
+                isDetailopen && (<TestModel onClose={ () => SetIsDetailOpen(false)} />)
+            }
+
             {/* Additional Content */}
-            <GridCards />
             <ToastContainer />
         </div>
     );

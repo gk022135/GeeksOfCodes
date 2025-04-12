@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import './From.css'
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 

@@ -66,8 +66,8 @@ function Adminuser() {
 
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-900 px-4">
-      <div className="w-full max-w-lg bg-gray-800/50 backdrop-blur-lg shadow-lg rounded-lg p-6 md:p-8">
+    <div className="flex justify-center items-center min-h-screen  px-4">
+      <div className="w-full max-w-lg backdrop-blur-lg shadow-lg rounded-lg p-6 md:p-8">
         <form className="flex flex-col" onSubmit={submitHandler}>
           {/* Title */}
           <h1 className="text-2xl font-semibold text-blue-400 border-b-2 pb-2 text-center">
@@ -99,10 +99,10 @@ function Adminuser() {
           />
 
           {/* Faculty Dropdown */}
-          <label htmlFor="facultyof" className="mt-4 text-gray-300">Faculty Of</label>
+          <label htmlFor="FuckltyOf" className="mt-4 text-gray-300">Faculty Of</label>
           <select
-            id="facultyof"
-            name="FacultyOf"
+            id="FuckltyOf"
+            name="FuckltyOf"
             value={NormaluserData.FuckltyOf}
             onChange={changeHandler}
             className="w-full px-4 py-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"

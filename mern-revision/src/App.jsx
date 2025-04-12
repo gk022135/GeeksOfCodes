@@ -48,7 +48,7 @@ import PostDetail from "./Discusion/PostDetails";
 
 function App() {
   return (
-    <BrowserRouter> {/* ✅ Wrap everything inside BrowserRouter */}
+    <BrowserRouter> {/* Wrap everything inside BrowserRouter */}
       <>
         <div className='fixed top-0 z-20 w-full'>
           <Navbar />
@@ -131,7 +131,7 @@ function App() {
 
 
           {/* <HashLoader color='green' /> */}
-          <div className="grid grid-cols-3 text-xl text-white bg-black z-20 p-5 ">
+          <div className="grid grid-cols-3 text-xl text-white bg-black z-20 p-5 bottom-10">
             <a href="/otpvarification">otpvarification</a>
             <a href="/qrscanner">qrscanner</a>
             <a href="/qrgenerator">qrgenerator</a>
