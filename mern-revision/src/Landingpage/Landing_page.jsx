@@ -43,11 +43,8 @@ function LandingPage() {
             
             <h1 className="text-white text-5xl mt-20 font-bold antialiased">Feature's At This Application</h1>
             <GridCards />
-            <Connects />
-
-
-
             <Signup />
+            <Connects />
         </div>
     )
 }

@@ -1,31 +1,32 @@
-//get all post with pagination
-
-const PostModel = require('../../Models/PostsSchema')
+const PostModel = require('../../Models/PostsSchema');
 
 async function FetchAllPosts(req, res) {
     try {
+        let { limit = 10, cursor } = req.query;
+        limit = parseInt(limit); // Ensure limit is a valid number
 
-        //your api call url will be :- base-url/get/all-posts?limit=10&cursor=null
-        const { limit = 10, cursor } = req.query;
-        console.log("details for fetching post", req.query);
+        console.log("Fetching posts with:", req.query);
 
         let query = {};
         if (cursor) {
-            query = { createAt: { $lt: new Date(cursor) } };
+            const cursorDate = new Date(cursor);
+            if (!isNaN(cursorDate.getTime())) {
+                query = { createdAt: { $lt: cursorDate } }; // Filter posts older than cursor
+            } else {
+                return res.status(400).json({ success: false, message: "Invalid cursor format" });
+            }
         }
 
         const posts = await PostModel.find(query)
-            .sort({ createdAt: -1 })//Newest First (descending order)
-            .limit(parseInt(limit));
-        const nextCursor = posts.length > 0 ? posts[posts.length - 1].createdAt : null;
+            .sort({ createdAt: 1 }) // Sort by newest first
+            .limit(limit);
 
-        return res.status(200).json({ posts, nextCursor });
+        const nextCursor = posts.length > 0 ? posts[posts.length - 1].createdAt.toISOString() : null;
+
+        return res.status(200).json({ success: true, posts: posts || [], nextCursor });
     } catch (error) {
-        console.log("error while fetching post",error);
-        return res.status(500).json({
-            message : "server side error while fetching post",
-            success : false
-        })
+        console.error("Error fetching posts:", error);
+        return res.status(500).json({ success: false, message: "Server error" });
     }
 }
 

@@ -19,7 +19,7 @@ function Signup() {
   //   }
 
   return (
-    <div className="flex justify-center w-full p-4 relative">
+    <div className="flex flex-col w-full p-4 relative">
       {loading ? (
         <HashLoader />
       ) : (
@@ -58,6 +58,10 @@ function Signup() {
           </div>
         </div>
       )}
+
+      <div className="">
+
+      </div>
     </div>
 
   );
