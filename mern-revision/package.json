@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.0.3",
     "aos": "^2.3.4",
     "canvg": "^4.0.2",
+    "framer-motion": "^12.6.5",
     "geolocation": "^0.2.0",
     "html5-qrcode": "^2.3.8",
     "react": "^19.0.0",

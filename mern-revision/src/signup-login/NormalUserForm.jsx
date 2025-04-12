@@ -1,52 +1,30 @@
 import { useContext, useState } from "react";
-import './From.css'
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-
-
 import { AppContext } from "../ContextApi/FisrtContext";
-import HashLoader from 'react-spinners/HashLoader'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify';
 import { NavLink, useNavigate } from "react-router-dom";
-
 import LoginButton from "../Google Auth/Login";
 import { useAuth0 } from "@auth0/auth0-react";
 // import Loader from "../UiComponents/Loader";
-
-
 
 function Normaluser() {
     const navigate = useNavigate();
     const googleAuth = useAuth0();
 
-    // console.log("google data frontend per ", googleAuth);
-
-    const [showpass, SetShowpass] = useState(false)
-    const [confshowpass, SetconfShowpass] = useState(false)
-    const [IsPassMatch, SetMatch] = useState(true);
-
-    const { loading, setLoading, SendDataSignLogin, } = useContext(AppContext);
-
-
+    const [showpass, setShowPass] = useState(false);
+    const [confshowpass, setConfShowPass] = useState(false);
+    const [isPassMatch, setMatch] = useState(true);
+    const { loading, SendDataSignLogin } = useContext(AppContext);
 
     const [NormaluserData, setNormalUserData] = useState({
-        username: "",
-        email: "",
-        password: "",
-        confirmpass: "",
-        contact: "",
-        gender: "",
-        role: "normal-user",
+        username: "", email: "", password: "", confirmpass: "", role: "normal-user",
     });
-
 
     const changeHandler = (event) => {
         const { name, value } = event.target;
-        setNormalUserData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-        SetMatch(true);
+        setNormalUserData(prev => ({ ...prev, [name]: value }));
+        setMatch(true);
     };
 
     const SignUpData = {
@@ -54,141 +32,118 @@ function Normaluser() {
         email: NormaluserData.email,
         password: NormaluserData.password,
         role: NormaluserData.role
-    }
+    };
 
-    if (NormaluserData && NormaluserData.email) {
-        localStorage.setItem("useremail", NormaluserData.email);
-        // console.log("New object stored in localStorage:", NormaluserData.email);
-    } else {
-        console.log("Error: Email is missing in NormaluserData");
-    }
-
-
-    // Handling form submission
     const submitHandler = async (e) => {
         e.preventDefault();
-        if (NormaluserData.password === NormaluserData.confirmpass) {
-
-            const signupresponse = await SendDataSignLogin('signup', SignUpData)
-
-            if (signupresponse.error) {
-                toast.error(signupresponse.error)
-            }
-            else if(signupresponse.success) {
-                toast.success(signupresponse.message)
-                setTimeout(() => {
-                    navigate("/otpvarification");
-                }, 1000);
-            }
-            else if(signupresponse.message === "User already exists, please login")
-            {
-                toast.warn(signupresponse.message)
-                setTimeout(() => {
-                    navigate("/login");
-                }, 1000);
-            }
-        }
-        else {
-            SetMatch(!IsPassMatch);
-            toast.warning("password not match")
-            console.log("password not match")
+        if (NormaluserData.password !== NormaluserData.confirmpass) {
+            setMatch(false);
+            toast.warning("Passwords do not match");
+            return;
         }
 
+        const response = await SendDataSignLogin('signup', SignUpData);
+
+        if (response.error) toast.error(response.error);
+        else if (response.success) {
+            toast.success(response.message);
+            setTimeout(() => navigate("/otpvarification"), 1000);
+        } else if (response.message === "User already exists, please login") {
+            toast.warn(response.message);
+            setTimeout(() => navigate("/login"), 1000);
+        }
     };
-    console.log("your ", IsPassMatch)
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-black px-4">
-       {loading ? (<Loader />) : 
-        <form
-            className="bg-green-950 shadow-md rounded-lg p-6 md:p-8 lg:p-10 w-full max-w-md"
-            onSubmit={submitHandler}
-        >
-            <h2 className="text-xl font-semibold text-center mb-4">Sign Up</h2>
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black flex items-center justify-center px-4">
+            {loading ? (
+                <Loader />
+            ) : (
+                <form onSubmit={submitHandler} className="w-full max-w-md bg-white/5 backdrop-blur-md rounded-xl shadow-lg p-8 space-y-6 border border-white/10 text-white">
+                    <h2 className="text-2xl font-bold text-center text-white mb-2">Create Your Account</h2>
 
-            {/* Name Field */}
-            <label htmlFor="name" className="block text-white font-medium">Student Name</label>
-            <input
-                type="text"
-                id="name"
-                name="username"
-                value={NormaluserData.username}
-                onChange={changeHandler}
-                required
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
-            />
+                    <div>
+                        <label className="text-sm font-medium">Name</label>
+                        <input
+                            type="text"
+                            name="username"
+                            value={NormaluserData.username}
+                            onChange={changeHandler}
+                            required
+                            className="w-full px-4 py-2 mt-1 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                        />
+                    </div>
 
-            {/* Email Field */}
-            <label htmlFor="email" className="block text-white font-medium">Student Email</label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                value={NormaluserData.email}
-                onChange={changeHandler}
-                required
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
-            />
+                    <div>
+                        <label className="text-sm font-medium">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={NormaluserData.email}
+                            onChange={changeHandler}
+                            required
+                            className="w-full px-4 py-2 mt-1 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                        />
+                    </div>
 
-            {/* Password Field */}
-            <label htmlFor="pass" className="block text-white font-medium flex justify-between">
-                Password
-                <span onClick={() => SetShowpass(!showpass)} className="cursor-pointer text-blue-600">
-                    {showpass ? <FaRegEye /> : <FaEyeSlash />}
-                </span>
-            </label>
-            <input
-                type={showpass ? "text" : "password"}
-                id="pass"
-                name="password"
-                value={NormaluserData.password}
-                onChange={changeHandler}
-                required
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
-            />
+                    <div>
+                        <label className="text-sm font-medium flex justify-between items-center">
+                            Password
+                            <span onClick={() => setShowPass(!showpass)} className="cursor-pointer text-blue-300">
+                                {showpass ? <FaRegEye /> : <FaEyeSlash />}
+                            </span>
+                        </label>
+                        <input
+                            type={showpass ? "text" : "password"}
+                            name="password"
+                            value={NormaluserData.password}
+                            onChange={changeHandler}
+                            required
+                            className="w-full px-4 py-2 mt-1 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                        />
+                    </div>
 
-            {/* Confirm Password Field */}
-            <label htmlFor="con-pass" className="block text-white font-medium flex justify-between">
-                Confirm Password
-                <span onClick={() => SetconfShowpass(!confshowpass)} className="cursor-pointer text-blue-600">
-                    {confshowpass ? <FaRegEye /> : <FaEyeSlash />}
-                </span>
-            </label>
-            <input
-                type={confshowpass ? "text" : "password"}
-                id="con-pass"
-                name="confirmpass"
-                value={NormaluserData.confirmpass}
-                onChange={changeHandler}
-                required
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3 
-                ${!IsPassMatch && "border-red-500 bg-red-100 animate-shake"}`}
-            />
+                    <div>
+                        <label className="text-sm font-medium flex justify-between items-center">
+                            Confirm Password
+                            <span onClick={() => setConfShowPass(!confshowpass)} className="cursor-pointer text-blue-300">
+                                {confshowpass ? <FaRegEye /> : <FaEyeSlash />}
+                            </span>
+                        </label>
+                        <input
+                            type={confshowpass ? "text" : "password"}
+                            name="confirmpass"
+                            value={NormaluserData.confirmpass}
+                            onChange={changeHandler}
+                            required
+                            className={`w-full px-4 py-2 mt-1 rounded bg-white/10 border ${!isPassMatch ? "border-red-500 bg-red-100 text-black animate-shake" : "border-white/20"} focus:outline-none focus:ring-2 focus:ring-violet-500`}
+                        />
+                    </div>
 
-            {/* Submit Button */}
-            <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md mt-4">
-                Sign Up
-            </button>
+                    <button
+                        type="submit"
+                        className="w-full bg-gradient-to-r from-blue-600 to-violet-700 hover:from-violet-700 hover:to-blue-600 py-2 rounded-md font-semibold shadow-md transition-all duration-200"
+                    >
+                        Sign Up
+                    </button>
 
-            {/* Already Have an Account? */}
-            <p className="text-center mt-3 text-white/50">
-                Already have an account?{" "}
-                <NavLink to="/login" className="text-green-600 font-semibold hover:underline">
-                    Login
-                </NavLink>
-            </p>
+                    <div className="text-center text-sm text-white/70">
+                        Already have an account?{" "}
+                        <NavLink to="/login" className="text-blue-300 hover:underline font-medium">
+                            Login
+                        </NavLink>
+                    </div>
 
-            {/* Google Signup */}
-            <div className="flex items-center justify-center mt-4">
-                <span className="flex flex-row gap-2 border-2 border-blue-700 rounded-md px-4 py-2 text-blue-700 hover:bg-blue-700 hover:text-white cursor-pointer">
-                    <FcGoogle size={24} /> <LoginButton />
-                </span>
-            </div>
-        </form>
-  }
-        <ToastContainer />
-    </div>
-
+                    <div className="mt-4 flex items-center justify-center">
+                        <div className="flex items-center gap-2 px-4 py-2 border border-blue-600 rounded-md hover:bg-blue-600 transition-colors cursor-pointer text-blue-300 hover:text-white">
+                            <FcGoogle size={20} />
+                            <LoginButton />
+                        </div>
+                    </div>
+                </form>
+            )}
+            <ToastContainer />
+        </div>
     );
 }
 

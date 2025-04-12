@@ -1,71 +1,52 @@
 import { useContext, useState } from "react";
-import Design from "./Design";
 import Normaluser from "./NormalUserForm";
 import Adminuser from "./AdminSignup";
-
 import { AppContext } from "../ContextApi/FisrtContext";
 import HashLoader from "react-spinners/HashLoader";
 
 function Signup() {
-
-
-  //   const [active, setactive] = useState(true);
   const [isTrue, setIsTrue] = useState(true);
-
-  const { loading, setLoading } = useContext(AppContext);
-
-  //   function isAdmin() {
-  //     setTrue(!istrue);
-  //   }
+  const { loading } = useContext(AppContext);
 
   return (
-    <div className="flex flex-col w-full p-4 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white">
       {loading ? (
-        <HashLoader />
+        <HashLoader color="#36d7b7" />
       ) : (
-        <div className="relative flex flex-col rounded-2xl justify-center items-center p-4 m-3 w-1/1 md:w-2/7 border-2 bg-black text-blue-50 gap-4">
-          {/* Buttons with active state styling */}
-          <div className="flex w-3/5 rounded-2xl border-2 justify-center">
+        <div className="w-full max-w-3xl mx-auto bg-white/5 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-10 flex flex-col items-center space-y-6 transition-all duration-300">
+          {/* Toggle Buttons */}
+          <div className="flex space-x-6">
             <button
-              className={`px-4 py-2 rounded-md h-10 m-2 transition-all 
-            ${isTrue
-                  ? "bg-green-400 text-black font-bold border-2 border-white"
-                  : "bg-amber-700/90"
-                }`}
               onClick={() => setIsTrue(true)}
+              className={`px-6 py-2 rounded-full transition-all duration-300 font-semibold text-sm shadow-md 
+                ${isTrue
+                  ? "bg-gradient-to-r from-green-400 to-lime-500 text-black"
+                  : "bg-white/10 hover:bg-white/20"
+                }`}
             >
               Teacher
             </button>
 
             <button
-              className={`px-4 py-2 rounded-md h-10 m-2 transition-all 
-            ${!isTrue
-                  ? "bg-green-400 border-2 border-white text-black font-bold"
-                  : "bg-amber-700/90"
-                }`}
               onClick={() => setIsTrue(false)}
+              className={`px-6 py-2 rounded-full transition-all duration-300 font-semibold text-sm shadow-md 
+                ${!isTrue
+                  ? "bg-gradient-to-r from-green-400 to-lime-500 text-black"
+                  : "bg-white/10 hover:bg-white/20"
+                }`}
             >
               Student
             </button>
           </div>
 
-          {/* Apply effect on this div when button is clicked */}
-          <div
-            className={`relative p-4 w-1/1 rounded-lg h-auto text-center
-          ${isTrue ? "text-white" : "text-gray-200"}`}
-          >
+          {/* Form Display */}
+          <div className="w-full">
             {isTrue ? <Adminuser /> : <Normaluser />}
           </div>
         </div>
       )}
-
-      <div className="">
-
-      </div>
     </div>
-
   );
 }
-
 
 export default Signup;

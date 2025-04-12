@@ -3,10 +3,20 @@ import Signup from "../signup-login/Signup";
 import Uniator from '../assets/image1.png'
 import Connects from "./Connects";
 import GridCards from "./GridLayout";
+import { useEffect, useState } from "react";
+import Pop_up from "./Pop_up";
 
 
 function LandingPage() {
+    const [popup, setPopup] = useState(false);
+    
+    useEffect(() => {
+        console.log("set timeout start hone wala hai")
+        setTimeout(() => {
+            setPopup(true);
+        }, 3000)
 
+    }, [])
 
     return (
         <div className="relative flex flex-col bg-black content-center justify-center items-center h-auto">
@@ -16,6 +26,7 @@ function LandingPage() {
                 </h1>
                 <h1 className="text-gray-400 text-xl antialiased  text-center md:ml-50 md:mr-50 ml-10 mr-10">A versatile web platform integrating <span className="text-yellow-300">real-time code collaboration</span>, a secure gate pass system with QR scanning, an <span className="text-pink-600">attendance tracker</span>, an <span className="text-green-500">advanced to-do</span> list with backend support, and a <span className="text-teal-300">community discussion</span> forum. It streamlines workflow, enhances security, boosts productivity, and fosters collaboration, making it an all-in-one solution for developers, students, and organizations.</h1>
             </div>
+            {popup && (<Pop_up close={() => setPopup(false)} />)}
 
             <div className="mt-20 border border-gray-400 rounded-xl p-4 flex flex-col sm:flex-row relative w-11/12 sm:w-3/4 h-auto sm:h-[130px] justify-center sm:justify-evenly text-white text-sm antialiased bg-white/10">
                 {/* Image Container */}
@@ -40,7 +51,7 @@ function LandingPage() {
                     </a>
                 </div>
             </div>
-            
+
             <h1 className="text-white text-5xl mt-20 font-bold antialiased">Feature's At This Application</h1>
             <GridCards />
             <Signup />
