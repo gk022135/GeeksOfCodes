@@ -5,7 +5,7 @@ function CommunityForum() {
 
 
     return (
-        <div className="flex flex-col bg-black/70 p-2 border-2 border-gray-400 text-white rounded-2xl relative m-1">
+        <div className="flex flex-col bg-base-100 70 p-2 border-2 border-gray-400 text-white rounded-2xl relative m-1">
             <h1>Community Forum</h1>
             <div className="flex flex-row"> 
                 <h1 className="text-sm">Posts: 67</h1>

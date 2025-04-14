@@ -39,7 +39,7 @@ export default function GridCards() {
     ];
   
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black px-6 py-10">
+      <div className="min-h-screen flex items-center justify-center bg-base-100 px-6 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
           {cards.map((card, index) => (
             <div key={index} className="bg-gray-900 text-white p-6 rounded-xl shadow-lg flex flex-col items-start">

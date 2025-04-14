@@ -25,7 +25,7 @@ dotenv.config();
 
 app.use(
     cors({
-      origin: "http://localhost:5173", // ✅ Allow only your frontend's origin
+      origin: "http://localhost:5174", // ✅ Allow only your frontend's origin
       credentials: true, // ✅ Allow cookies & authentication headers
     })
   );

@@ -55,7 +55,7 @@ function FacultyDetails({ email, userType, removeUrl, DetailsUrl, heading }) {
     };
 
     return (
-        <div className="text-white bg-black p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
+        <div className="text-white bg-base-100 p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
             {/* Header */}
             <div className="text-center mb-6">
                 <h1 className="text-2xl font-bold">{heading}</h1>

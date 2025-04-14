@@ -8,7 +8,7 @@ function Connects() {
 
 
     return (
-        <div className="flex flex-col bg-black text-white h-full justify-center content-center items-center mt-10">
+        <div className="flex flex-col bg-base-100 text-white h-full justify-center content-center items-center mt-10">
             <h1 className="p-5 text-2xl text-gray-300 md:text-5xl antialiased">
                 Connect With Me Community !!
             </h1>

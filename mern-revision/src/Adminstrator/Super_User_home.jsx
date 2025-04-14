@@ -28,7 +28,7 @@ function SuperUserHome() {
 
     return (
         <div className="flex flex-col">
-            <div className="flex z-10 justify-center content-center bg-black/80  w-full">
+            <div className="flex z-10 justify-center content-center bg-base-100 80  w-full">
                 <h1 className="z-20 text-3xl p-4 font-bold bg-gradient-to-tr from-pink-500 to-blue-500 bg-clip-text text-transparent/20">
                 Adminstrator Dashboard
                 </h1>
@@ -36,7 +36,7 @@ function SuperUserHome() {
 
             <div className="flex flex-col sm:flex-row relative z-0 rounded-2xl gap-2 p-2 ">
                 {/* Sidebar with Multiple Buttons */}
-                <div className="sm:w-1/5 sm:flex-row bg-black sm:h-screen rounded-2xl h-[400px] p-2 relative">
+                <div className="sm:w-1/5 sm:flex-row bg-base-100 sm:h-screen rounded-2xl h-[400px] p-2 relative">
                 <SUProf />
                     <button onClick={() => handleButtonClick("All_Class")} className="border-2 border-cyan-500 rounded-2xl text-white p-2  m-2 w-9/10">
                         All Classes
@@ -64,7 +64,7 @@ function SuperUserHome() {
                 </div>
 
                 {/* Main Content */}
-                <div className="sm:w-4/5 bg-black sm:h-screen rounded-2xl h-[400px] p-4">
+                <div className="sm:w-4/5 bg-base-100 sm:h-screen rounded-2xl h-[400px] p-4">
                     {selectedButton === "All_Class" && <All_Class_adm />}
                     
                     {selectedButton === "Qr Add" &&<QrGenerator/>}

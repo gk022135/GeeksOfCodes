@@ -6,7 +6,7 @@ import image1 from '../assets/DocsImages/wrong qr.jpg'
 
 function QrWorking() {
     return (
-        <div className="text-white antialiased mt-5 bg-black min-h-screen flex flex-col items-center justify-center px-6">
+        <div className="text-white antialiased mt-5 bg-base-100 min-h-screen flex flex-col items-center justify-center px-6">
             {/* Title */}
             <h1 className="text-center text-3xl font-bold mb-4">
                 Here we get to know how <span className="text-5xl text-red-500 font-bold">QR Works</span>

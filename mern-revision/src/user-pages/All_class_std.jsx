@@ -48,7 +48,7 @@ function All_Class_Std({ x }) {
     // console.log("first course", classData[1])
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-black px-6 py-10">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-base-100 px-6 py-10">
 
             <div className="text-white text-4xl font-bold antialiased flex flex-col justify-center content-center items-center">
                 <h1 className="text-white">Wellcome <span className="text-red-500">{UserName}</span> !, Have <span className="text-yellow-300">A Nice</span> Day For <span className="text-lime-500">You !!</span></h1>
@@ -58,7 +58,7 @@ function All_Class_Std({ x }) {
 
             {classData ? (
 
-                <div className="grid grid-cols-1 md:grid-cols-3 bg-black p-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 bg-base-100 p-10">
                     {(!x ? classData.filter(course => course.isActive) : classData)
                         .map((course, index) => (
                             <div key={index} className="shadow-md p-2 rounded-lg">

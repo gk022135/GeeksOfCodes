@@ -30,7 +30,7 @@ function CommunityNavbar({ fun }) {
     ];
 
     return (
-        <div className="relative flex flex-col  bg-black/90 text-white">
+        <div className="relative flex flex-col  bg-base-100 90 text-white">
             {/* Left Most div */}
             <div className=" flex w-1/1 justify-between border-b border-gray-400">
                 <div className="relative flex justify-center items-center gap-1 m-2 p-1 text-2xl">

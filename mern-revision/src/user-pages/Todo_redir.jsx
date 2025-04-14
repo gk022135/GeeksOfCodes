@@ -15,7 +15,7 @@ function Todo_Page() {
 
 
     return (
-        <div className="flex flex-col bg-black/70 text-white p-2 border-2 rounded-2xl relative m-1">
+        <div className="flex flex-col bg-base-100 70 text-white p-2 border-2 rounded-2xl relative m-1">
             <h1>Your Task Lists</h1>
             <div className="flex flex-row p-"> 
                 <h1 className="text-sm">0%</h1>

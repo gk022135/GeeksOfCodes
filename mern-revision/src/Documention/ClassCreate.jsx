@@ -2,7 +2,7 @@ import classmanage from "../assets/DocsImages/classmanage.jpg"
 import attendancebycourse from "../assets//DocsImages/attendancebycourse.jpg"
 function ClassCreate() {
     return (
-        <div className="text-white antialiased bg-black min-h-screen flex flex-col items-center justify-center px-6">
+        <div className="text-white antialiased bg-base-100 min-h-screen flex flex-col items-center justify-center px-6">
             {/* Title */}
             <h1 className="text-center text-3xl antialiased font-bold mb-5 mt-5">
                 Understanding How <span className="text-4xl text-red-500 font-bold">Class Management By Teacher works</span>

@@ -127,7 +127,7 @@ function UserHome() {
     return (
         <div className="flex flex-col">
 
-            <div className="flex flex-col relative bg-black items-center justify-center md:p-5 p-10 text-white">
+            <div className="flex flex-col relative bg-base-100 items-center justify-center md:p-5 p-10 text-white">
                 <h1 className=" text-3xl text-white font-bold"> <span className="text-3xl text-red-500 font-bold">Hello !</span>
                     <span className="text-3xl text-yellow-300 font-bold"> Student </span>
                     How's Your class going</h1>
@@ -142,7 +142,7 @@ function UserHome() {
 
 
 
-            <div className="main flex flex-col md:flex-row bg-black relative min-h-screen gap-2 p-4">
+            <div className="main flex flex-col md:flex-row bg-base-100 relative min-h-screen gap-2 p-4">
 
                 {/* Left Sidebar */}
                 <div className="left-div flex flex-col w-full md:w-1/5 bg-white/15 border-2 pl-1 pr-4 pt-5 rounded-2xl relative gap-5 md:h-screen">

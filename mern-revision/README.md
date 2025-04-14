@@ -26,4 +26,4 @@ logic:-- 22bcs037 to 22bcs060 if email id slice se baad is range mein aye toh ka
   student have all classes 
   example student select a single class and enter in the class, then he will able to see their attendance like attend/total_classes, and more things like study materials
 
-  ![alt text](/mern-revision/src/assets/Logo_smvDeX.png)
+  ![Logo](src/assets/Logo_smvDeX.png)

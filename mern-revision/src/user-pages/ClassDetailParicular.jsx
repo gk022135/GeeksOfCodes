@@ -49,7 +49,7 @@ const ClassDetailParticular = () => {
     const percentage = total_class ? ((AttendByYou / total_class) * 100).toFixed(2) : 0;
 
     return (
-        <div className="relative w-full min-h-screen bg-black text-white">
+        <div className="relative w-full min-h-screen bg-base-100 text-white">
             {/* Header Section */}
             <div className="flex flex-col items-center text-center p-6">
                 <h1 className="text-3xl sm:text-4xl font-bold">

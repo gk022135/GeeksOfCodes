@@ -70,7 +70,7 @@ function AddEntryExitQr() { //  Don't use async here! may cause infinite render
                     name="Entry_Qr"
                     value={qrData.Entry_Qr}
                     onChange={changeHandler}
-                    className="bg-black/50 p-2"
+                    className="bg-base-100 50 p-2"
                 />
 
                 <label htmlFor="exit"
@@ -80,7 +80,7 @@ function AddEntryExitQr() { //  Don't use async here! may cause infinite render
                     name="Exit_Qr"
                     value={qrData.Exit_Qr}
                     onChange={changeHandler}
-                    className="bg-black/50 p-2"
+                    className="bg-base-100 50 p-2"
                 />
 
                 <button type="submit" className="bg-gradient-to-bl from-blue-600 to-red-500 p-2 rounded shadow-2xl shadow-black hover:bg-gradient-to-l" >Add QR Data</button>
