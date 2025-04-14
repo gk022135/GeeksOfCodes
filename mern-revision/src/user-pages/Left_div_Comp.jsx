@@ -4,7 +4,7 @@ function LeftDivComp({ props }) {
 
     return (
         <div
-            className="middle-upper-1 flex flex-row relative bg-black/50 border-gray-400 border-2 justify-between items-center p-2 overflow-hidden w-full md:w-full rounded-2xl h-auto gap-4 m-2 hover:bg-emerald-400 transition duration-300"
+            className="middle-upper-1 flex flex-row relative bg-base-100 50 border-gray-400 border-2 justify-between items-center p-2 overflow-hidden w-full md:w-full rounded-2xl h-auto gap-4 m-2 hover:bg-emerald-400 transition duration-300"
         >
             <div className="flex flex-col">
                 <h1 className="text-xl text-white font-bold">{props.head}</h1>

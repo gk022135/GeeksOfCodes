@@ -31,7 +31,7 @@ const Qr_res = () => {
   // }, [])
 
   return (
-    <div className="flex flex-col items-center p-4 bg-black text-white">
+    <div className="flex flex-col items-center p-4 bg-base-100 text-white">
       <h1 className="text-2xl font-bold mb-4">React QR Code Scanner</h1>
       <QrScanner
         onScanSuccess={handleScanSuccess}
@@ -62,7 +62,7 @@ const Qr_res = () => {
       </div>
 
       {scanResult && (
-        <div className="mt-4 p-2 bg-black border-1 rounded">
+        <div className="mt-4 p-2 bg-base-100 border-1 rounded">
           <strong>Scan Result:</strong> {scanResult}
         </div>
       )}

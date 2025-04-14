@@ -1,6 +1,6 @@
 function GatePassWorking() {
     return (
-        <div className="text-white antialiased  bg-black min-h-screen flex flex-col items-center justify-center px-6">
+        <div className="text-white antialiased  bg-base-100 min-h-screen flex flex-col items-center justify-center px-6">
             {/* Title */}
             <h1 className="text-center text-4xl antialiased font-bold mb-4 mt-5">
                 Understanding The <span className="text-4xl text-red-500 font-bold">Gate Pass System </span>

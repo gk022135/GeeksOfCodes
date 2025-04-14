@@ -43,18 +43,21 @@ import SetLocation from "./Teacher-pages/SetLoaction";
 import VarifyLocation from "./user-pages/VarifiyLocation";
 import FetchAllPost from "./Discusion/FetchAllPost";
 import PostDetail from "./Discusion/PostDetails";
+import ThemeChanger from "./themectrl";
+import ThemeSelector from "./themectrl";
 
 
 
 function App() {
   return (
     <BrowserRouter> {/* Wrap everything inside BrowserRouter */}
+    <ThemeSelector />
       <>
         <div className='fixed top-0 z-20 w-full'>
           <Navbar />
         </div>
 
-        <div className='w-full h-screen bg-black/90 mt-16'>
+        <div className='w-full h-screen bg-base-100 90 mt-16'>
 
 
           <Routes>
@@ -131,7 +134,7 @@ function App() {
 
 
           {/* <HashLoader color='green' /> */}
-          <div className="grid grid-cols-3 text-xl text-white bg-black z-20 p-5 bottom-10">
+          <div className="grid grid-cols-3 text-xl text-white bg-base-100 z-20 p-5 bottom-10">
             <a href="/otpvarification">otpvarification</a>
             <a href="/qrscanner">qrscanner</a>
             <a href="/qrgenerator">qrgenerator</a>
@@ -143,6 +146,7 @@ function App() {
             <a href="/administrator">Adminstrator Dashboard</a>
             <a href="/administrator-login">Administrator Login</a>
           </div>
+          <ThemeChanger />
           <Footer />
         </div>
 

@@ -25,7 +25,7 @@ function AdminHome() {
 
     return (
         <div className="flex flex-col bg-black">
-            <div className="mt-20 flex flex-col relative bg-black items-center justify-center md:p-5 p-10 text-white">
+            <div className="mt-20 flex flex-col relative bg-base-100 items-center justify-center md:p-5 p-10 text-white">
                 <h1 className=" text-3xl text-white font-bold"> <span className="text-3xl text-red-500 font-bold">Welcome !</span> to
                     <span className="text-3xl text-yellow-300 font-bold"> Teacher Dashbord </span>
                     Ultimate Class Managing Web-App</h1>
@@ -39,7 +39,7 @@ function AdminHome() {
             </div>
 
 
-            <div className="flex flex-col sm:flex-row relative z-0 rounded-2xl gap-2 px-20 py-10 bg-black ">
+            <div className="flex flex-col sm:flex-row relative z-0 rounded-2xl gap-2 px-20 py-10 bg-base-100 ">
                 {/* Sidebar with Multiple Buttons */}
                 <div className="sm:w-1/5 sm:flex-row bg-white/10 sm:h-screen rounded-2xl h-[400px] p-2 relative">
                     <AdminPro />

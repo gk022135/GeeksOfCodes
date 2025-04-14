@@ -1,6 +1,6 @@
 const TestModel = ({ onClose }) => {
     return (
-      <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-base-100 50 bg-opacity-50 flex items-center justify-center z-50">
         <div className="bg-white p-8 rounded-lg max-w-md w-full">
           <h2 className="text-2xl font-bold mb-4 text-center text-black">
              Get All Attendance Details Date Wise

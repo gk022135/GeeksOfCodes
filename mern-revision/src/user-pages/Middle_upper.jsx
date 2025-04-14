@@ -7,7 +7,7 @@ function Middle_upper({ props, color }) {
 
     return (
         <div
-            className="flex flex-col md:flex-col relative text-white font-semibold bg-black/70 border-gray-400 border-2 justify-between p-5 overflow-hidden w-full md:w-1/3 rounded-2xl h-auto gap-"
+            className="flex flex-col md:flex-col relative text-white font-semibold bg-base-100 70 border-gray-400 border-2 justify-between p-5 overflow-hidden w-full md:w-1/3 rounded-2xl h-auto gap-"
         >
             <div className="flex flex-col text-center p-1 w-1/3 h-1/1">
                 <h1 className="text-xl text-white font-bold">{props.head}</h1>

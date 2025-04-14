@@ -42,12 +42,12 @@ function HomeDiscussion() {
                 <div
                     className={`fixed relative transition-all duration-300 ${
                         isSidebarOpen ? "w-1/4 md:w-90" : "w-0 md:w-16"
-                    } bg-black/80 text-white h-screen shadow-lg border-r-2 border-gray-400`}
+                    } bg-base-100 80 text-white h-screen shadow-lg border-r-2 border-gray-400`}
                 >
                     {/* Sidebar Toggle Button */}
                     <button
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                        className="absolute top-5 left-5 z-50 bg-black/80 text-white p-2 rounded-full shadow-md border "
+                        className="absolute top-5 left-5 z-50 bg-base-100 80 text-white p-2 rounded-full shadow-md border "
                     >
                         {isSidebarOpen  ? (<PiLessThanLight size={25} /> ): < CiMenuBurger size={25} color="white"/>}
                     </button>
@@ -88,7 +88,7 @@ function HomeDiscussion() {
                         isSidebarOpen ? "w-3/4 md:w-full" : "ml-0 md:w-full"
                     }`}
                 >
-                    <div className="bg-black w-full content-center items-center relative h-screen p-2 border rounded-2xl justify-center md:pl-60 overflow-y-scroll">
+                    <div className="bg-base-100 w-full content-center items-center relative h-screen p-2 border rounded-2xl justify-center md:pl-60 overflow-y-scroll">
                         {selectedParam === null && <FetchAllPost />}
 
                         {selectedParam === "explore" && <Explore />}

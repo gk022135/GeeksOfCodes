@@ -2,7 +2,7 @@ import imag1 from '../assets/DocsImages/attendance1.jpg'
 import imag2 from '../assets/DocsImages/attendance2.jpg'
 function AttendanceMarking() {
     return (
-        <div className="text-white antialiased bg-black min-h-screen flex flex-col items-center justify-center px-6">
+        <div className="text-white antialiased bg-base-100 min-h-screen flex flex-col items-center justify-center px-6">
             {/* Title */}
             <h1 className="text-center antialiased mt-5 text-3xl font-bold mb-5">
                 Understanding How <span className="text-5xl text-red-500 font-bold">Attendance System Works</span>

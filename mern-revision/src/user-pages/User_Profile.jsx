@@ -6,7 +6,7 @@ function UserProfile({ props }) {
 
 
     return (
-        <div className="relative bg-black/50 flex border-2 rounded-2xl p-2">
+        <div className="relative bg-base-100 50 flex border-2 rounded-2xl p-2">
             <div className="flex w-[80px] bg-amber-400 rounded-full justify-center content-center p-2">
                 <img src={encodeURI(props.picture)} alt="Profile" className="flex rounded-full"></img>
             </div>
