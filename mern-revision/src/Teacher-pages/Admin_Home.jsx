@@ -7,7 +7,9 @@ import AdminPro from './AdminPro';
 import QrGenerator from "../QR/QrGenerator";
 import EntriesLog from "./AllEntryExits";
 import SetLocation from "./SetLoaction";
-import { FaChalkboardTeacher, FaPlusCircle, FaClipboardList, FaMapMarkedAlt } from "react-icons/fa";
+import AddResources from "./ResourcesAdd";
+
+import { FaChalkboardTeacher, FaPlusCircle, FaClipboardList, FaMapMarkedAlt,FaArchive } from "react-icons/fa";
 
 function AdminHome() {
   const [selectedButton, setSelectedButton] = useState(null);
@@ -66,6 +68,11 @@ function AdminHome() {
             label="Set Location & Radius"
             onClick={() => handleButtonClick("setlocation")}
           />
+          <SidebarButton
+            icon={<FaArchive />}
+            label="Add Resources"
+            onClick={() => handleButtonClick("addresource")}
+          />
         </div>
 
         {/* Main Content */}
@@ -74,6 +81,7 @@ function AdminHome() {
           {selectedButton === "Create_Class" && <Create_class />}
           {selectedButton === "Attendance" && <Attendance />}
           {selectedButton === "setlocation" && <SetLocation />}
+          {selectedButton === "addresource" && <AddResources />}
           {!selectedButton && (
             <h1 className="text-white text-2xl font-bold flex justify-center items-center h-full">
               Please select an option from the sidebar
