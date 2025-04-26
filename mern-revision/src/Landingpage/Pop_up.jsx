@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 function Pop_up({ close }) {
   return (
-    <div className="fixed inset-0 bg-base-100 50 bg-opacity-40 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-base-100/50 50 bg-opacity-40 flex items-center justify-center z-50">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
