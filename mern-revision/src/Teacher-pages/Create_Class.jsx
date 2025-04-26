@@ -1,6 +1,10 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../ContextApi/FisrtContext";
 import { ToastContainer, toast } from 'react-toastify';
+import { MdOutlineCreateNewFolder } from "react-icons/md";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import { AiOutlineFieldTime } from "react-icons/ai";
+import { HiOutlineBuildingLibrary } from "react-icons/hi2";
 
 function Create_class() {
   const { SendDataSignLogin } = useContext(AppContext);
@@ -26,18 +30,14 @@ function Create_class() {
     }));
   };
 
-
-
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitted Course Data:", courseData);
 
     try {
-      // Check Faculty Department Before Submission
       const FacultyInfo = localStorage.getItem("UserData");
       const FacultyDep = FacultyInfo ? JSON.parse(FacultyInfo).Department : null;
-
-      console.log("fac dep",FacultyDep)
+      console.log("fac dep", FacultyDep);
 
       if (FacultyDep !== courseData.Department) {
         setDepartment(false)
@@ -55,7 +55,6 @@ function Create_class() {
         toast.error(response.message);
       }
 
-      // Reset form after submission
       setCourseData({
         courseName: "",
         Teacher: "",
@@ -75,99 +74,116 @@ function Create_class() {
   };
 
   return (
-    <div className="text-white relative h-auto">
-      <form onSubmit={onSubmit} className="flex flex-col gap-4 p-4 w-4/5">
-        <div className="flex flex-col md:flex-row justify-center gap-4">
-          <span>
-            <label>Course Code</label>
+    <div className="text-white relative min-h-screen flex flex-col items-center justify-start py-8 px-4 bg-gradient-to-b from-gray-900 via-black to-gray-900">
+      <form
+        onSubmit={onSubmit}
+        className="flex flex-col gap-6 bg-gray-800 shadow-lg p-6 rounded-2xl w-full max-w-2xl"
+      >
+        <h2 className="text-2xl font-bold flex items-center gap-2 mb-4">
+          <MdOutlineCreateNewFolder className="text-blue-400" />
+          Create New Class
+        </h2>
+
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col flex-1">
+            <label className="text-sm mb-1">Course Code</label>
             <input
               type="text"
               name="courseCode"
               value={courseData.courseCode}
               onChange={handleChange}
-              className="border rounded p-1"
+              className="bg-gray-700 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
-          </span>
-          <span>
-            <label>Course Name</label>
+          </div>
+          <div className="flex flex-col flex-1">
+            <label className="text-sm mb-1">Course Name</label>
             <input
               type="text"
               name="courseName"
               value={courseData.courseName}
               onChange={handleChange}
-              className="border rounded p-1"
+              className="bg-gray-700 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
-          </span>
+          </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-center gap-4">
-          <span>
-            <label>Expiry On</label>
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col flex-1">
+            <label className="text-sm mb-1">Expiry On</label>
             <input
               type="date"
               name="enddate"
               value={courseData.enddate}
               onChange={handleChange}
-              className="border rounded p-1"
+              className="bg-gray-700 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
-          </span>
-          <span>
-            <label>Allow From</label>
+          </div>
+          <div className="flex flex-col flex-1">
+            <label className="text-sm mb-1">Allow From (Start Entry)</label>
             <input
               type="text"
               name="startEntry"
               value={courseData.startEntry}
               onChange={handleChange}
-              className="border rounded p-1"
+              className="bg-gray-700 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
-          </span>
-          <span>
-            <label>To</label>
+          </div>
+          <div className="flex flex-col flex-1">
+            <label className="text-sm mb-1">To (End Entry)</label>
             <input
               type="text"
               name="endEntry"
               value={courseData.endEntry}
               onChange={handleChange}
-              className="border rounded p-1"
+              className="bg-gray-700 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 md:w-30"
               required
             />
-          </span>
+          </div>
         </div>
 
-        <label>Teacher Name</label>
-        <input
-          type="text"
-          name="Teacher"
-          value={courseData.Teacher}
-          onChange={handleChange}
-          className="border rounded p-1"
-          required
-        />
+        <div className="flex flex-col">
+          <label className="flex items-center gap-2 text-sm mb-1">
+            <FaChalkboardTeacher />
+            Teacher Name
+          </label>
+          <input
+            type="text"
+            name="Teacher"
+            value={courseData.Teacher}
+            onChange={handleChange}
+            className="bg-gray-700 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
 
-        <div className="flex items-center gap-2">
-          <label>Is Active?</label>
+        <div className="flex items-center gap-3">
+          <label className="text-sm">Is Active?</label>
           <input
             type="checkbox"
             name="isActive"
             checked={courseData.isActive}
             onChange={handleChange}
+            className="h-5 w-5 text-blue-500"
           />
         </div>
 
-        <div className="flex items-center gap-2 text-white bg-black">
-          <label htmlFor="department">School Of</label>
+        <div className="flex flex-col">
+          <label className="flex items-center gap-2 text-sm mb-1">
+            <HiOutlineBuildingLibrary />
+            Department
+          </label>
           <select
             id="department"
             name="Department"
             value={courseData.Department}
             onChange={handleChange}
-            className="flex border rounded px-2 py-1 items-center gap-2 text-white bg-black"
+            className="bg-gray-700 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">Select An Option</option>
+            <option value="">Select Department</option>
             <option value="CSE">Computer Science & Engineering</option>
             <option value="ECE">Electronics & Communication Engineering</option>
             <option value="EE">Electrical Engineering</option>
@@ -181,9 +197,10 @@ function Create_class() {
 
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold p-3 rounded-md flex items-center justify-center gap-2 transition"
         >
-          Create A Class
+          <AiOutlineFieldTime className="text-xl" />
+          Create Class
         </button>
       </form>
 
@@ -191,18 +208,17 @@ function Create_class() {
         <h1
           className={`${
             res.success ? "bg-green-500" : "bg-red-500"
-          } rounded p-2 w-1/6 font-bold text-black`}
+          } mt-6 p-3 rounded-md font-bold w-full max-w-md text-center text-black`}
         >
           {res.message}
         </h1>
       )}
      
-       {!isDepartment && (<h1
-          className="rounded p-2 w-1/6 font-bold text-black bg-red-600"
-        >ou are not authorized to create a course in this department.
-          
-        </h1>)}
-     
+      {!isDepartment && (
+        <h1 className="bg-red-600 mt-4 p-3 rounded-md font-bold w-full max-w-md text-center text-black">
+          You are not authorized to create a course in this department.
+        </h1>
+      )}
 
       <ToastContainer />
     </div>

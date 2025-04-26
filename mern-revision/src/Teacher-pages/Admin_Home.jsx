@@ -1,85 +1,109 @@
 import { useEffect, useState } from "react";
-import Create_class from '../Teacher-pages/Create_Class'
+import Create_class from '../Teacher-pages/Create_Class';
 import All_Class_adm from "./All_Class_Ad";
 import DeleteUser from "./Delete_Class";
 import Attendance from "./AttendanceDetails";
-
-import AdminPro from './AdminPro'
+import AdminPro from './AdminPro';
 import QrGenerator from "../QR/QrGenerator";
 import EntriesLog from "./AllEntryExits";
 import SetLocation from "./SetLoaction";
+import AddResources from "./ResourcesAdd";
+
+import { FaChalkboardTeacher, FaPlusCircle, FaClipboardList, FaMapMarkedAlt,FaArchive } from "react-icons/fa";
 
 function AdminHome() {
-    const [selectedButton, setSelectedButton] = useState(null);
+  const [selectedButton, setSelectedButton] = useState(null);
 
-    // Load last clicked button from localStorage on page reload
-    useEffect(() => {
-        const stored = localStorage.getItem("buttonClickType");
-        const storedData = stored ? JSON.parse(stored) : null;
-        setSelectedButton(storedData?.BtnName || "");
-    }, []);
-    function handleButtonClick(buttonName) {
-        setSelectedButton(buttonName);
-        localStorage.setItem("buttonClickType", JSON.stringify({ BtnName: buttonName }));
-    }
+  useEffect(() => {
+    const stored = localStorage.getItem("buttonClickType");
+    const storedData = stored ? JSON.parse(stored) : null;
+    setSelectedButton(storedData?.BtnName || "");
+  }, []);
 
-    return (
-        <div className="flex flex-col bg-black">
-            <div className="mt-20 flex flex-col relative bg-base-100 items-center justify-center md:p-5 p-10 text-white">
-                <h1 className=" text-3xl text-white font-bold"> <span className="text-3xl text-red-500 font-bold">Welcome !</span> to
-                    <span className="text-3xl text-yellow-300 font-bold"> Teacher Dashbord </span>
-                    Ultimate Class Managing Web-App</h1>
-                <br></br>
-                <h1 className="text-2xl text-white font-bold">
-                    Your <span className="text-2xl text-red-500 font-bold">Ultimate</span> Classess Manage Hub!
-                </h1>
-                <div className="flex items-center md:ml-50 md:mr-50">
-                    <p className="text-gray-400 p-10 items-center">Welcome to <span className="text-2xl text-yellow-300">Uniator</span>, A versatile web platform integrating real-time code collaboration, a secure gate pass system with QR scanning, an attendance tracker, an advanced to-do list with backend support, and a community discussion forum. making it an all-in-one students, and organizations.</p>
-                </div>
-            </div>
+  function handleButtonClick(buttonName) {
+    setSelectedButton(buttonName);
+    localStorage.setItem("buttonClickType", JSON.stringify({ BtnName: buttonName }));
+  }
 
+  return (
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+      {/* Welcome Section */}
+      <div className="mt-24 flex flex-col items-center justify-center p-8 text-center">
+        <h1 className="text-3xl md:text-5xl font-bold text-white">
+          <span className="text-red-500">Welcome!</span> to
+          <span className="text-yellow-400"> Teacher Dashboard</span>
+        </h1>
+        <p className="mt-4 text-gray-400 max-w-2xl">
+          Manage your classes, students, and activities seamlessly. Experience the power of
+          <span className="text-yellow-400 font-semibold"> Uniator</span> — your all-in-one solution for real-time collaboration, secure QR gate passes, attendance tracking, and more.
+        </p>
+      </div>
 
-            <div className="flex flex-col sm:flex-row relative z-0 rounded-2xl gap-2 px-20 py-10 bg-base-100 ">
-                {/* Sidebar with Multiple Buttons */}
-                <div className="sm:w-1/5 sm:flex-row bg-white/10 sm:h-screen rounded-2xl h-[400px] p-2 relative">
-                    <AdminPro />
-                    <button onClick={() => handleButtonClick("All_Class")} className="border-2 border-cyan-500 rounded-2xl text-white p-2  m-2 w-9/10">
-                        All Classes
-                    </button>
-                    <button onClick={() => handleButtonClick("Create_Class")} className="border-2 border-cyan-500 rounded-2xl text-white p-2  m-2 w-9/10">
-                        Create class
-                    </button>
+      {/* Main Layout */}
+      <div className="flex flex-col sm:flex-row rounded-2xl gap-6 p-6">
+        {/* Sidebar */}
+        <div className="sm:w-1/5 bg-white/10 backdrop-blur-lg rounded-2xl p-4 flex flex-col gap-4">
+          <AdminPro />
 
+          <SidebarButton
+            icon={<FaChalkboardTeacher />}
+            label="All Classes"
+            onClick={() => handleButtonClick("All_Class")}
+          />
 
-                    <button onClick={() => handleButtonClick("Attendance")} className="border-2 border-cyan-500 rounded-2xl text-white p-2  m-2 w-9/10">
-                        Attendance Details
-                    </button>
+          <SidebarButton
+            icon={<FaPlusCircle />}
+            label="Create Class"
+            onClick={() => handleButtonClick("Create_Class")}
+          />
 
-                    <button onClick={() => handleButtonClick("setlocation")} className="border-2 border-cyan-500 rounded-2xl text-white p-2  m-2 w-9/10">
-                        Set Location & Radius
-                    </button>
+          <SidebarButton
+            icon={<FaClipboardList />}
+            label="Attendance Details"
+            onClick={() => handleButtonClick("Attendance")}
+          />
 
-
-                </div>
-
-                {/* Main Content */}
-                <div className="sm:w-4/5 w-1/1 bg-white/10 sm:h-screen rounded-2xl p-2">
-                    {selectedButton === "All_Class" && <All_Class_adm />}
-
-                    {selectedButton === "Create_Class" && <Create_class />}
-
-                    {selectedButton === "Attendance" && <Attendance />}
-
-                    {selectedButton === "setlocation" && <SetLocation />}
-
-
-
-                    {/* Default Content when no button is clicked */}
-                    {!selectedButton && <h1 className="text-white text-2xl">Select an option from the sidebar</h1>}
-                </div>
-            </div>
+          <SidebarButton
+            icon={<FaMapMarkedAlt />}
+            label="Set Location & Radius"
+            onClick={() => handleButtonClick("setlocation")}
+          />
+          <SidebarButton
+            icon={<FaArchive />}
+            label="Add Resources"
+            onClick={() => handleButtonClick("addresource")}
+          />
         </div>
-    );
+
+        {/* Main Content */}
+        <div className="sm:w-4/5 w-full bg-white/10 backdrop-blur-lg rounded-2xl p-4 min-h-[500px] overflow-y-auto">
+          {selectedButton === "All_Class" && <All_Class_adm />}
+          {selectedButton === "Create_Class" && <Create_class />}
+          {selectedButton === "Attendance" && <Attendance />}
+          {selectedButton === "setlocation" && <SetLocation />}
+          {selectedButton === "addresource" && <AddResources />}
+          {!selectedButton && (
+            <h1 className="text-white text-2xl font-bold flex justify-center items-center h-full">
+              Please select an option from the sidebar
+            </h1>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Reusable SidebarButton Component
+function SidebarButton({ icon, label, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="flex items-center gap-3 border-2 border-cyan-500 text-white p-3 rounded-2xl hover:bg-cyan-500 hover:text-black transition-all duration-300"
+    >
+      {icon}
+      {label}
+    </button>
+  );
 }
 
 export default AdminHome;
