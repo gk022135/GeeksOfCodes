@@ -45,6 +45,8 @@ import FetchAllPost from "./Discusion/FetchAllPost";
 import PostDetail from "./Discusion/PostDetails";
 import ThemeChanger from "./themectrl";
 import ThemeSelector from "./themectrl";
+import { Component } from "./Chart";
+import QuizBuilder from "./Teacher-pages/QuizRes";
 
 
 
@@ -146,6 +148,8 @@ function App() {
             <a href="/administrator">Adminstrator Dashboard</a>
             <a href="/administrator-login">Administrator Login</a>
           </div>
+          <QuizBuilder />
+          {/* <Component /> */}
           <ThemeChanger />
           <Footer />
         </div>
