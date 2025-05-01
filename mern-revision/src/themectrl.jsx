@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { IoSettingsSharp } from "react-icons/io5";
 
 function ThemeSelector() {
   const themes = [
@@ -30,24 +31,16 @@ function ThemeSelector() {
   };
 
   return (
-    <div className="dropdown mb-4">
+    <div className="dropdown">
       <label tabIndex={0} className="btn m-1">
-        Theme
-        <svg
-          width="12px"
-          height="12px"
-          className="inline-block ml-1 h-2 w-2 fill-current opacity-60"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 2048 2048"
-        >
-          <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z" />
-        </svg>
+        Theme <IoSettingsSharp color="yellow"/>
+        
       </label>
-      <ul tabIndex={0} className="dropdown-content bg-base-300 rounded-box z-10 w-52 p-2 shadow-2xl">
+      <ul tabIndex={0} className="dropdown-content bg-base-300 rounded-box z-10 w-52 p-2 shadow-2xl text-white">
         {themes.map((theme) => (
           <li key={theme}>
             <button
-              className={`w-full btn btn-sm btn-ghost justify-start ${activeTheme === theme ? 'bg-primary text-primary-content' : ''
+              className={`w-full btn btn-sm btn-ghost justify-start ${activeTheme === theme ? 'bg-primary' : ''
                 }`}
               onClick={() => changeTheme(theme)}
             >
