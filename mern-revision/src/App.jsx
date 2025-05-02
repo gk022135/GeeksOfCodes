@@ -47,6 +47,7 @@ import ThemeChanger from "./themectrl";
 import ThemeSelector from "./themectrl";
 import { Component } from "./Chart";
 import QuizBuilder from "./Teacher-pages/QuizRes";
+import Code_editor from "./code_editor/Test";
 
 
 
@@ -59,7 +60,7 @@ function App() {
           <Navbar />
         </div>
 
-        <div className='w-full h-screen bg-base-100 90 mt-16'>
+        <div className='w-full h-auto bg-base-100 90 '>
 
 
           <Routes>
@@ -131,6 +132,9 @@ function App() {
             <Route path="/all-posts" element={<FetchAllPost />} />
             <Route path="/posts/detail/:id" element = {<PostDetail />} />
 
+            <Route path="/quiz" element = {<QuizBuilder />} />
+            <Route path="/code-editor" element = {<Code_editor />} />
+
 
           </Routes>
 
@@ -148,8 +152,8 @@ function App() {
             <a href="/administrator">Adminstrator Dashboard</a>
             <a href="/administrator-login">Administrator Login</a>
           </div>
-          <QuizBuilder />
           {/* <Component /> */}
+          
           <ThemeChanger />
           <Footer />
         </div>
