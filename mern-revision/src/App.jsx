@@ -45,9 +45,9 @@ import FetchAllPost from "./Discusion/FetchAllPost";
 import PostDetail from "./Discusion/PostDetails";
 import ThemeChanger from "./themectrl";
 import ThemeSelector from "./themectrl";
-import { Component } from "./Chart";
 import QuizBuilder from "./Teacher-pages/QuizRes";
 import Code_editor from "./code_editor/Test";
+import WebSock from "./Chart";
 
 
 
@@ -134,6 +134,7 @@ function App() {
 
             <Route path="/quiz" element = {<QuizBuilder />} />
             <Route path="/code-editor" element = {<Code_editor />} />
+            <Route path="/chat" element={<WebSock />} />
 
 
           </Routes>
