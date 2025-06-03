@@ -1,18 +1,24 @@
 const WebSocket = require('ws');
 
-let clients = [];
-
 module.exports = function setupWebSocket(server) {
-  const wss = new WebSocket.Server({ server }); // attach to same server
+  const wss = new WebSocket.Server({ server }); // attach to HTTP server
 
   wss.on('connection', (ws) => {
-    clients.push(ws);
-    console.log('New WebSocket client connected');
+    console.log('🟢 New client connected');
 
     ws.on('message', (message) => {
-      // Broadcast to all other clients
-      
-      clients.forEach(client => {
+      console.log('📨 Received:', message);
+
+      // Try to parse the message, don't crash if it's plain text
+      try {
+        const parsed = JSON.parse(message);
+        console.log('Parsed message:', parsed);
+      } catch {
+        console.log('Message is not JSON, broadcasting as-is.');
+      }
+
+      // Broadcast to all other connected clients
+      wss.clients.forEach(client => {
         if (client !== ws && client.readyState === WebSocket.OPEN) {
           client.send(message);
         }
@@ -20,10 +26,13 @@ module.exports = function setupWebSocket(server) {
     });
 
     ws.on('close', () => {
-      clients = clients.filter(client => client !== ws);
-      console.log('Client disconnected');
+      console.log('🔴 Client disconnected');
+    });
+
+    ws.on('error', (err) => {
+      console.error('WebSocket error:', err);
     });
   });
 
-  console.log('WebSocket server attached');
+  console.log('✅ WebSocket server is ready');
 };

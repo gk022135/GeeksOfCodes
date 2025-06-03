@@ -1,20 +1,26 @@
+import ProfileLeft from "../test/profile_left";
+import RightPart from "../test/RightPart";
 
 
 
 function UserProfile({ props }) {
-    console.log("naaam",props)
+    console.log("naaam", props)
 
 
     return (
-        <div className="relative bg-base-100 50 flex border-2 rounded-2xl p-2">
-            <div className="flex w-[80px] bg-amber-400 rounded-full justify-center content-center p-2">
-                <img src={encodeURI(props.picture)} alt="Profile" className="flex rounded-full"></img>
+        <div className="flex flex-col lg:flex-row gap-6 px-4 sm:px-6 md:px-10 lg:px-16 py-6">
+            {/* Left (Profile) */}
+            <div className="w-full lg:w-1/4 flex-shrink-0 border border-gray-600 rounded-xl p-4 bg-base-100 shadow-sm">
+                <ProfileLeft />
             </div>
-            <div  className="overflow-hidden flex flex-col mt-4 ml-4 text-white bg-red">
-                <p1>{props.name}</p1>
-                <p1 className = 'overflow-hidden'>{props.email}</p1> 
+
+            {/* Right (Charts) */}
+            <div className="w-full lg:w-3/4 border border-gray-300 rounded-xl p-4 bg-base-100 shadow-sm">
+                <RightPart />
             </div>
         </div>
+
+
     )
 }
 export default UserProfile;
