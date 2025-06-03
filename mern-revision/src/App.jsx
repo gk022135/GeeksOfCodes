@@ -48,6 +48,8 @@ import ThemeSelector from "./themectrl";
 import QuizBuilder from "./Teacher-pages/QuizRes";
 import Code_editor from "./code_editor/Test";
 import WebSock from "./Chart";
+import ContributionGraph from "./test/Contri";
+import UserProfile from "./user-pages/User_Profile";
 
 
 
@@ -135,6 +137,9 @@ function App() {
             <Route path="/quiz" element = {<QuizBuilder />} />
             <Route path="/code-editor" element = {<Code_editor />} />
             <Route path="/chat" element={<WebSock />} />
+            <Route path="/contri" element = {<ContributionGraph /> } />
+
+            <Route path="User-profile" element = {<UserProfile />} />
 
 
           </Routes>
@@ -157,6 +162,7 @@ function App() {
           
           <ThemeChanger />
           <Footer />
+
         </div>
 
 
