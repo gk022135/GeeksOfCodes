@@ -23,6 +23,7 @@ async function ClassCreate(req, res) {
                 success: false
             })
         }
+        console.log("hi")
         if (!isCoursePresent) {
             //create new course
             const newObj = {
@@ -35,13 +36,16 @@ async function ClassCreate(req, res) {
                 endEntry: endEntry,
                 Department: Department,
             }
+            //  console.log("hi")
             const doc = await ClassModel(newObj).save();
+            //  console.log("hi")
             return res.status(200).json({
                 message: "Class Created Succesfully",
                 success: true
             })
         }
     } catch (error) {
+        // console.log(error)
         return res.status(500).json({
             message: "error in server for Class creation",
             success: false

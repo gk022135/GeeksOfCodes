@@ -7,15 +7,22 @@ const CourseSchema = new Schema({
     courseName: { type: String, required: true },
     Teacher: { type: String, required: true },
     isActive: { type: Boolean, required: true },
-    createdAt: { type: Date, default: Date.now },  // ✅ Fix: Uses default for dynamic timestamp
+    createdAt: { type: Date, default: Date.now },
 
     enddate: { type: String, required: true },
     startEntry: { type: String, required: true },
     endEntry: { type: String, required: true },
     Department: { type: String, required: true },
-    longitude: { type: Number, required: true },
-    latitude: { type: Number, required: true },
-    radius: { type: Number }
+    longitude: { type: Number},
+    latitude: { type: Number },
+    radius: { type: Number },
+    Notification: [
+        {
+            message: String,
+            createdAt: { type: Date, default: Date.now, expires: '7d' }
+        }
+    ]
+
 });
 
 

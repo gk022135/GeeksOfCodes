@@ -51,6 +51,7 @@ import WebSock from "./Chart";
 import ContributionGraph from "./test/Contri";
 import UserProfile from "./user-pages/User_Profile";
 import UpdateProfile from "./test/edit-user-profile";
+import NotificationManager from "./Teacher-pages/addnotification";
 
 
 
@@ -143,6 +144,7 @@ function App() {
 
             <Route path="User-profile" element={<UserProfile />} />
             <Route path="Update" element={<UpdateProfile />} />
+            <Route path="noti" element={<NotificationManager />} />
 
 
 
