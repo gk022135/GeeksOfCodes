@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AppContext } from "../ContextApi/FisrtContext";
 import DeleteCourse from "./Delete_Class";
-
+import { Bell } from 'lucide-react';
 
 function ClassComponent({ course }) {
     const { PutRequets } = useContext(AppContext);
@@ -28,49 +28,51 @@ function ClassComponent({ course }) {
 
 
     return (
-        <div className="flex flex-col text-white bg-white/10 w-full h-auto sm:max-w-[400px] sm:min-h-[300px] justify-center border-2 rounded-2xl m-2 hover:shadow-2xl shadow-blue-500 transition-transform duration-300 hover:scale-105">
+        <div className="flex flex-col text-white bg-base-100 w-full h-auto sm:max-w-[400px] sm:min-h-[320px] justify-between border border-blue-600 rounded-2xl m-2 p-4 shadow-md hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 ease-in-out">
+
             {/* Top Row */}
-            <div className="flex justify-between items-center px-3 py-2">
-                <p className="text-sm truncate">{course.createdAt.slice(0, 10)}</p>
+            <div className="flex justify-between items-center text-xs mb-2">
+                <span className="text-base-content/60">{course.createdAt.slice(0, 10)}</span>
 
-                <p
-                    className={`rounded px-2 py-1 text-xs font-semibold ${course.isActive ? "bg-green-600" : "bg-red-600"
-                        }`}
-                >
+                <span className={`rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wide 
+      ${course.isActive ? "bg-green-600 text-white" : "bg-red-600 text-white"}`}>
                     {course.isActive ? "Live" : "Closed"}
-                </p>
-
-                <DeleteCourse props={course.courseCode} />
-
-                <p className="border rounded px-2 py-1 text-xs">Expired at: {course.enddate}</p>
+                </span>
             </div>
 
             {/* Course Info */}
-            <div className="flex flex-col border rounded m-2 p-2">
-                <h1 className="text-md font-semibold">{course.courseName}</h1>
-                <h1 className="text-md">{course.Teacher}</h1>
-                <h1 className="text-md font-mono">{course.courseCode}</h1>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 mb-3 space-y-1">
+                <h2 className="text-lg font-semibold text-primary">{course.courseName}</h2>
+                <p className="text-sm text-base-content/80">Instructor: <span className="font-medium">{course.Teacher}</span></p>
+                <p className="text-sm font-mono text-base-content/70">Code: {course.courseCode}</p>
             </div>
 
             {/* Entry Timings */}
-            <div className="flex flex-col items-center">
-                <p className="text-sm">Start Entry: {course.startEntry}</p>
-                <p className="text-sm">Last Entry: {course.endEntry}</p>
+            <div className="bg-white/5 p-2 rounded-lg text-center text-sm mb-2 space-y-1 text-base-content/70">
+                <p>Start Entry: <span className="font-medium">{course.startEntry}</span></p>
+                <p>Last Entry: <span className="font-medium">{course.endEntry}</span></p>
+                <p className="text-xs italic mt-1">Allowed Entry: {course.startEntry} - {course.endEntry}</p>
+            </div>
+
+            {/* Footer Row */}
+            <div className="flex items-center justify-between mt-2 text-xs text-base-content/60">
+                <p className="px-2 py-1 border border-base-300 rounded-md">
+                    Expired: {course.enddate}
+                </p>
+                <a href="/admin-noti"><Bell size={35} color="yellow"/></a>
+                
+                <DeleteCourse props={course.courseCode} />
             </div>
 
             {/* Attendance Button */}
             <button
-                className="bg-blue-900 w-1/2 p-2 mx-auto rounded-2xl hover:bg-green-700 font-bold mt-3"
+                className="bg-blue-600 hover:bg-green-600 transition-colors duration-200 text-white font-semibold py-2 px-4 rounded-xl mt-4 self-center w-full sm:w-2/3"
                 onClick={AttendanceHandler}
             >
                 Start Attendance
             </button>
-
-            {/* Entry Time Info */}
-            <p className="text-sm text-center mt-2">
-                Allowed Entry ({course.startEntry} - {course.endEntry})
-            </p>
         </div>
+
 
 
     )
