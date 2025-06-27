@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFlow - Collaborative Code Editor</title>
+    <link rel="stylesheet" href="./part2.css" />
+</head>
+
+<body>
+    <!-- Floating particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">CodeFlow</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#docs">Docs</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <a href="#" class="cta-btn">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Code Together,<br>Create Together</h1>
+                <p>The most intuitive collaborative code editor. Write, debug, and deploy with your team in real-time.
+                    Experience the future of collaborative development.</p>
+
+                <div class="hero-buttons">
+                    <a href="#" class="btn-primary">Start Coding Now</a>
+                    <a href="#" class="btn-secondary">Watch Demo</a>
+                </div>
+
+                <div class="editor-demo">
+                    <div class="editor-window">
+                        <div class="editor-header">
+                            <div class="editor-dots">
+                                <div class="dot red"></div>
+                                <div class="dot yellow"></div>
+                                <div class="dot green"></div>
+                            </div>
+                            <div class="editor-title">collaborative-app.js</div>
+                            <div class="collaborators">
+                                <div class="collaborator"></div>
+                                <div class="collaborator"></div>
+                                <div class="collaborator"></div>
+                            </div>
+                        </div>
+                        <div class="editor-content">
+                            <div class="code-line">
+                                <span class="line-number">1</span>
+                                <span class="code-text"><span class="comment">// Real-time collaborative
+                                        coding</span></span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">2</span>
+                                <span class="code-text"><span class="keyword">import</span> { <span
+                                        class="function">CollaborativeEditor</span> } <span class="keyword">from</span>
+                                    <span class="string">'@codeflow/core'</span>;</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">3</span>
+                                <span class="code-text"></span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">4</span>
+                                <span class="code-text"><span class="keyword">const</span> <span
+                                        class="variable">editor</span> = <span class="keyword">new</span> <span
+                                        class="function">CollaborativeEditor</span>({</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">5</span>
+                                <span class="code-text"> <span class="variable">roomId</span>: <span
+                                        class="string">'team-project-2024'</span>,</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">6</span>
+                                <span class="code-text"> <span class="variable">language</span>: <span
+                                        class="string">'javascript'</span>,</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">7</span>
+                                <span class="code-text"> <span class="variable">features</span>: [<span
+                                        class="string">'live-cursors'</span>, <span class="string">'voice-chat'</span>,
+                                    <span class="string">'git-sync'</span>]</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">8</span>
+                                <span class="code-text">});<span class="cursor"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h2>Powerful Features</h2>
+                <p class="features-subtitle">Everything you need for seamless collaborative development, from real-time
+                    editing to integrated communication.</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Real-time Collaboration</h3>
+                        <p>See changes instantly as your teammates type. Live cursors, syntax highlighting, and conflict
+                            resolution keep everyone in sync.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Smart Code Completion</h3>
+                        <p>AI-powered autocomplete that learns from your team's coding patterns. Write code faster with
+                            intelligent suggestions.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔗</div>
+                        <h3>Git Integration</h3>
+                        <p>Seamless version control with built-in Git support. Branch, merge, and deploy directly from
+                            the editor.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Integrated Communication</h3>
+                        <p>Voice chat, video calls, and inline comments. Discuss code without leaving your development
+                            environment.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>One-click Deployment</h3>
+                        <p>Deploy to production with a single click. Integrated CI/CD pipeline ensures your code goes
+                            live smoothly.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Enterprise Security</h3>
+                        <p>Bank-grade encryption, SSO integration, and compliance with SOC 2, GDPR, and HIPAA standards.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Add some interactive animations
+        document.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach((particle, index) => {
+                const speed = (index + 1) * 0.02;
+                const x = e.clientX * speed;
+                const y = e.clientY * speed;
+                particle.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Simulate typing animation in the code editor
+        function simulateTyping() {
+            const codeLines = document.querySelectorAll('.code-line');
+            codeLines.forEach((line, index) => {
+                setTimeout(() => {
+                    line.style.opacity = '1';
+                    line.style.transform = 'translateX(0)';
+                }, index * 300 + 1000);
+            });
+        }
+
+        // Start typing animation when page loads
+        window.addEventListener('load', simulateTyping);
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+
+</html>

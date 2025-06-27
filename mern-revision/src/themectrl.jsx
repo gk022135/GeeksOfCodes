@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IoSettingsSharp } from "react-icons/io5";
+import { SunMoon } from 'lucide-react';
 
 function ThemeSelector() {
   const themes = [
@@ -32,8 +32,8 @@ function ThemeSelector() {
 
   return (
     <div className="dropdown">
-      <label tabIndex={0} className="btn m-1">
-        Theme <IoSettingsSharp color="yellow"/>
+      <label tabIndex={0} className="btn m-1 rounded-4xl bg-base-100">
+       <SunMoon color="yellow" size={35}/>
         
       </label>
       <ul tabIndex={0} className="dropdown-content bg-base-300 rounded-box z-10 w-52 p-2 shadow-2xl text-white">
