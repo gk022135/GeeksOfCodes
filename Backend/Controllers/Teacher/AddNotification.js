@@ -4,10 +4,10 @@ const classModel = require('../../Models/ClassModel');
 async function deletionNoti(message, courseCode, res) {
   try {
     
-
+    const _id  = message
     const updated = await classModel.findOneAndUpdate(
       { courseCode: courseCode },
-      { $pull: { Notification: { message } } },
+      { $pull: { Notification: { _id } } },
       { new: true }
     );
 
@@ -46,7 +46,7 @@ async function viewNoti(courseCode, res) {
     }
     const sendData = classData.Notification
     return res.status(200).json({
-      notifications: JSON.stringify(classData.Notification),
+      notifications: classData.Notification,
       success: true,
       message : "hello"
     });

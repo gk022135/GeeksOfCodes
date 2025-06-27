@@ -53,65 +53,61 @@ function Class_Card_Component({ course, x }) {
     const SetLoaction = () => {
         navigate(`/varifylocaation/${course._id}`);
     };
-    
+
 
     SetLoaction
 
 
     return (
-        <div className="flex flex-col text-white bg-white/15 sm:w-[400px] sm:h-[300px] justify-center content-center border-2 rounded-2xl m-2 hover:shadow-2xl shadow-blue-500 relative transition-transform duration-300 hover:scale-105">
+        <div className="flex flex-col bg-base-100 sm:w-[400px] sm:h-[320px] justify-between border border-blue-700 rounded-2xl m-2 p-4 hover:shadow-2xl shadow-blue-500 relative transition-transform duration-300 hover:scale-105  text-white">
+
             {/* Top Section */}
-
-
-            <div className="flex sm:flex-row justify-evenly">
-                <p className="flex overflow-hidden left-0 top-0 p-2">{course.createdAt.slice(0, 10)}</p>
+            <div className="flex justify-between items-center text-sm mb-2">
+                <p className="text-slate-300">{course.createdAt.slice(0, 10)}</p>
                 <p
-                    style={{ backgroundColor: course.isActive ? "green" : "red" }}
-                    className="flex rounded-2xl p-2"
+                    className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide 
+        ${course.isActive ? "bg-green-600" : "bg-red-600"}`}
                 >
                     {course.isActive ? "Attendance Live" : "Attendance Off"}
                 </p>
             </div>
 
-
-
             {/* Course Details */}
-            <h1 className="flex content-center justify-center text-xl h-10 m-2 w-3/4">{course.courseName.toUpperCase()}</h1>
-            <h1 className="flex content-center justify-center text-xl w-3/4 h-10 m-2">Teacher: {course.Teacher}</h1>
-            <h1 className="flex content-center justify-center text-xl w-3/4 h-10 m-2">Course Code: {course.courseCode}</h1>
+            <div className="text-center space-y-1 mb-4">
+                <h1 className="text-lg font-bold tracking-wide text-white">{course.courseName.toUpperCase()}</h1>
+                <h2 className="text-sm text-slate-300">Teacher: <span className="font-medium">{course.Teacher}</span></h2>
+                <h2 className="text-sm text-slate-400 font-mono">Code: {course.courseCode}</h2>
+            </div>
 
             {/* Attendance Button */}
-
-
             {!x && (
-               
-                <button className="bg-blue-800 font-bold w-1/2 p-1 ml-20 rounded-2xl hover:bg-green-600" onClick={SetLoaction}>
-                Varify and Mark attendance
-             </button>
-            )}
-            
-
-
-
-            {/* More Info & Attendance */}
-            <div className="flex overflow-hidden p-1 gap-2">
                 <button
-                    className="bg-green-700 w-2/5 ml-1 text-center rounded-xl font-bold"
-                    onClick={handleMoreInfoClick} // Navigate on click
+                    className="bg-blue-700 hover:bg-green-600 transition-colors duration-200 font-semibold py-2 px-4 rounded-xl mx-auto w-3/4 text-sm"
+                    onClick={SetLoaction}
+                >
+                    Verify & Mark Attendance
+                </button>
+            )}
+
+            {/* More Info & Attendance Summary */}
+            <div className="flex justify-between items-center mt-4 gap-2">
+                <button
+                    className="bg-green-700 hover:bg-green-800 transition-colors duration-200 text-sm font-semibold px-4 py-2 rounded-xl w-5/12"
+                    onClick={handleMoreInfoClick}
                 >
                     More Info
                 </button>
 
-                <h1 className="text-white font-bold border-1 p-1 rounded-xl w-6/12">
-                    Your Atd: {AttendByYou}/{total_class} = {percentage}%
-                </h1>
+                <div className="text-xs bg-white/10 text-white px-3 py-2 rounded-xl w-7/12 text-center">
+                    <span className="font-semibold">Your Atd:</span> {AttendByYou}/{total_class} = <span className="text-blue-300">{percentage}%</span>
+                </div>
             </div>
 
-
+            {/* Pop Component and Toast */}
             {ispopState && <PopComponent ispopState={ispopState} />}
-
             <ToastContainer />
         </div>
+
     );
 }
 

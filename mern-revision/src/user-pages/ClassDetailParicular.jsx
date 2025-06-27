@@ -4,11 +4,13 @@ import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../ContextApi/FisrtContext";
 import { ToastContainer, toast } from "react-toastify";
 import TestModel from "./Test";
+import NotificationStd from "./std-cls-noti";
 
 const ClassDetailParticular = () => {
     const { courseCode, courseName, Teacher } = useParams();
     const { AllGetReq, loading, setLoading } = useContext(AppContext);
     const [isDetailopen, SetIsDetailOpen] = useState(false);
+
 
     const [attendance, setAttendance] = useState({
         total_class: 0,
@@ -122,6 +124,7 @@ const ClassDetailParticular = () => {
             }
 
             {/* Additional Content */}
+            <NotificationStd courseCode={courseCode}/>
             <ToastContainer />
         </div>
     );
