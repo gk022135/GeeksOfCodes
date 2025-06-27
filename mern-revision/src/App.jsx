@@ -50,13 +50,15 @@ import Code_editor from "./code_editor/Test";
 import WebSock from "./Chart";
 import ContributionGraph from "./test/Contri";
 import UserProfile from "./user-pages/User_Profile";
+import UpdateProfile from "./test/edit-user-profile";
+
 
 
 
 function App() {
   return (
     <BrowserRouter> {/* Wrap everything inside BrowserRouter */}
-    <ThemeSelector />
+      {/* <ThemeSelector /> */}
       <>
         <div className='fixed top-0 z-20 w-full'>
           <Navbar />
@@ -82,8 +84,8 @@ function App() {
               <Route path='/admin-dashboard' element={<AdminHome />} />
               <Route path="/create-class" element={<Create_class />} />
               <Route path="/all-classes-adm" element={<All_Class_adm />} />
-              
-             
+
+
             </Route>
 
 
@@ -91,7 +93,7 @@ function App() {
             <Route element={<StudentAuthorise />}>
               <Route path="/user-home" element={<UserHome />} />
               <Route path="/todo-home" element={<TodoHome />} />
-              
+
               <Route path="/qrscanner" element={<Qr_res />} />
               <Route path="/discussion" element={<HomeDiscussion />} />
               <Route path="/discussion/makepost" element={<MakePost />} />
@@ -99,11 +101,11 @@ function App() {
             </Route>
 
 
-{/* Documentation of project */}
+            {/* Documentation of project */}
             <Route path="/Qr-working-docs" element={<QrWorking />} />
-            <Route path= "/attendace-marking-docs" element = {<AttendanceMarking />} />
-            <Route path="/class-creating-docs" element = {<ClassCreate />} />
-            <Route path="/gatepss-working-docs" element = {<GatePassWorking />} />
+            <Route path="/attendace-marking-docs" element={<AttendanceMarking />} />
+            <Route path="/class-creating-docs" element={<ClassCreate />} />
+            <Route path="/gatepss-working-docs" element={<GatePassWorking />} />
 
 
 
@@ -114,7 +116,7 @@ function App() {
             <Route path="/all-classes-student" element={<All_Class_Std />} />
 
 
-{/* Dynamic route for each course sending details with query params */}
+            {/* Dynamic route for each course sending details with query params */}
             <Route path="/all-classes-student/:courseCode/:courseName/:Teacher" element={<ClassDetailParticular />} />
 
             <Route path="/otpvarification" element={<Otpvarifiacation />} />
@@ -127,19 +129,21 @@ function App() {
             <Route path='/admin-login' element={<AdminLogin />} />
             <Route path="/administrator-login" element={<SUlogin />} />
 
-            <Route path="/makepost"element = {<MakePost />} />
+            <Route path="/makepost" element={<MakePost />} />
 
-            <Route path="/setlocation" element = {<SetLocation />} />
-            <Route path= "/varifylocaation/:_id" element = {<VarifyLocation />} />
+            <Route path="/setlocation" element={<SetLocation />} />
+            <Route path="/varifylocaation/:_id" element={<VarifyLocation />} />
             <Route path="/all-posts" element={<FetchAllPost />} />
-            <Route path="/posts/detail/:id" element = {<PostDetail />} />
+            <Route path="/posts/detail/:id" element={<PostDetail />} />
 
-            <Route path="/quiz" element = {<QuizBuilder />} />
-            <Route path="/code-editor" element = {<Code_editor />} />
+            <Route path="/quiz" element={<QuizBuilder />} />
+            <Route path="/code-editor" element={<Code_editor />} />
             <Route path="/chat" element={<WebSock />} />
-            <Route path="/contri" element = {<ContributionGraph /> } />
+            <Route path="/contri" element={<ContributionGraph />} />
 
-            <Route path="User-profile" element = {<UserProfile />} />
+            <Route path="User-profile" element={<UserProfile />} />
+            <Route path="Update" element={<UpdateProfile />} />
+
 
 
           </Routes>
@@ -159,7 +163,7 @@ function App() {
             <a href="/administrator-login">Administrator Login</a>
           </div>
           {/* <Component /> */}
-          
+
           <ThemeChanger />
           <Footer />
 

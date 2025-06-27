@@ -6,7 +6,7 @@ import MiddlemiddleComp from "./Middle_middle_comp";
 import { AppContext } from "../ContextApi/FisrtContext";
 import { useContext, useState } from "react";
 import { useEffect } from "react";
-import UserProfile from "./User_Profile";
+// import UserProfile from "./User_Profile";
 import Todo_Page from "./Todo_redir";
 import CommunityForum from "./Community_chat";
 
@@ -146,7 +146,7 @@ function UserHome() {
 
                 {/* Left Sidebar */}
                 <div className="left-div flex flex-col w-full md:w-1/5 bg-white/15 border-2 pl-1 pr-4 pt-5 rounded-2xl relative gap-5 md:h-screen">
-                    <UserProfile props={userInfo} />
+                    {/* <UserProfile props={userInfo} /> */}
                     <LeftDivComp props={leftEditor} />
                     <LeftDivComp props={userInfo} />
                     <LeftDivComp props={logout} />
