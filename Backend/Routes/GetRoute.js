@@ -28,6 +28,10 @@ const FetchAllPost = require('../Controllers/CommunityStuff/FetchAllPosts')
 const PostDetails = require('../Controllers/CommunityStuff/PostDetails')
 
 
+//mislenious routes
+const httpToWebsocket = require('../Controllers/web-socket/http-to-ws');
+
+
 
 
 //Adminstrator controllers
@@ -54,5 +58,9 @@ getrouter.get('/get-post-details', PostDetails);
 //student 
 getrouter.get('/get-single-class-details',SingleClassDetail);
 getrouter.get('/get-varify-location', VarifyLocation);
+
+
+//misclenoius route
+// getrouter.get('/verify', httpToWebsocket);
 
 module.exports = getrouter;

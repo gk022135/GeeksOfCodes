@@ -14,6 +14,7 @@ const putrouter = require('./Routes/PutRoute');
 
 // WebSocket
 const websocket_connection = require('./Controllers/web-socket/conncetion');
+const upgradeHttpToWebSocket = require('./Controllers/web-socket/http-to-ws')
 const http = require('http');
 
 dotenv.config();
@@ -53,6 +54,8 @@ console.log("MongoDB URL:", URL);
 DB_connect(URL);
 clodinaryConnect();
 
+
 // Connect WebSocket to the same HTTP server
 console.log("Connecting WebSocket...");
-websocket_connection(server);
+// websocket_connection(server);
+upgradeHttpToWebSocket(server);

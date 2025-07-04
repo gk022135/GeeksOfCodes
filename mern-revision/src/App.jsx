@@ -52,6 +52,8 @@ import ContributionGraph from "./test/Contri";
 import UserProfile from "./user-pages/User_Profile";
 import UpdateProfile from "./test/edit-user-profile";
 import NotificationManager from "./Teacher-pages/addnotification";
+import Chatapp from "./chat/chat";
+import Mainnav from "./components/navbar/mainnav";
 
 
 
@@ -85,6 +87,7 @@ function App() {
               <Route path='/admin-dashboard' element={<AdminHome />} />
               <Route path="/create-class" element={<Create_class />} />
               <Route path="/all-classes-adm" element={<All_Class_adm />} />
+              <Route path="/admin-noti" element={<NotificationManager />} />
 
 
             </Route>
@@ -145,6 +148,8 @@ function App() {
             <Route path="User-profile" element={<UserProfile />} />
             <Route path="Update" element={<UpdateProfile />} />
             <Route path="noti" element={<NotificationManager />} />
+            <Route path="chat-app" element={<Chatapp />} />
+            <Route path="navtest" element={<Mainnav />} />
 
 
 
@@ -168,12 +173,11 @@ function App() {
 
           <ThemeChanger />
           <Footer />
-
         </div>
 
 
         <ToastContainer />
-      </>
+         </>
     </BrowserRouter>
   );
 }

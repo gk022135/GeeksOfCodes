@@ -1,38 +1,57 @@
 const WebSocket = require('ws');
+const jwtVerification = require('../../Middlewares/jwtvarification');
 
-module.exports = function setupWebSocket(server) {
-  const wss = new WebSocket.Server({ server }); // attach to HTTP server
+const userMap = new Map(); // email -> ws
 
-  wss.on('connection', (ws) => {
-    console.log('🟢 New client connected');
+function setupWebSocket(server) {
+    const wss = new WebSocket.Server({ server });
 
-    ws.on('message', (message) => {
-      console.log('📨 Received:', message);
+    wss.on('connection', async (ws, request) => {
+        const params = new URLSearchParams(request.url.replace(/^\/\?/, ''));
+        const token = params.get('token');
+        const userId = params.get('user'); // user's email or ID
 
-      // Try to parse the message, don't crash if it's plain text
-      try {
-        const parsed = JSON.parse(message);
-        console.log('Parsed message:', parsed);
-      } catch {
-        console.log('Message is not JSON, broadcasting as-is.');
-      }
-
-      // Broadcast to all other connected clients
-      wss.clients.forEach(client => {
-        if (client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send(message);
+        const isValid = await jwtVerification({token});
+        if (!isValid) {
+            ws.close();
+            return;
         }
-      });
+
+        // Store the connection
+        userMap.set(userId, ws);
+
+        ws.on('message', (message) => {
+            try {
+             
+                const { to, content } = JSON.parse(message);
+                const recipientSocket = userMap.get(to);
+
+                 console.log("message",to, content, recipientSocket)
+
+                if (recipientSocket && recipientSocket.readyState === WebSocket.OPEN) {
+                    recipientSocket.send(JSON.stringify({
+                        from: userId,
+                        content
+                    }));
+                } else {
+                  console.log("error user offline")
+                    ws.send(JSON.stringify({ error: 'User is offline' }));
+                }
+            } catch (err) {
+                ws.send(JSON.stringify({ error: 'Invalid message format' }));
+            }
+        });
+
+        ws.on('close', () => {
+            userMap.delete(userId);
+        });
+
+        ws.on('error', (err) => {
+            console.error('WebSocket error:', err);
+        });
     });
 
-    ws.on('close', () => {
-      console.log('🔴 Client disconnected');
-    });
+    console.log('✅ WebSocket server is running');
+}
 
-    ws.on('error', (err) => {
-      console.error('WebSocket error:', err);
-    });
-  });
-
-  console.log('✅ WebSocket server is ready');
-};
+module.exports = setupWebSocket;
