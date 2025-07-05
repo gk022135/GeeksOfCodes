@@ -71,58 +71,87 @@ function Posts_Cards({ posts }) {
     }
 
     return (
-        <div className="max-w-lg w-full mx-auto bg-gray-900 text-white shadow-lg rounded-xl overflow-hidden mb-6 transition-all duration-300 hover:shadow-2xl">
+       <div className="max-w-lg w-full mx-auto bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 text-white shadow-2xl rounded-2xl overflow-hidden mb-6 transition-all duration-500 hover:shadow-blue-500/20 hover:scale-[1.02] border border-gray-700/50 backdrop-blur-sm">
             {/* Header Section */}
-            <div className="flex items-center gap-3 p-4 border-b border-gray-700">
-                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white font-bold text-lg">
-                    {posts.email?.[0]?.toUpperCase() || "U"}
+            <div className="flex items-center gap-4 p-5 border-b border-gray-700/50 bg-gradient-to-r from-gray-800/50 to-gray-900/50">
+                <div className="relative">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold text-lg shadow-lg ring-2 ring-blue-500/30">
+                        {posts.email?.[0]?.toUpperCase() || "U"}
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-gray-900"></div>
                 </div>
-                <div>
-                    <h3 className="text-sm font-semibold">{posts.email || "Unknown User"}</h3>
-                    <p className="text-xs text-gray-400">{new Date().toLocaleDateString()}</p>
+                <div className="flex-1">
+                    <h3 className="text-sm font-semibold text-gray-100">{posts.email || "Unknown User"}</h3>
+                    <p className="text-xs text-gray-400 flex items-center gap-1">
+                        <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                        {new Date().toLocaleDateString()}
+                    </p>
+                </div>
+                <div className="flex items-center gap-1">
+                    <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                    <div className="w-1 h-1 bg-purple-400 rounded-full"></div>
+                    <div className="w-1 h-1 bg-pink-400 rounded-full"></div>
                 </div>
             </div>
 
             {/* Post Content */}
-            <div className="p-4">
-                <a href={`/posts/detail/${posts._id}`}>
-                <p className="text-gray-300 mb-3 text-xl">{posts.title}</p>
+            <div className="p-5 space-y-4">
+                <a href={`/posts/detail/${posts._id}`} className="block group">
+                    <h2 className="text-gray-100 mb-3 text-xl font-bold leading-tight group-hover:text-blue-400 transition-colors duration-300 cursor-pointer">
+                        {posts.title}
+                    </h2>
                 </a>
                
-                <p className="text-gray-300 text-sm mb-3">{posts.postBody}</p>
-                {
-                    posts.postImg ? (
+                <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
+                    {posts.postBody}
+                </p>
+                
+                {posts.postImg && (
+                    <div className="relative overflow-hidden rounded-xl group">
                         <img
-                            src={posts.postImg || white_flower}
+                            src={posts.postImg}
                             alt="Post"
-                            className="w-full h-64 object-cover rounded-lg"
+                            className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                    ) : ("")
-                }
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                )}
             </div>
 
             {/* Actions Section */}
-            <div className="flex justify-between items-center px-4 pb-4">
+            <div className="flex justify-between items-center px-5 pb-5 pt-2 border-t border-gray-700/30">
                 {/* Like & Dislike Buttons */}
-                <div className="flex gap-5">
-                    <button onClick={makelike} className="flex items-center gap-1 text-gray-300 hover:text-green-500 transition">
-                        <BiSolidUpvote size={22} color={liked ? "green" : ""}/>
-                        <span className="text-sm">{posts.postLikes?.length || 0}</span>
+                <div className="flex gap-6">
+                    <button 
+                        onClick={makelike} 
+                        className="flex items-center gap-2 text-gray-300 hover:text-green-400 transition-all duration-300 hover:scale-105 group"
+                    >
+                        <div className="p-2 rounded-full bg-gray-800/50 group-hover:bg-green-500/20 transition-colors duration-300">
+                            <BiSolidUpvote size={18} color={liked ? "#22c55e" : ""}/>
+                        </div>
+                        <span className="text-sm font-medium">{posts.postLikes?.length || 0}</span>
                     </button>
 
-                    <button onClick={makedislikes} className="flex items-center gap-1 text-gray-300 hover:text-red-500 transition">
-                        <BiSolidDownvote size={22} color={disliked ? "red" : ""}/>
-                        <span className="text-sm">{posts.postDisLikes?.length || 0}</span>
+                    <button 
+                        onClick={makedislikes} 
+                        className="flex items-center gap-2 text-gray-300 hover:text-red-400 transition-all duration-300 hover:scale-105 group"
+                    >
+                        <div className="p-2 rounded-full bg-gray-800/50 group-hover:bg-red-500/20 transition-colors duration-300">
+                            <BiSolidDownvote size={18} color={disliked ? "#ef4444" : ""}/>
+                        </div>
+                        <span className="text-sm font-medium">{posts.postDisLikes?.length || 0}</span>
                     </button>
                 </div>
 
                 {/* Comment Button */}
                 <button
                     onClick={() => makeComments("comment")}
-                    className="flex items-center gap-1 text-gray-300 hover:text-blue-400 transition"
+                    className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-all duration-300 hover:scale-105 group"
                 >
-                    <FaRegComment size={22} />
-                    <span className="text-sm">Comment</span>
+                    <div className="p-2 rounded-full bg-gray-800/50 group-hover:bg-blue-500/20 transition-colors duration-300">
+                        <FaRegComment size={16} />
+                    </div>
+                    <span className="text-sm font-medium">Comment</span>
                 </button>
             </div>
         </div>

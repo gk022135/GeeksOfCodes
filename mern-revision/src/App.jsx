@@ -31,7 +31,6 @@ import FacultyDetails from "./Adminstrator/Faculty_Details";
 import StudentAuthorise from "./Authorization/StudentAuthorise";
 import AdminstratorAuth from "./Authorization/AdminstratorAuth";
 import TeacherAuthorise from "./Authorization/TeacherAuthorise";
-import CommunityNavbar from "./Discusion/CommunityNavbar";
 import Footer from "./UiComponents/Footer";
 import LandingPage from "./Landingpage/Landing_page";
 import ClassDetailParticular from "./user-pages/ClassDetailParicular";
@@ -54,7 +53,6 @@ import UpdateProfile from "./test/edit-user-profile";
 import NotificationManager from "./Teacher-pages/addnotification";
 import Chatapp from "./chat/chat";
 import Mainnav from "./components/navbar/mainnav";
-
 
 
 
@@ -157,7 +155,7 @@ function App() {
 
 
           {/* <HashLoader color='green' /> */}
-          <div className="grid grid-cols-3 text-xl text-white bg-base-100 z-20 p-5 bottom-10">
+          <div className="grid grid-cols-3 text-xl text-white bg-base-100 z-20 p-5">
             <a href="/otpvarification">otpvarification</a>
             <a href="/qrscanner">qrscanner</a>
             <a href="/qrgenerator">qrgenerator</a>
@@ -175,9 +173,8 @@ function App() {
           <Footer />
         </div>
 
-
         <ToastContainer />
-         </>
+      </>
     </BrowserRouter>
   );
 }
