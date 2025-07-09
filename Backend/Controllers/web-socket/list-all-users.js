@@ -8,9 +8,9 @@ async function ListAllUsers(req, res) {
         const authHeader = req.cookies.Myjwt;
        
 
-        console.log("what is in cookies", authHeader)
-        console.log("what comes inside credential ", email)
-        console.log(req.query)
+        // console.log("what is in cookies", authHeader)
+        // console.log("what comes inside credential ", email)
+        // console.log(req.query)
 
         if (!authHeader) {
             return res.status(401).json({ message: "Missing token" });

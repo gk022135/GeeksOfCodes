@@ -6,10 +6,14 @@ export default function FetchUserNameEmail() {
     const [userNames, setUserNames] = useState([]);
     const [error, setError] = useState("");
 
+    const UserInfo = localStorage.getItem("UserData");
+    const UserEmail = UserInfo ? JSON.parse(UserInfo).email : "";
+
+
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await AllGetReq("all-users", {email:"22bcs037@smvdu.ac.in"});
+                const response = await AllGetReq("all-users", { email: UserEmail });
                 if (!response || !response.data) {
                     throw new Error("Failed to fetch users.");
                 }
@@ -28,7 +32,7 @@ export default function FetchUserNameEmail() {
             {/* Sidebar User List */}
             <div className="w-72 bg-gray-800 text-white p-4 space-y-4 overflow-y-auto">
                 <h2 className="text-xl font-semibold border-b pb-2 border-gray-600 mb-4">All Users</h2>
-                
+
                 {error && (
                     <div className="text-red-400 text-sm bg-red-900/40 p-2 rounded">
                         {error}
