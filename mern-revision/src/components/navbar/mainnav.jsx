@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { BiExit } from 'react-icons/bi';
 import CollaborativeEditorLanding from '../../Landingpage/part2';
 import CategoryCards from './categories';
+import MakePosts from '../make-post';
 
 
 
@@ -114,7 +115,7 @@ export default function Mainnav({ FetchAllPost, Explore, Makepost }) {
             {toggle === "search" ? (<SearchFunction />) : ""}
             {toggle === "home" ? (<CollaborativeEditorLanding />) : ""}
             {toggle === "categories" ? (<CategoryCards />) : ""}
-            {toggle === "add new" ? (<Makepost />) : ""}
+            {toggle === "add new" ? (<MakePosts />) : ""}
             {toggle === "message" ? (<FetchAllPost />) : ""}
             {toggle === "posts" ? (<FetchAllPost />) : ""}
 

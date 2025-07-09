@@ -16,7 +16,7 @@ async function MakePost(req, res) {
         const { email,url, title, body } = req.body;
         console.log(req.body)
 
-        if (!email || !body || !title) {
+        if (!email || !body) {
             return res.status(400).json({
                 message: "Data Sahi Se Nahi Aa rha bhai",
                 success: false

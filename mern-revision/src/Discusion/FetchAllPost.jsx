@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext, useCallback } from "react";
 import { AppContext } from "../ContextApi/FisrtContext";
 import Posts_Cards from "./Posts_Cards";
+import PageNotFound from "../ui/page-not-found";
 
 const FetchAllPost = () => {
     const [posts, setPosts] = useState([]);
@@ -36,6 +37,11 @@ const FetchAllPost = () => {
                 setHasMore(false); // Stop fetching if no more posts
             }
         } catch (error) {
+            return (
+                <>
+                <PageNotFound />
+                </>
+            )
             console.error("Error fetching posts:", error);
         }
 

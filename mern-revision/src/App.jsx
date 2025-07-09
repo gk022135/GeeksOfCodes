@@ -53,6 +53,9 @@ import UpdateProfile from "./test/edit-user-profile";
 import NotificationManager from "./Teacher-pages/addnotification";
 import Chatapp from "./chat/chat";
 import Mainnav from "./components/navbar/mainnav";
+import RichTextEditor from "./components/text-editor";
+import MakePosts from "./components/make-post";
+import FetchUserNameEmail from "./chat/user-sidebar";
 
 
 
@@ -148,6 +151,8 @@ function App() {
             <Route path="noti" element={<NotificationManager />} />
             <Route path="chat-app" element={<Chatapp />} />
             <Route path="navtest" element={<Mainnav />} />
+            <Route path="posts" element={<MakePosts />} />
+            <Route path="allusers" element={<FetchUserNameEmail />} />
 
 
 
@@ -170,6 +175,7 @@ function App() {
           {/* <Component /> */}
 
           <ThemeChanger />
+          {/* <RichTextEditor /> */}
           <Footer />
         </div>
 

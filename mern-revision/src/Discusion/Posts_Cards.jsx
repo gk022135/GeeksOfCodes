@@ -4,11 +4,12 @@ import { FaRegComment } from "react-icons/fa";
 import { BiSolidUpvote, BiSolidDownvote } from "react-icons/bi";
 import { AppContext } from "../ContextApi/FisrtContext";
 import { toast } from "react-toastify";
+import PostBodyRenderer from "./Post-body-render";
 
 function Posts_Cards({ posts }) {
     const [comment, setComment] = useState("");
     const [btncomment, setBtnComment] = useState("");
-    const {PutRequets} = useContext(AppContext);
+    const { PutRequets } = useContext(AppContext);
 
     const [liked, setLiked] = useState(false);
     const [disliked, setDisLiked] = useState(false);
@@ -30,36 +31,36 @@ function Posts_Cards({ posts }) {
     async function makelike() {
         //make-like-on-post
         setLiked(true);
-        console.log("is post ki id ye hai beti chod",posts._id)
-        console.log("user email:-",userEmail)
+        console.log("is post ki id ye hai beti chod", posts._id)
+        console.log("user email:-", userEmail)
         const body = {
-            PostId : posts._id,
-            email : userEmail
+            PostId: posts._id,
+            email: userEmail
         }
         const resposne = await PutRequets("", body, "make-like-on-post");
-        if(!resposne.success){
+        if (!resposne.success) {
             setLiked(false);
             alert("failed to like post")
         }
-        if(resposne.success){
+        if (resposne.success) {
             alert("post liked successfully")
         }
     }
 
     async function makedislikes() {
         setDisLiked(true);
-        console.log("is post ki id ye hai beti chod",posts._id)
-        console.log("user email:-",userEmail)
+        console.log("is post ki id ye hai beti chod", posts._id)
+        console.log("user email:-", userEmail)
         const body = {
-            PostId : posts._id,
-            email : userEmail
+            PostId: posts._id,
+            email: userEmail
         }
         const resposne = await PutRequets("", body, "make-dislike-on-post");
-        if(!resposne.success){
+        if (!resposne.success) {
             setDisLiked(false);
             alert("failed to Dislike post")
         }
-        if(resposne.success){
+        if (resposne.success) {
             alert("post Disliked successfully")
         }
     }
@@ -71,7 +72,7 @@ function Posts_Cards({ posts }) {
     }
 
     return (
-       <div className="max-w-lg w-full mx-auto bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 text-white shadow-2xl rounded-2xl overflow-hidden mb-6 transition-all duration-500 hover:shadow-blue-500/20 hover:scale-[1.02] border border-gray-700/50 backdrop-blur-sm">
+        <div className="max-w-lg w-full mx-auto bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 text-white shadow-2xl rounded-2xl overflow-hidden mb-6 transition-all duration-500 hover:shadow-blue-500/20 hover:scale-[1.02] border border-gray-700/50 backdrop-blur-sm">
             {/* Header Section */}
             <div className="flex items-center gap-4 p-5 border-b border-gray-700/50 bg-gradient-to-r from-gray-800/50 to-gray-900/50">
                 <div className="relative">
@@ -97,47 +98,35 @@ function Posts_Cards({ posts }) {
             {/* Post Content */}
             <div className="p-5 space-y-4">
                 <a href={`/posts/detail/${posts._id}`} className="block group">
-                    <h2 className="text-gray-100 mb-3 text-xl font-bold leading-tight group-hover:text-blue-400 transition-colors duration-300 cursor-pointer">
-                        {posts.title}
-                    </h2>
-                </a>
-               
-                <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
-                    {posts.postBody}
-                </p>
-                
-                {posts.postImg && (
-                    <div className="relative overflow-hidden rounded-xl group">
-                        <img
-                            src={posts.postImg}
-                            alt="Post"
-                            className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="" >
+                        <div dangerouslySetInnerHTML={{ __html: posts.postBody }} />
                     </div>
-                )}
+                </a>
             </div>
+
+            {/* <PostBodyRenderer postBody = {posts.postBody}/> */}
+
 
             {/* Actions Section */}
             <div className="flex justify-between items-center px-5 pb-5 pt-2 border-t border-gray-700/30">
                 {/* Like & Dislike Buttons */}
                 <div className="flex gap-6">
-                    <button 
-                        onClick={makelike} 
+                    <button
+                        onClick={makelike}
                         className="flex items-center gap-2 text-gray-300 hover:text-green-400 transition-all duration-300 hover:scale-105 group"
                     >
                         <div className="p-2 rounded-full bg-gray-800/50 group-hover:bg-green-500/20 transition-colors duration-300">
-                            <BiSolidUpvote size={18} color={liked ? "#22c55e" : ""}/>
+                            <BiSolidUpvote size={18} color={liked ? "#22c55e" : ""} />
                         </div>
                         <span className="text-sm font-medium">{posts.postLikes?.length || 0}</span>
                     </button>
 
-                    <button 
-                        onClick={makedislikes} 
+                    <button
+                        onClick={makedislikes}
                         className="flex items-center gap-2 text-gray-300 hover:text-red-400 transition-all duration-300 hover:scale-105 group"
                     >
                         <div className="p-2 rounded-full bg-gray-800/50 group-hover:bg-red-500/20 transition-colors duration-300">
-                            <BiSolidDownvote size={18} color={disliked ? "#ef4444" : ""}/>
+                            <BiSolidDownvote size={18} color={disliked ? "#ef4444" : ""} />
                         </div>
                         <span className="text-sm font-medium">{posts.postDisLikes?.length || 0}</span>
                     </button>

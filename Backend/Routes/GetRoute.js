@@ -30,6 +30,7 @@ const PostDetails = require('../Controllers/CommunityStuff/PostDetails')
 
 //mislenious routes
 const httpToWebsocket = require('../Controllers/web-socket/http-to-ws');
+const ListAllUsers = require('../Controllers/web-socket/list-all-users');
 
 
 
@@ -53,6 +54,7 @@ getrouter.get('/get-all-post',RetriveAllPost);
 getrouter.get('/comments-of-post',ShowCommentOnPost);
 getrouter.get('/all-posts',FetchAllPost);
 getrouter.get('/get-post-details', PostDetails);
+getrouter.get('/all-users', ListAllUsers)
 
 
 //student 
