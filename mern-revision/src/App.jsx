@@ -149,7 +149,7 @@ function App() {
             <Route path="User-profile" element={<UserProfile />} />
             <Route path="Update" element={<UpdateProfile />} />
             <Route path="noti" element={<NotificationManager />} />
-            <Route path="chat-app" element={<Chatapp />} />
+            <Route path="chat-app" element={<Chatapp client2={"user@gmail.com"}/>} />
             <Route path="navtest" element={<Mainnav />} />
             <Route path="posts" element={<MakePosts />} />
             <Route path="allusers" element={<FetchUserNameEmail />} />

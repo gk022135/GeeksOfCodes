@@ -32,7 +32,7 @@ async function ListAllUsers(req, res) {
         // Decode and validate JWT token
         
         const decryptedData = jwt.verify(authHeader, jwtSecret);
-        console.log(decryptedData)
+        // console.log(decryptedData)
         if (decryptedData.email !== email) {
             return res.status(403).json({
                 message: "Invalid credentials.",
