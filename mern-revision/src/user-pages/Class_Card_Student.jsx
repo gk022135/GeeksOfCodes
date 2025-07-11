@@ -55,8 +55,6 @@ function Class_Card_Component({ course, x }) {
     };
 
 
-    SetLoaction
-
 
     return (
         <div className="flex flex-col bg-base-100 sm:w-[400px] sm:h-[320px] justify-between border border-blue-700 rounded-2xl m-2 p-4 hover:shadow-2xl shadow-blue-500 relative transition-transform duration-300 hover:scale-105  text-white">
