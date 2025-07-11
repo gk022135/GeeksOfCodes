@@ -28,7 +28,7 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <span className="bg-gradient-to-tl from-yellow-500 to-red-600 bg-clip-text text-transparent text-3xl opacity-80 font-bold font-mono hover:shadow-xl p-2 rounded-2xl">
-              Uniator
+              smvdeX
             </span>
 
             {/* Desktop nav links */}
@@ -42,10 +42,10 @@ const Navbar = () => {
               <NavLink to="/discussion" className="hover:text-white hover:border-b-2 border-blue-400">Community</NavLink>
             </div>
 
-            <div className="hidden md:block">
+            <div className=" md:block">
               <ThemeSelector />
             </div>
-            <div className="hidden md:block">
+            <div className="md:block">
               <ProfileIcon />
             </div>
           </div>

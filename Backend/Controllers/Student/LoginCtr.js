@@ -30,7 +30,7 @@ const LoginCtrl = async (req, res) => {
 
         //defining student department
         const StudentYearAndDep = email.substring(0, 8)
-        
+
 
 
 
@@ -75,7 +75,13 @@ const LoginCtrl = async (req, res) => {
                 role: isUserExists.role,
                 name: isUserExists.username,
                 email: isUserExists.email,
-                StudentDepAndYear : StudentYearAndDep,
+                description: isUserExists.description,
+                location: isUserExists.location,
+                github: isUserExists.github,
+                linkedin: isUserExists.linkedin, // removed duplicate 'linked'
+                skills: isUserExists.skills,
+                stats: isUserExists.stats,
+                StudentDepAndYear: StudentYearAndDep,
             });
 
 

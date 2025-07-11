@@ -1,7 +1,7 @@
 import { FaGithub, FaLinkedin, FaMapMarkerAlt, FaEdit, FaEye, FaHeart, FaFileAlt } from "react-icons/fa";
 
 function ProfileLeft() {
-    const userData = JSON.parse(localStorage.getItem("UserData1")) || {
+    const userData = JSON.parse(localStorage.getItem("UserData")) || {
         name: "Gaurav Kumar",
         email: "gaurav@example.com",
         description: "Full Stack Developer passionate about web and AI.",
@@ -46,7 +46,7 @@ function ProfileLeft() {
                                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-white/60 break-words whitespace-normal">
                                     <FaMapMarkerAlt className="text-xs sm:text-sm" />
                                     <span className="text-xs sm:text-sm break-words whitespace-normal">
-                                        {userData.location}
+                                        {userData.location ? (userData.location) : ("not found")}
                                     </span>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@ function ProfileLeft() {
                         {/* Description */}
                         <div className="space-y-3">
                             <p className="text-white/80 text-sm sm:text-base leading-relaxed">
-                                {userData.description}
+                                {userData.description ? (userData.description) : ("-----")}
                             </p>
 
                             {/* Edit Profile Button */}
@@ -82,7 +82,7 @@ function ProfileLeft() {
 
                             <div className="grid grid-cols-1 gap-2">
                                 <a
-                                    href={userData.github}
+                                    href={userData.github ? (userData.github) : ("------")}
                                     target="_blank"
                                     rel="noreferrer"
                                     className="flex items-center gap-3 p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 group"
@@ -93,7 +93,7 @@ function ProfileLeft() {
                                 </a>
 
                                 <a
-                                    href={userData.linkedin}
+                                    href={userData.linkedin? (userData.linkedin) : ("-----")}
                                     target="_blank"
                                     rel="noreferrer"
                                     className="flex items-center gap-3 p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 group"
@@ -113,7 +113,7 @@ function ProfileLeft() {
                             </h3>
 
                             <div className="grid grid-cols-2 gap-2">
-                                {userData.skills.map((skill, index) => (
+                                {userData.skills && userData.skills.map((skill, index) => (
                                     <div
                                         key={index}
                                         className="bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-sm border border-white/20 px-3 py-2 rounded-lg text-center group hover:from-blue-500/20 hover:to-purple-500/20 hover:border-blue-400/30 transition-all duration-300 cursor-default"
@@ -136,19 +136,19 @@ function ProfileLeft() {
                             <div className="grid grid-cols-3 gap-3">
                                 <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/10 p-3 sm:p-4 rounded-xl border border-blue-400/20 text-center group hover:from-blue-500/30 hover:to-blue-600/20 transition-all duration-300">
                                     <FaEye className="text-blue-400 text-lg sm:text-xl mx-auto mb-1 group-hover:scale-110 transition-transform duration-300" />
-                                    <p className="text-white font-bold text-sm sm:text-base">{userData.stats.views}</p>
+                                    <p className="text-white font-bold text-sm sm:text-base">{userData.stats && userData.stats.views}</p>
                                     <p className="text-white/60 text-xs">Views</p>
                                 </div>
 
                                 <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/10 p-3 sm:p-4 rounded-xl border border-purple-400/20 text-center group hover:from-purple-500/30 hover:to-purple-600/20 transition-all duration-300">
                                     <FaFileAlt className="text-purple-400 text-lg sm:text-xl mx-auto mb-1 group-hover:scale-110 transition-transform duration-300" />
-                                    <p className="text-white font-bold text-sm sm:text-base">{userData.stats.posts}</p>
+                                    <p className="text-white font-bold text-sm sm:text-base">{userData.stats && userData.stats.posts}</p>
                                     <p className="text-white/60 text-xs">Posts</p>
                                 </div>
 
                                 <div className="bg-gradient-to-br from-pink-500/20 to-pink-600/10 p-3 sm:p-4 rounded-xl border border-pink-400/20 text-center group hover:from-pink-500/30 hover:to-pink-600/20 transition-all duration-300">
                                     <FaHeart className="text-pink-400 text-lg sm:text-xl mx-auto mb-1 group-hover:scale-110 transition-transform duration-300" />
-                                    <p className="text-white font-bold text-sm sm:text-base">{userData.stats.likes}</p>
+                                    <p className="text-white font-bold text-sm sm:text-base">{userData.stats && userData.stats.likes}</p>
                                     <p className="text-white/60 text-xs">Likes</p>
                                 </div>
                             </div>
