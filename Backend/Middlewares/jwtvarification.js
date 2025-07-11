@@ -21,8 +21,12 @@ async function jwtVerification({token}) {
         }
 
         const isUserExists = await userModel.findOne({ email: userEmail });
+        const response = {
+            email : userEmail,
+            success : true,
+        }
 
-        if (isUserExists) return true;
+        if (isUserExists) return response;
 
         return false;
 

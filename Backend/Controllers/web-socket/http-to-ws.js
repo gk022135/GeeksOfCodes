@@ -1,85 +1,79 @@
+// controller-websocket/http-to-ws.js
+
 const WebSocket = require('ws');
 const jwtVerification = require('../../Middlewares/jwtvarification');
 const cookie = require('cookie');
 
-const userMap = new Map(); // email -> WebSocket
+const userMap = new Map(); // email => WebSocket connection
 
 function setupWebSocket(server) {
-    console.log("hey upgradation procees on");
-    const wss = new WebSocket.Server({ noServer: true }); // we'll manually upgrade
+  const wss = new WebSocket.Server({ noServer: true });
 
-    // Upgrade HTTP(S) request to WebSocket
-    server.on('upgrade', async (request, socket, head) => {
-        try {
-            console.log("auth start\n")
-            const cookies = cookie.parse(request.headers.cookie || '');
-            console.log("cookies are delisoious", cookie)
-            const authHeader = request.headers['authorization'];
+  server.on('upgrade', async (req, socket, head) => {
+    try {
+        // console.log("hello ji working ??")
+      const cookies = cookie.parse(req.headers.cookie || '');
+    //   console.log("hello ji working ??",cookies)
+      const authHeader = req.headers['authorization'];
+      const token = cookies.Myjwt || (authHeader?.split(' ')[1]);
+    //   console.log(token)
 
-            const token = cookies.myjwt || (authHeader?.split(' ')[1]);
+      if (!token) {
+        socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+        socket.destroy();
+        return;
+      }
 
-            if (!token) {
-                socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-                socket.destroy();
-                return;
-            }
-            console.log("token validation done\n");
-            const userData = await jwtVerification(token);
-            if (!userData || !userData.email) {
-                socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-                socket.destroy();
-                return;
-            }
+      const userData = await jwtVerification({token}); // result is boolean
+      if (!userData.success) {
+        socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+        socket.destroy();
+        return;
+      }
 
+      req.userEmail = userData.email;
 
-            request.userEmail = userData.email; // attach email for later
-            wss.handleUpgrade(request, socket, head, function done(ws) {
-                console.log("try to start the server")
-                wss.emit('connection', ws, request);
-            });
+      wss.handleUpgrade(req, socket, head, (ws) => {
+        wss.emit('connection', ws, req);
+      });
+    } catch (err) {
+      console.error('Upgrade error:', err);
+      socket.write('HTTP/1.1 500 Internal Server Error\r\n\r\n');
+      socket.destroy();
+    }
+  });
 
-        } catch (err) {
-            console.error('Upgrade error:', err);
-            socket.write('HTTP/1.1 500 Internal Server Error\r\n\r\n');
-            socket.destroy();
+  wss.on('connection', (ws, req) => {
+    const userEmail = req.userEmail;
+    userMap.set(userEmail, ws);
+    console.log(`🟢 ${userEmail} connected`);
+
+    ws.on('message', (msg) => {
+      try {
+        const { to, content } = JSON.parse(msg);
+        const recipient = userMap.get(to);
+
+        if (recipient && recipient.readyState === WebSocket.OPEN) {
+          recipient.send(JSON.stringify({ sender: userEmail, text: content }));
+        } else {
+          ws.send(JSON.stringify({ error: 'User is offline or unavailable.' }));
         }
+      } catch (err) {
+        ws.send(JSON.stringify({ error: 'Invalid message format.' }));
+      }
     });
 
-    // Handle WebSocket messages
-    wss.on('connection', (ws, request) => {
-        const userEmail = request.userEmail;
-        userMap.set(userEmail, ws);
-        console.log(`🟢 ${userEmail} connected`);
-
-        ws.on('message', (message) => {
-            try {
-                const { to, content } = JSON.parse(message);
-                const recipientSocket = userMap.get(to);
-
-                if (recipientSocket && recipientSocket.readyState === WebSocket.OPEN) {
-                    recipientSocket.send(JSON.stringify({
-                        from: userEmail,
-                        content
-                    }));
-                } else {
-                    ws.send(JSON.stringify({ error: 'User is offline' }));
-                }
-            } catch (err) {
-                ws.send(JSON.stringify({ error: 'Invalid message format' }));
-            }
-        });
-
-        ws.on('close', () => {
-            console.log(`🔴 ${userEmail} disconnected`);
-            userMap.delete(userEmail);
-        });
-
-        ws.on('error', (err) => {
-            console.error('WebSocket error:', err);
-        });
+    ws.on('close', () => {
+      userMap.delete(userEmail);
+      console.log(`🔴 ${userEmail} disconnected`);
     });
 
-    console.log('✅ WebSocket server is ready to accept secure upgrades');
+    ws.on('error', (err) => {
+      console.error(`WebSocket error (${userEmail}):`, err);
+    });
+  });
+
+  console.log('✅ WebSocket server ready for authenticated connections');
 }
 
 module.exports = setupWebSocket;

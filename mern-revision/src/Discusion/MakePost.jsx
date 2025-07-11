@@ -52,7 +52,7 @@ export default function CreatePost() {
     };
 
     return (
-        <div className="max-w-xl mx-auto bg-white/10 p-6 rounded-lg shadow-md text-white">
+        <div className="max-w-xl mx-auto bg-white/10 p-6 rounded-lg shaJSONdow-md text-white">
             <h2 className="text-xl font-semibold mb-4">Create Post</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">

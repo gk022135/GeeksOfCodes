@@ -25,6 +25,9 @@ const server = http.createServer(app); //Shared HTTP server for both Express and
 // Middlewares
 app.use(FileUpload({ useTempFiles: true, tempFileDir: "./temp/" }));
 
+
+app.set("trust proxy", 1);
+
 app.use(cors({
   origin: ["http://localhost:5174", "http://localhost:5173"],
   credentials: true,

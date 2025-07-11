@@ -9,7 +9,7 @@ import EntriesLog from "./AllEntryExits";
 import SetLocation from "./SetLoaction";
 import AddResources from "./ResourcesAdd";
 
-import { FaChalkboardTeacher, FaPlusCircle, FaClipboardList, FaMapMarkedAlt,FaArchive } from "react-icons/fa";
+import { FaChalkboardTeacher, FaPlusCircle, FaClipboardList, FaMapMarkedAlt, FaArchive } from "react-icons/fa";
 
 function AdminHome() {
   const [selectedButton, setSelectedButton] = useState(null);
@@ -28,15 +28,22 @@ function AdminHome() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Welcome Section */}
-      <div className="mt-24 flex flex-col items-center justify-center p-8 text-center">
-        <h1 className="text-3xl md:text-5xl font-bold text-white">
-          <span className="text-red-500">Welcome!</span> to
-          <span className="text-yellow-400"> Teacher Dashboard</span>
-        </h1>
-        <p className="mt-4 text-gray-400 max-w-2xl">
-          Manage your classes, students, and activities seamlessly. Experience the power of
-          <span className="text-yellow-400 font-semibold"> Uniator</span> — your all-in-one solution for real-time collaboration, secure QR gate passes, attendance tracking, and more.
-        </p>
+      <div className="mt-20 flex flex-col relative items-center justify-center p-5 text-white md:px-10 sm:px-5">
+        <div className="backdrop-blur-sm bg-white/5 rounded-3xl p-8 border border-white/10 shadow-2xl">
+          <h1 className="text-3xl text-white font-bold text-center mb-4 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+            <span className="text-3xl bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent font-bold animate-pulse">Welcome !</span> to
+            <span className="text-3xl bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent font-bold"> Teacher Dashboard </span>
+            Ultimate Class Managing Web-App
+          </h1>
+          <h1 className="text-2xl text-white font-bold text-center mb-6">
+            Your <span className="text-2xl bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent font-bold">Ultimate</span> Classes Manage Hub!
+          </h1>
+          <div className="flex items-center justify-center">
+            <p className="text-gray-300 text-center sm:text-base md:text-lg lg:text-xl leading-relaxed max-w-4xl">
+              Welcome to <span className="text-2xl bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent font-semibold">smvDeX</span>, A versatile web platform integrating real-time code collaboration, a secure gate pass system with QR scanning, an attendance tracker, an advanced to-do list with backend support, and a community discussion forum. Making it an all-in-one solution for students and organizations.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Main Layout */}
