@@ -11,12 +11,12 @@ function setupWebSocket(server) {
 
   server.on('upgrade', async (req, socket, head) => {
     try {
-        console.log("hello ji working ??")
+        // console.log("hello ji working ??")
       const cookies = cookie.parse(req.headers.cookie || '');
-      console.log("hello ji working ??",cookies)
+    //   console.log("hello ji working ??",cookies)
       const authHeader = req.headers['authorization'];
       const token = cookies.Myjwt || (authHeader?.split(' ')[1]);
-      console.log(token)
+    //   console.log(token)
 
       if (!token) {
         socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
