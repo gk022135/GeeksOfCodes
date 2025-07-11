@@ -29,7 +29,7 @@ function HomeDiscussion() {
         <div className="relative flex flex-col h-auto">
             {/* Navbar */}
             <div>
-                <CommunityNavbar fun={handleSelection} />
+                {/* <CommunityNavbar fun={handleSelection} /> */}
             </div>
 
             <Mainnav FetchAllPost = {FetchAllPost} Explore={Explore} Makepost={Makepost}/>

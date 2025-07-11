@@ -5,6 +5,9 @@ import { toast, ToastContainer } from 'react-toastify';
 
 function UpdateProfile() {
     const [userData, setUserData] = useState({
+        StudentDepAndYear: "",
+        role: "",
+        success: "",
         name: "",
         email: "",
         description: "",
@@ -21,10 +24,13 @@ function UpdateProfile() {
 
     // Load existing user data on component mount
     useEffect(() => {
-        const existingData = JSON.parse(localStorage.getItem("UserData1")) || {};
+        const existingData = JSON.parse(localStorage.getItem("UserData")) || {};
         setUserData({
+            StudentDepAndYear: existingData.StudentDepAndYear,
+            role: existingData.role,
+            success: existingData.success,
+            email: existingData.email,
             name: existingData.name || "",
-            email: existingData.email || "",
             description: existingData.description || "",
             location: existingData.location || "",
             github: existingData.github || "",
@@ -61,14 +67,12 @@ function UpdateProfile() {
         setIsLoading(true);
 
         try {
-            // Get existing data to preserve other fields
-            const existingData = JSON.parse(localStorage.getItem("UserData1")) || {};
-            
-            // Create updated data object, preserving existing fields
+            // Load current data from localStorage
+            const existingData = JSON.parse(localStorage.getItem("UserData")) || {};
+
             const updatedData = {
-                ...existingData, // Preserve all existing fields
+                ...existingData, // preserve all prior fields
                 name: userData.name || existingData.name,
-                email: userData.email || existingData.email,
                 description: userData.description || existingData.description,
                 location: userData.location || existingData.location,
                 github: userData.github || existingData.github,
@@ -76,14 +80,22 @@ function UpdateProfile() {
                 skills: skillsArray.length > 0 ? skillsArray : existingData.skills || [],
             };
 
-            // Save to localStorage
-            localStorage.setItem("UserData1", JSON.stringify(updatedData));
-            
-            toast.success("Profile updated successfully!");
-            
-            // Optional: You can add API call here
-            // await updateProfileAPI(updatedData);
-            
+            const response = await fetch(`http://localhost:3000/mern-revision/v1/put/update-user-profile?email=${userData.email}`, {
+                method: "PUT",
+                credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            });
+
+            if (response.ok) {
+                localStorage.setItem("UserData", JSON.stringify(updatedData));
+                toast.success("Profile updated successfully!");
+            } else {
+                toast.error("Profile update failed!");
+            }
+
         } catch (error) {
             toast.error("Failed to update profile. Please try again.");
             console.error("Update error:", error);
@@ -92,16 +104,19 @@ function UpdateProfile() {
         }
     };
 
+
     const handleCancel = () => {
         // Reset to original data
-        const existingData = JSON.parse(localStorage.getItem("UserData1")) || {};
+        const existingData = JSON.parse(localStorage.getItem("UserData")) || {};
         setUserData({
+            StudentDepAndYear: existingData.StudentDepAndYear,
+            role: existingData.role,
+            success: existingData.success,
+            email: existingData.email,
             name: existingData.name || "",
-            email: existingData.email || "",
             description: existingData.description || "",
             location: existingData.location || "",
             github: existingData.github || "",
-            linked: existingData.linked || "",
             linkedin: existingData.linkedin || "",
             skills: existingData.skills ? existingData.skills.join(", ") : "",
         });
@@ -129,14 +144,14 @@ function UpdateProfile() {
                 {/* Main Form Card */}
                 <div className="backdrop-blur-xl bg-white/10 rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
                     <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6">
-                        
+
                         {/* Personal Information Section */}
                         <div className="space-y-4">
                             <h2 className="text-xl font-semibold text-white flex items-center gap-2 border-b border-white/20 pb-2">
                                 <FaUser className="text-blue-400" />
                                 Personal Information
                             </h2>
-                            
+
                             {/* Name Field */}
                             <div className="space-y-2 group">
                                 <label className="text-sm font-medium text-white/80 transition-colors group-focus-within:text-blue-400">
@@ -154,21 +169,7 @@ function UpdateProfile() {
                                 </div>
                             </div>
 
-                            {/* Email Field */}
-                            <div className="space-y-2 group">
-                                <label className="text-sm font-medium text-white/80 transition-colors group-focus-within:text-blue-400 flex items-center gap-2">
-                                    <FaEnvelope className="text-xs" />
-                                    Email Address
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={userData.email}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 hover:bg-white/10"
-                                    placeholder="Enter your email address"
-                                />
-                            </div>
+
 
                             {/* Description Field */}
                             <div className="space-y-2 group">
@@ -209,7 +210,7 @@ function UpdateProfile() {
                                 <FaGithub className="text-purple-400" />
                                 Social Links
                             </h2>
-                            
+
                             {/* GitHub Field */}
                             <div className="space-y-2 group">
                                 <label className="text-sm font-medium text-white/80 transition-colors group-focus-within:text-blue-400 flex items-center gap-2">
@@ -249,7 +250,7 @@ function UpdateProfile() {
                                 <FaCode className="text-green-400" />
                                 Skills & Technologies
                             </h2>
-                            
+
                             {/* Add New Skill */}
                             <div className="flex gap-2">
                                 <input
@@ -309,7 +310,7 @@ function UpdateProfile() {
                                     </>
                                 )}
                             </button>
-                            
+
                             <button
                                 type="button"
                                 onClick={handleCancel}
