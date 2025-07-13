@@ -56,6 +56,7 @@ import Mainnav from "./components/navbar/mainnav";
 import RichTextEditor from "./components/text-editor";
 import MakePosts from "./components/make-post";
 import FetchUserNameEmail from "./chat/user-sidebar";
+import Signup2 from "./signup-login/singup-student";
 
 
 
@@ -153,6 +154,7 @@ function App() {
             <Route path="navtest" element={<Mainnav />} />
             <Route path="posts" element={<MakePosts />} />
             <Route path="allusers" element={<FetchUserNameEmail />} />
+            <Route path="sin2" element={<Signup2 />} />
 
 
 
@@ -160,7 +162,7 @@ function App() {
 
 
           {/* <HashLoader color='green' /> */}
-          <div className="grid grid-cols-3 text-xl text-white bg-base-100 z-20 p-5">
+          <div className="grid grid-cols-3 text-xl text-white bg-base-100 z-20 p-5 bottom-10">
             <a href="/otpvarification">otpvarification</a>
             <a href="/qrscanner">qrscanner</a>
             <a href="/qrgenerator">qrgenerator</a>
@@ -174,9 +176,9 @@ function App() {
           </div>
           {/* <Component /> */}
 
-          <ThemeChanger />
+          {/* <ThemeChanger /> */}
           {/* <RichTextEditor /> */}
-          <Footer />
+          {/* <Footer /> */}
         </div>
 
         <ToastContainer />

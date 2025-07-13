@@ -1,54 +1,54 @@
 import X from '../assets/X.png';
-import Git from '../assets/Github.png'
+import Git from '../assets/Github.png';
 import Linked from '../assets/InkedIn.png';
 import Insta from '../assets/Instagram.jpeg';
 
-
 function Connects() {
+  return (
+    <div className="w-full bg-base-100 text-white py-16 px-4 flex flex-col items-center">
+      <h1 className="text-3xl md:text-5xl font-semibold text-gray-200 text-center mb-12">
+        Connect With Our Community 🚀
+      </h1>
 
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl">
+        {/* X (Twitter) */}
+        <a
+          href="#"
+          className="flex flex-col items-center justify-center p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 shadow-md"
+        >
+          <img src={X} alt="X" className="w-12 h-12 mb-3 rounded-full" />
+          <span className="text-sm font-medium text-gray-200">Twitter</span>
+        </a>
 
-    return (
-        <div className="flex flex-col bg-base-100 text-white h-full justify-center content-center items-center mt-10">
-            <h1 className="p-5 text-2xl text-gray-300 md:text-5xl antialiased">
-                Connect With Me Community !!
-            </h1>
-            <div className="relative grid grid-cols-2 grid-rows-2 gap-4 md:grid-cols-4 md:grid-rows-1 w-3/4">
+        {/* GitHub */}
+        <a
+          href="#"
+          className="flex flex-col items-center justify-center p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 shadow-md"
+        >
+          <img src={Git} alt="GitHub" className="w-12 h-12 mb-3 rounded-full" />
+          <span className="text-sm font-medium text-gray-200">GitHub</span>
+        </a>
 
+        {/* LinkedIn */}
+        <a
+          href="#"
+          className="flex flex-col items-center justify-center p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 shadow-md"
+        >
+          <img src={Linked} alt="LinkedIn" className="w-12 h-12 mb-3 rounded-full" />
+          <span className="text-sm font-medium text-gray-200">LinkedIn</span>
+        </a>
 
-                <div className="flex flex-col items-center justify-center w-full aspect-square bg-white/10 text-white text-lg font-semibold rounded-lg transition-all duration-300 hover:border-2 hover:border-white">
-                    <img src={X} alt="Description" className="w-1/4 h-1/4 rounded-2xl" />
-                    <h1>
-                        <a href="#" className="hover:underline">LinkedIn</a>
-                    </h1>
-                </div>
-
-
-                <div className="flex flex-col items-center justify-center w-full aspect-square bg-white/10 text-white text-lg font-semibold rounded-lg transition-all duration-300 hover:border-2 hover:border-white">
-                    <img src={Git} alt="Description" className="w-1/4 h-1/4 rounded-2xl" />
-                    <h1>
-                        <a href="#" className="hover:underline">LinkedIn</a>
-                    </h1>
-                </div>
-
-                <div className="flex flex-col items-center justify-center w-full aspect-square bg-white/10 text-white text-lg font-semibold rounded-lg transition-all duration-300 hover:border-2 hover:border-white">
-                    <img src={Linked} alt="Description" className="w-1/4 h-1/4 rounded-2xl" />
-                    <h1>
-                        <a href="#" className="hover:underline">LinkedIn</a>
-                    </h1>
-                </div>
-
-                <div className="flex flex-col items-center justify-center w-full aspect-square bg-white/10 text-white text-lg font-semibold rounded-lg transition-all duration-300 hover:border-2 hover:border-white">
-                    <img src={Insta} alt="Description" className="w-1/4 h-1/4 rounded-2xl" />
-                    <h1>
-                        <a href="#" className="hover:underline">LinkedIn</a>
-                    </h1>
-                </div>
-
-            </div>
-
-
-        </div>
-    )
+        {/* Instagram */}
+        <a
+          href="#"
+          className="flex flex-col items-center justify-center p-6 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300 shadow-md"
+        >
+          <img src={Insta} alt="Instagram" className="w-12 h-12 mb-3 rounded-full" />
+          <span className="text-sm font-medium text-gray-200">Instagram</span>
+        </a>
+      </div>
+    </div>
+  );
 }
 
-export default Connects
+export default Connects;

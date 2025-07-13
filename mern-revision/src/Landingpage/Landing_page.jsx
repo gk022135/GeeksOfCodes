@@ -6,11 +6,13 @@ import GridCards from "./GridLayout";
 import { useEffect, useState } from "react";
 import Pop_up from "./Pop_up";
 import CollaborativeEditorLanding from "./part2";
+import Signup2 from "../signup-login/singup-student";
+import Adminuser from "../signup-login/test2";
 
 
 function LandingPage() {
     const [popup, setPopup] = useState(false);
-    
+
     useEffect(() => {
         console.log("set timeout start hone wala hai")
         setTimeout(() => {
@@ -20,7 +22,7 @@ function LandingPage() {
     }, [])
 
     return (
-        <div className="relative flex flex-col bg-base-100 content-center justify-center items-center h-auto">
+        <div className="relative flex flex-col bg-base-100 content-center justify-center items-center h-auto ">
             <div className="flex flex-col justify-between items-center content-center">
                 <h1 className="text-white antialiased text-3xl md:text-6xl p-10">
                     <span className="text-red-500 font-bold">Welcome !</span> to <span className="text-yellow-400 antialiased font-bold">smvdeX</span>
@@ -57,8 +59,11 @@ function LandingPage() {
             <GridCards />
             <CollaborativeEditorLanding />
             <Signup />
-            <Connects />
-            
+
+            <div className="">
+                <Connects />
+            </div>
+
         </div>
     )
 }

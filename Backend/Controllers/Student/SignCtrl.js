@@ -62,7 +62,9 @@ const SignupCtrl = async (req, res) => {
                 role,
             };
             await client.set(`data:${email}`, JSON.stringify(dataToSave))
-            res.status(201).json({ message: "User Otp Send to mail successfully!", user: dataToSave });
+            res.status(201).json({ message: "User Otp Send to mail successfully!",
+                success : true,
+            user: dataToSave });
 
         } catch (error) {
             res.status(500).json({ message: "Error encrypting password", success: false, error });
