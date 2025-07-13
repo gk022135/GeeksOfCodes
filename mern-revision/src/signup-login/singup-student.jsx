@@ -7,7 +7,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import LoginButton from "../Google Auth/Login";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import imagess from './meesage-bell-icon.png'
 // import Loader from "../UiComponents/Loader";
 
 function SignupStudent() {

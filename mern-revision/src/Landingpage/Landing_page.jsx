@@ -6,8 +6,7 @@ import GridCards from "./GridLayout";
 import { useEffect, useState } from "react";
 import Pop_up from "./Pop_up";
 import CollaborativeEditorLanding from "./part2";
-import Signup2 from "../signup-login/singup-student";
-import Adminuser from "../signup-login/test2";
+
 
 
 function LandingPage() {
