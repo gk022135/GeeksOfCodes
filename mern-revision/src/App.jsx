@@ -154,7 +154,6 @@ function App() {
             <Route path="navtest" element={<Mainnav />} />
             <Route path="posts" element={<MakePosts />} />
             <Route path="allusers" element={<FetchUserNameEmail />} />
-            <Route path="sin2" element={<Signup2 />} />
 
 
 
