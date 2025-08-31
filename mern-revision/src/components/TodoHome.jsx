@@ -27,110 +27,198 @@ function TodoHome() {
         });
     };
 
-    
     const addHandler = () => {
-        if (todolist) {
-            dispatch(addTask(todolist));
-            console.log("okk", todolist);
+        if (todolist.task.trim()) {
+            const newTaskWithTimestamp = {
+                ...todolist,
+                createdAt: new Date().toISOString(),
+            };
+            dispatch(addTask(newTaskWithTimestamp));
+            console.log("Task added:", newTaskWithTimestamp);
             setTodolist({ task: "" });
         } else {
             console.log("Task cannot be empty");
         }
     };
+
     const removeHandler = (index) => {
         const percentage = percentages[index] || 0;
 
         console.log("Removing task at index:", index, "with percentage:", percentage);
         if (percentage > 0 && percentage <= 100) {
-            dispatch(deletetask({ index, percentage }));
-            console.log("Deletion initiated");
+            const completedAt = new Date().toISOString();
+            dispatch(deletetask({ index, percentage, completedAt }));
+            console.log("Deletion initiated at", completedAt);
         }
-
-
     };
+
     const percentHandler = (index, e) => {
         setPercentages(prev => ({ ...prev, [index]: e.target.value }));
     };
 
     return (
-        <div className="flex flex-col gap-2 justify-center items-center text-white bg-base-100 h-screen">
+        <div className="min-h-screen bg-base-100 flex flex-col items-center px-6 py-8">
+            {/* Background decoration */}
+            <div className="fixed inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-10 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-10 right-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl"></div>
+            </div>
 
+            <div className="relative z-10 w-full max-w-4xl space-y-8">
+                {/* Header */}
+                <div className="text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                        Make Your Daily Task Here
+                    </h1>
+                    <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div>
+                </div>
 
+                {/* Add Task Form */}
+                <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl">
+                    <label className="flex flex-col space-y-6">
+                        <span className="text-xl font-semibold text-white/90">Make task here:</span>
 
+                        <input
+                            className="h-16 w-full px-6 bg-white/10 border border-white/30 rounded-xl text-white text-lg placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300"
+                            type="text"
+                            placeholder="Add task"
+                            name="task"
+                            value={todolist.task}
+                            onChange={handleTask}
+                        />
 
-            <h1 className="h-10 bg-base-100 content-center text-blue-300 text-3xl font-bold border-b-2  border-spacing-3">Make Your Daily Task Here</h1>
+                        <button
+                            className="h-12 px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                            onClick={addHandler}
+                        >
+                            Add Task
+                        </button>
+                    </label>
+                </div>
 
-            <label className="flex flex-col m-2 p-2 border rounded-xl content-center gap-3 hover:text-yellow-200 pl-3 md:w-[600px] md:p-4">
-
-                Make task here:
-                <input
-                    className="border-red-100 h-16 content-center rounded-lg pl-3 text-white bg-white/10"
-                    type="text"
-                    placeholder="Add task"
-                    name="task"
-                    value={todolist.task}
-                    onChange={handleTask}
-                />
-                <button className="bg-gradient-to-tr from-red-600  h-10 pl-4 pr-4 text-cyan-300 rounded-sm hover:bg-black" onClick={addHandler}>Add</button>
-            </label>
-            <h1 className=" flex  border-b-8 border-red-500 mt-2 md:w-[600px] text-2xl text-emerald-400 justify-center">Your current tasks</h1>
-            {taskList.length > 0 ? (
-                    taskList.map((task, index) => (
-                    <div
-                        key={index}
-                        className="flex flex-col gap-3 min-h-20 border m-2 p-3 content-center place-content-between items-center rounded-xl justify-between md:w-[600px] bg-base-100 50 shadow-lg bg-opacity-10"
-                    >
-                        <h1 className="break-words overflow-x-hidden w-full text-lg">{index + 1}. {task.task}</h1>
-                        <div className="flex flex-row gap-3 items-center justify-between w-full">
-                            <label className="flex items-center gap-2">
-                                <input
-                                    className="rounded-xl p-1 pl-3 w-20 bg-opacity-40 border border-gray-300"
-                                    type="number"
-                                    name={`percentage-${index}`}
-                                    onChange={(e) => percentHandler(index, e)}
-                                    value={percentages[index] || ''}
-                                />
-                            </label>
-                            <button
-                                className="h-8 px-4 rounded-xl bg-blue-600 text-white text-sm hover:bg-green-600"
-                                onClick={() => removeHandler(index)}
-                            >
-                                % Done
-                            </button>
-                            <AddTimer />
-                        </div>
+                {/* Current Tasks Section */}
+                <div className="space-y-6">
+                    <div className="text-center">
+                        <h1 className="text-3xl font-bold text-emerald-400 mb-4">Your current tasks</h1>
+                        <div className="w-32 h-1 bg-emerald-500 mx-auto rounded-full"></div>
                     </div>
-                )) ): "null"}
 
-            <br />
-            <div
-                className="flex  border-b-8 border-red-500 mt-2 md:w-[600px] text-2xl text-emerald-400 justify-center"
-            >Completed tasks:</div>
-            {!completedTasks.lenght > 0 ? (completedTasks
-                .map((item, index) => (
-                    <div
-                        className="flex flex-row gap-3 h-20 border m-2 content-center place-content-between items-center pl-2 rounded-xl justify-between md:w-[600px]"
-                        key={index}>
-
-                        <div>
-                            <h1
-                                className="ml-2"
-                            >{index + 1}. {item.task} - {item.percentage}% complete</h1>
-                           
-                            <div className="border border-black rounded-xl h-3 relative">
+                    <div className="space-y-4">
+                        {taskList.length > 0 ? (
+                            taskList.map((task, index) => (
                                 <div
-                                    className="ml-2 h-2 bg-green-600 rounded items-center justify-center border relative"
-                                    style={{ width: `${item.percentage}%` }}
-                                ></div>
+                                    key={index}
+                                    className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl hover:bg-white/15 transition-all duration-300 hover:scale-[1.01]"
+                                >
+                                    <h1 className="text-lg font-medium text-white mb-4 break-words">
+                                        <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white text-sm font-bold rounded-full mr-3">
+                                            {index + 1}
+                                        </span>
+                                        {task.task}
+                                        <p className="text-sm text-white/60">
+                                            Created at: {new Date(task.createdAt).toLocaleString()}
+                                        </p>
+                                    </h1>
+
+                                    <div className="flex flex-wrap items-center gap-4">
+                                        <label className="flex items-center gap-2">
+                                            <span className="text-white/70 text-sm font-medium">Progress:</span>
+                                            <input
+                                                className="w-20 h-10 px-3 bg-white/20 border border-white/30 rounded-lg text-white text-center focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300"
+                                                type="number"
+                                                name={`percentage-${index}`}
+                                                onChange={(e) => percentHandler(index, e)}
+                                                value={percentages[index] || ''}
+                                                placeholder="0"
+                                                min="0"
+                                                max="100"
+                                            />
+                                            <span className="text-white/70 text-sm">%</span>
+                                        </label>
+
+                                        <button
+                                            className="h-10 px-6 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-medium rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500/50"
+                                            onClick={() => removeHandler(index)}
+                                        >
+                                            % Done
+                                        </button>
+
+                                        <div className="bg-white/10 rounded-lg p-2 border border-white/20">
+                                            <AddTimer />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="text-center py-12 text-white/60">
+                                <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                    </svg>
+                                </div>
+                                <p className="text-lg">No tasks yet. Add your first task above!</p>
                             </div>
-
-
-
-                        </div>
+                        )}
                     </div>
-                )) ): ""}
+                </div>
 
+                <br />
 
+                {/* Completed Tasks Section */}
+                <div className="space-y-6">
+                    <div className="text-center">
+                        <div className="text-3xl font-bold text-emerald-400 mb-4">Completed tasks:</div>
+                        <div className="w-32 h-1 bg-emerald-500 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div className="space-y-4">
+                        {completedTasks.length > 0 ? (
+                            completedTasks.map((item, index) => (
+                                <div
+                                    className="bg-green-500/10 backdrop-blur-lg border border-green-400/30 rounded-2xl p-6 shadow-xl hover:bg-green-500/15 transition-all duration-300"
+                                    key={index}
+                                >
+                                    <div className="space-y-4">
+                                        <h1 className="text-lg font-medium text-white flex items-center gap-3">
+                                            <p className="text-sm text-white/60">
+                                                Completed at: {new Date(item.completedAt).toLocaleString()}
+                                            </p>
+                                            <span className="inline-flex items-center justify-center w-8 h-8 bg-green-600 text-white text-sm font-bold rounded-full">
+                                                {index + 1}
+                                            </span>
+                                            {item.task} - {item.percentage}% complete
+                                        </h1>
+
+                                        <div className="relative">
+                                            <div className="w-full h-4 bg-white/20 rounded-full overflow-hidden">
+                                                <div
+                                                    className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all duration-1000 ease-out relative"
+                                                    style={{ width: `${item.percentage}%` }}
+                                                >
+                                                    <div className="absolute inset-0 bg-white/20 animate-pulse rounded-full"></div>
+                                                </div>
+                                            </div>
+                                            <div className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs font-medium text-white">
+                                                {item.percentage}%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="text-center py-12 text-white/60">
+                                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <p className="text-lg">No completed tasks yet. Complete some tasks to see them here!</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
