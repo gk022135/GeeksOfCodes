@@ -27,3 +27,6 @@ logic:-- 22bcs037 to 22bcs060 if email id slice se baad is range mein aye toh ka
   example student select a single class and enter in the class, then he will able to see their attendance like attend/total_classes, and more things like study materials
 
   ![Logo](src/assets/Logo_smvDeX.png)
+
+
+start working for Websocket and some other stuff
