@@ -10,6 +10,9 @@ import SetLocation from "./SetLoaction";
 import AddResources from "./ResourcesAdd";
 
 import { FaChalkboardTeacher, FaPlusCircle, FaClipboardList, FaMapMarkedAlt, FaArchive } from "react-icons/fa";
+import { MdNotificationsActive } from "react-icons/md";
+
+import NotificationManager from "../components/notificationTeacher";
 
 function AdminHome() {
   const [selectedButton, setSelectedButton] = useState(null);
@@ -80,6 +83,11 @@ function AdminHome() {
             label="Add Resources"
             onClick={() => handleButtonClick("addresource")}
           />
+          <SidebarButton
+            icon={<MdNotificationsActive />}
+            label="Add Resources"
+            onClick={() => handleButtonClick("Notification")}
+          />
         </div>
 
         {/* Main Content */}
@@ -89,6 +97,7 @@ function AdminHome() {
           {selectedButton === "Attendance" && <Attendance />}
           {selectedButton === "setlocation" && <SetLocation />}
           {selectedButton === "addresource" && <AddResources />}
+          {selectedButton === "Notification" && <NotificationManager />}
           {!selectedButton && (
             <h1 className="text-white text-2xl font-bold flex justify-center items-center h-full">
               Please select an option from the sidebar
