@@ -30,6 +30,10 @@ const ImageUploader = require('../Controllers/CommunityStuff/ImageUploader');
  
 
 
+//notifications imports
+const TeacherNotification = require('../Controllers/notification/addNotification')
+
+
 //todos imports
 // const AddUser = require('../controllers/AddUser');
 // const AddTask = require('../controllers/AddTask');
@@ -61,6 +65,11 @@ router.post('/adminstrator-login',AdminstratorLogin)
 //COMMUNITY STUFF HERE
 router.post('/make-a-post',MakeApost);
 router.post('/upload-the-image',ImageUploader);
+
+
+
+//notifications routes
+router.post('/teacher-notification',TeacherNotification);
 
 
 

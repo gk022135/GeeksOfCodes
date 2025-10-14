@@ -10,37 +10,37 @@ const client = require('../../client');
 const SignupCtrl = async (req, res) => {
     try {
         // app.use(express.json());
-        const {username,email,password,role} = req.body; // Extract request data
+        const { username, email, password, role } = req.body; // Extract request data
         console.log(req.body);
 
         //checking proper request coming or not
-        if(!username || !email || !password || !role){
+        if (!username || !email || !password || !role) {
             return res.status(400).json({
-                message : "please fill inputs",
-                success : false
+                message: "please fill inputs",
+                success: false
             })
         }
 
-        const isUserPresent = await UserModel.findOne({email : email})
-        if(isUserPresent){
+        const isUserPresent = await UserModel.findOne({ email: email })
+        if (isUserPresent) {
             return res.status(200).json({
-                message : "User already exists please login",
-                success : false,
+                message: "User already exists please login",
+                success: false,
             })
         }
 
 
-        
+
         //send opt function to user
 
         const otp = GeneratedOtp();
         // console.log("generated otp", otp);
-        const saveOtp_to_redis =await client.set(`otp:${email}`, otp); //ise save krna hai in redis db
+        const saveOtp_to_redis = await client.set(`otp:${email}`, otp); //ise save krna hai in redis db
 
         console.log("otp saved to redis", saveOtp_to_redis);
 
         //email send to user 
-        
+
 
 
         //wait for user side otp
@@ -58,29 +58,31 @@ const SignupCtrl = async (req, res) => {
             const dataToSave = {
                 username,
                 email,
-                password : hashpass,
+                password: hashpass,
                 role,
             };
             await client.set(`data:${email}`, JSON.stringify(dataToSave))
-            res.status(201).json({ message: "User Otp Send to mail successfully!",
-                success : true,
-            user: dataToSave 
+            res.status(201).json({
+                message: "User Otp Send to mail successfully!",
+                success: true,
+                user: dataToSave
+            })
 
         } catch (error) {
             res.status(500).json({ message: "Error encrypting password", success: false, error });
         }
 
-        const responseEmail = await EmailSender(email,otp);
-        if(responseEmail){
+        const responseEmail = await EmailSender(email, otp);
+        if (responseEmail) {
             return res.status(200).json({
-                message : `OTP send Succesfully to ${email}`,
-                success : true
+                message: `OTP send Succesfully to ${email}`,
+                success: true
             })
         }
-        else if(!responseEmail) {
+        else if (!responseEmail) {
             return res.status(500).json({
-                message : "error pleas try again",
-                success : false,
+                message: "error pleas try again",
+                success: false,
             })
         }
 
@@ -100,7 +102,7 @@ const SignupCtrl = async (req, res) => {
         //Outside of the try-catch block, hash is undefined because bcrypt.hash() is asynchronous. If you don't use await, the execution moves forward before the hashing completes.
 
 
-       
+
     } catch (error) {
         res.status(500).json({ message: "Error signing up user", error: error.message });
     }
