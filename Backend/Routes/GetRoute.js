@@ -66,3 +66,7 @@ getrouter.get('/get-varify-location', VarifyLocation);
 // getrouter.get('/verify', httpToWebsocket);
 
 module.exports = getrouter;
+
+
+//somthing crazy going to be happening
+//hi there i tried so hard 
