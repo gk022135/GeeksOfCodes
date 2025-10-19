@@ -176,10 +176,6 @@ export default function NotificationManager() {
         </form>
 
         {/* Notification List */}
-        <h2 className="text-lg font-semibold text-gray-300 mb-3">
-          Current Notifications
-        </h2>
-
         <TeacherNotifications email={teacherEmail} />
       </div>
 

@@ -8,8 +8,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 const UserHome = () => {
     const navigate = useNavigate();
     const [clickType, setClickType] = useState(null);
+    const [activeClasses, setActiveClasses] = useState(0);
+
     const [userInfo, setUserInfo] = useState(() => {
         const dataFromLocalStorage = localStorage.getItem("UserData");
+        setActiveClasses(localStorage.getItem("activeClasses"))
         return dataFromLocalStorage
             ? JSON.parse(dataFromLocalStorage)
             : {
@@ -218,7 +221,7 @@ const UserHome = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <StatCard
                                 title="Classes Today"
-                                value="4"
+                                value={activeClasses}
                                 icon={Calendar}
                                 color="from-blue-500 to-cyan-500"
                             />

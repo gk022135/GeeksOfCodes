@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp, Bell } from "lucide-react"; // lucide icons
 
-export default function TeacherNotifications({ email }) {
+export default function CourseNotification({ courseCode }) {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(null); // track which notification is open
@@ -10,7 +10,7 @@ export default function TeacherNotifications({ email }) {
   const fetchNotifications = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3000/mern-revision/v1/get/teacher-notifications/${email}`
+        `http://localhost:3000/mern-revision/v1/get/course-notifications/${courseCode}`
       );
       const data = await res.json();
       setNotifications(data.notifications || []);
@@ -25,7 +25,7 @@ export default function TeacherNotifications({ email }) {
     fetchNotifications();
     const interval = setInterval(fetchNotifications, 30000); // every 30 sec
     return () => clearInterval(interval);
-  }, [email]);
+  }, [courseCode]);
 
   if (loading) {
     return (
@@ -38,12 +38,12 @@ export default function TeacherNotifications({ email }) {
   return (
     <div className="flex flex-col min-h-screen w-full text-white p-4 sm:p-6 transition-all z-10">
       <h1 className="text-2xl text-white sm:text-3xl font-bold mb-6 text-primary text-center">
-        Notifications for {email}
+        Notifications for {courseCode}
       </h1>
 
       {notifications.length === 0 ? (
         <div className="flex flex-col items-center justify-center text-center text-gray-400 min-h-[50vh]">
-          <p className="text-lg sm:text-xl">No notifications found 😕</p>
+          <p className="text-lg sm:text-xl">No notifications found </p>
         </div>
       ) : (
         <ul className="space-y-4 w-full max-w-3xl mx-auto">
