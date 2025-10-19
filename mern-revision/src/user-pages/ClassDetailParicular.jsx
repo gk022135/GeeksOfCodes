@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../ContextApi/FisrtContext";
 import { ToastContainer, toast } from "react-toastify";
 import TestModel from "./Test";
-import NotificationStd from "./std-cls-noti";
+import CourseNotification from "../components/courseNoti";
 
 const ClassDetailParticular = () => {
     const { courseCode, courseName, Teacher } = useParams();
@@ -135,7 +135,7 @@ const ClassDetailParticular = () => {
 
             {/* Additional Content */}
             <div className="relative z-10">
-                <NotificationStd courseCode={courseCode} />
+                <CourseNotification courseCode={courseCode} />
             </div>
             <ToastContainer />
 

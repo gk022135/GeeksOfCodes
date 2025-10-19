@@ -7,6 +7,7 @@ function All_Class_Std({ x }) {
     const { AllGetReq } = useContext(AppContext);
     const [classData, setClassData] = useState(null);
     const [UserName, setName] = useState("NA")
+    const [activeClasses, setActiveClasses] = useState(0);
 
 
     useEffect(() => {
@@ -48,6 +49,17 @@ function All_Class_Std({ x }) {
         fetchClasses();
     }, []);
     // console.log("first course", classData[1])
+    //counting the total active classess
+    useEffect(() => {
+        if (!classData) return;
+        const count = classData.reduce((acc, el) => acc + (el.isActive ? 1 : 0), 0);
+        setActiveClasses(count);
+        try {
+            localStorage.setItem("activeClasses", String(count));
+        } catch (e) {
+            console.error("Failed to save activeClasses", e);
+        }
+    }, [classData]);
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-base-100 px-6 py-10">

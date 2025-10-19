@@ -10,9 +10,14 @@ function Create_class() {
   const { SendDataSignLogin } = useContext(AppContext);
   const [res, setRes] = useState(null);
   const [isDepartment, setDepartment] = useState(true)
+
+  // Get teacher email safely
+  const userData = JSON.parse(localStorage.getItem("UserData") || "{}");
+  const teacherEmail = userData?.email || "";
+
   const [courseData, setCourseData] = useState({
     courseName: "",
-    Teacher: "",
+    Teacher: teacherEmail, //some notification issue fixes with this
     courseCode: "",
     isActive: false,
     createdAt: Date.now(),
@@ -145,21 +150,6 @@ function Create_class() {
           </div>
         </div>
 
-        <div className="flex flex-col">
-          <label className="flex items-center gap-2 text-sm mb-1">
-            <FaChalkboardTeacher />
-            Teacher Name
-          </label>
-          <input
-            type="text"
-            name="Teacher"
-            value={courseData.Teacher}
-            onChange={handleChange}
-            className="bg-gray-700 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-
         <div className="flex items-center gap-3">
           <label className="text-sm">Is Active?</label>
           <input
@@ -206,14 +196,13 @@ function Create_class() {
 
       {res && (
         <h1
-          className={`${
-            res.success ? "bg-green-500" : "bg-red-500"
-          } mt-6 p-3 rounded-md font-bold w-full max-w-md text-center text-black`}
+          className={`${res.success ? "bg-green-500" : "bg-red-500"
+            } mt-6 p-3 rounded-md font-bold w-full max-w-md text-center text-black`}
         >
           {res.message}
         </h1>
       )}
-     
+
       {!isDepartment && (
         <h1 className="bg-red-600 mt-4 p-3 rounded-md font-bold w-full max-w-md text-center text-black">
           You are not authorized to create a course in this department.

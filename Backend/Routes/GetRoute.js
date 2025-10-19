@@ -33,12 +33,13 @@ const httpToWebsocket = require('../Controllers/web-socket/http-to-ws');
 const ListAllUsers = require('../Controllers/web-socket/list-all-users');
 
 
-
-//
+// All Get Notification imports
 const GetTeacherNotification = require('../Controllers/notification/getAllNotificatio');
+const CourseNoti = require('../Controllers/notification/courseNotification');
 
 //notification routes
 getrouter.get('/teacher-notifications/:teacherName',GetTeacherNotification);
+getrouter.get('/course-notifications/:courseCode',CourseNoti);
 
 //Adminstrator controllers
 getrouter.get('/delete-student-adminstrator',StudentDeletion)
