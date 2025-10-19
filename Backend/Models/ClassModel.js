@@ -18,7 +18,8 @@ const CourseSchema = new Schema({
     radius: { type: Number },
     Notification: [
         {
-            message: String,
+            heading: String,
+            description: String,
             createdAt: { type: Date, default: Date.now, expires: '7d' }
         }
     ]

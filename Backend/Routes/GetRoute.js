@@ -34,6 +34,11 @@ const ListAllUsers = require('../Controllers/web-socket/list-all-users');
 
 
 
+//
+const GetTeacherNotification = require('../Controllers/notification/getAllNotificatio');
+
+//notification routes
+getrouter.get('/teacher-notifications/:teacherName',GetTeacherNotification);
 
 //Adminstrator controllers
 getrouter.get('/delete-student-adminstrator',StudentDeletion)

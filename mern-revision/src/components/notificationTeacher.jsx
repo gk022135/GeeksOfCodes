@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
+import TeacherNotifications from "./fetchTeacherNoti";
+
 export default function NotificationManager() {
   const [notifications, setNotifications] = useState([]);
   const [formData, setFormData] = useState({
@@ -10,13 +13,13 @@ export default function NotificationManager() {
     description: "",
   });
 
-  // ✅ Get teacher email safely
+  // Get teacher email safely
   const userData = JSON.parse(localStorage.getItem("UserData") || "{}");
   const teacherEmail = userData?.email || "";
 
   const url = "http://localhost:3000/mern-revision/v1/teacher-notification";
 
-  // ✅ Fetch notifications from backend using action=view
+  // Fetch notifications from backend using action=view
   const fetchNotifications = async () => {
     if (!formData.courseCode) return; // Don’t fetch until courseCode is set
 
@@ -43,17 +46,19 @@ export default function NotificationManager() {
     }
   };
 
+  //fetching notification on certain changes
+
   useEffect(() => {
     if (formData.courseCode) fetchNotifications();
-  }, [formData.courseCode]);
+  }, []);
 
-  // ✅ Handle input changes
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // ✅ Add new notification
+  // Add new notification
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -77,7 +82,8 @@ export default function NotificationManager() {
           actions: "add",
           email: teacherEmail,
           courseCode: formData.courseCode,
-          message,
+          heading : formData.heading,
+          description : formData.description
         }),
       });
 
@@ -96,7 +102,7 @@ export default function NotificationManager() {
     }
   };
 
-  // ✅ Delete notification
+  // Delete notification
   const handleDelete = async (message) => {
     try {
       const response = await fetch(url, {
@@ -174,31 +180,7 @@ export default function NotificationManager() {
           Current Notifications
         </h2>
 
-        <div className="space-y-3">
-          {notifications.length === 0 ? (
-            <p className="text-gray-500 text-sm">No notifications found.</p>
-          ) : (
-            notifications.map((note, idx) => (
-              <div
-                key={idx}
-                className="p-4 border border-gray-700 rounded-xl bg-gray-700 flex justify-between items-start"
-              >
-                <div>
-                  <p className="text-sm text-gray-200">{note.message}</p>
-                  <p className="text-xs text-gray-500 mt-1">
-                    Created: {new Date(note.createdAt).toLocaleString()}
-                  </p>
-                </div>
-                <button
-                  onClick={() => handleDelete(note._id || note.message)}
-                  className="text-red-400 text-sm hover:underline"
-                >
-                  Delete
-                </button>
-              </div>
-            ))
-          )}
-        </div>
+        <TeacherNotifications email={teacherEmail} />
       </div>
 
       <ToastContainer position="top-center" theme="dark" autoClose={3000} />
