@@ -32,13 +32,13 @@ async function viewNotifications(Teacher) {
 // Main handler
 async function AddNotification(req, res) {
   try {
-    const { courseCode, courseName, heading, description, expiry, email, classId, actions, message } =
+    const { courseCode, courseName, heading, description, email, classId, actions, message } =
       req.body;
 
     console.log("Request Body:", req.body);
 
     // Validate teacher existence
-    const teacher = await teacherModel.findOne({ email });
+    const teacher = await teacherModel.findOne({AdminEmail : email });
     if (!teacher) {
       return res.status(400).json({
         success: false,
@@ -62,7 +62,7 @@ async function AddNotification(req, res) {
     }
 
     // Handle add notification
-    if (!courseCode || !heading || !description || !expiry) {
+    if (!courseCode || !heading || !description) {
       return res.status(400).json({
         success: false,
         message: "Missing required fields for adding notification",
@@ -79,13 +79,8 @@ async function AddNotification(req, res) {
 
     // Add new notification object
     const newNotification = {
-      courseCode,
-      courseName,
       heading,
       description,
-      expiry,
-      createdBy: email,
-      createdAt: new Date(),
     };
 
     await classModel.findByIdAndUpdate(classDoc._id, {
