@@ -27,7 +27,7 @@ export default function CategoryCards() {
             key={idx}
             className="bg-base-100 hover:border-blue-700 border border-gray-300/20 rounded-xl shadow-md p-4 transition-all cursor-pointer"
           >
-            <h3 className="text-md font-medium text-white antialiased">{cat}</h3>
+            <h3 className="text-md font-medium text-white antialiased"><a href={`/hot-topics/${cat}`}>{cat}</a></h3>
           </div>
         ))}
       </div>
@@ -40,7 +40,7 @@ export default function CategoryCards() {
             className="bg-base-100 hover:border-blue-700 border border-gray-300/20 rounded-xl shadow-sm p-3 transition-all cursor-pointer flex items-center justify-between text-gray-200 antialiased"
           >
             <span className="text-gray-500">{cat}</span>
-            <span className="text-sm text-blue-500">View Posts →</span>
+            <span className="text-sm text-blue-500"><a href={`/hot-topics/${cat}`}>View Posts →</a></span>
           </div>
         ))}
       </div>
