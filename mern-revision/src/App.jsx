@@ -161,7 +161,7 @@ function App() {
 
 
           {/* <HashLoader color='green' /> */}
-          <div className="grid grid-cols-3 text-xl text-white bg-base-100 z-20 p-5 bottom-10">
+          <div className="grid grid-cols-3 text-xl text-white bg-base-100 z-0 p-5 bottom-0">
             <a href="/otpvarification">otpvarification</a>
             <a href="/qrscanner">qrscanner</a>
             <a href="/qrgenerator">qrgenerator</a>

@@ -32,7 +32,8 @@ function HomeDiscussion() {
                 {/* <CommunityNavbar fun={handleSelection} /> */}
             </div>
 
-            <Mainnav FetchAllPost = {FetchAllPost} Explore={Explore} Makepost={Makepost}/>
+            {/* <Mainnav FetchAllPost = {FetchAllPost} Explore={Explore} Makepost={Makepost}/> */}
+            <Mainnav />
         </div>
     );
 }
