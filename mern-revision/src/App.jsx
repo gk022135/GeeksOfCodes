@@ -57,6 +57,11 @@ import RichTextEditor from "./components/text-editor";
 import MakePosts from "./components/make-post";
 import FetchUserNameEmail from "./chat/user-sidebar";
 import Signup2 from "./signup-login/singup-student";
+import HotTopicsPosts from "./Discusion/hotTopicPosts";
+import MainLayout from "./layouts/aluminies";
+import StudentLayout from "./layouts/studentLayout";
+import HomeLayout from "./layouts/mainLayout";
+import LandingPageAlumni from "./AluminiesNetworks/landingPage";
 
 
 
@@ -65,10 +70,6 @@ function App() {
     <BrowserRouter> {/* Wrap everything inside BrowserRouter */}
       {/* <ThemeSelector /> */}
       <>
-        <div className='fixed top-0 z-20 w-full'>
-          <Navbar />
-        </div>
-
         <div className='w-full h-auto bg-base-100 90 '>
 
 
@@ -96,7 +97,7 @@ function App() {
 
 
             {/* User Routes (Protected by StudentAuthorise) */}
-            <Route element={<StudentAuthorise />}>
+            <Route element={<StudentLayout />} >
               <Route path="/user-home" element={<UserHome />} />
               <Route path="/todo-home" element={<TodoHome />} />
 
@@ -104,36 +105,42 @@ function App() {
               <Route path="/discussion" element={<HomeDiscussion />} />
               <Route path="/discussion/makepost" element={<MakePost />} />
               <Route path="/upload" element={<ImageUpload />} />
+
+
+
+              {/* Documentation of project */}
+              <Route path="/Qr-working-docs" element={<QrWorking />} />
+              <Route path="/attendace-marking-docs" element={<AttendanceMarking />} />
+              <Route path="/class-creating-docs" element={<ClassCreate />} />
+              <Route path="/gatepss-working-docs" element={<GatePassWorking />} />
+
+
+
+
+              <Route path="/popcomp" element={<PopComponent />} />
+              <Route path="/qrscanner" element={<Qr_res />} />
+              <Route path="/all-classes" element={<All_Class />} />
+              <Route path="/all-classes-student" element={<All_Class_Std />} />
+              {/* Dynamic route for each course sending details with query params */}
+              <Route path="/all-classes-student/:courseCode/:courseName/:Teacher" element={<ClassDetailParticular />} />
+
             </Route>
 
 
-            {/* Documentation of project */}
-            <Route path="/Qr-working-docs" element={<QrWorking />} />
-            <Route path="/attendace-marking-docs" element={<AttendanceMarking />} />
-            <Route path="/class-creating-docs" element={<ClassCreate />} />
-            <Route path="/gatepss-working-docs" element={<GatePassWorking />} />
 
 
 
+            <Route element={<HomeLayout />} >
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/otpvarification" element={<Otpvarifiacation />} />
+              <Route path='/admin-login' element={<AdminLogin />} />
+              <Route path="/administrator-login" element={<SUlogin />} />
+              <Route path="/otpvarification" element={<Otpvarifiacation />} />
 
-            <Route path="/popcomp" element={<PopComponent />} />
-            <Route path="/qrscanner" element={<Qr_res />} />
-            <Route path="/all-classes" element={<All_Class />} />
-            <Route path="/all-classes-student" element={<All_Class_Std />} />
-
-
-            {/* Dynamic route for each course sending details with query params */}
-            <Route path="/all-classes-student/:courseCode/:courseName/:Teacher" element={<ClassDetailParticular />} />
-
-            <Route path="/otpvarification" element={<Otpvarifiacation />} />
+            </Route>
 
 
-
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/otpvarification" element={<Otpvarifiacation />} />
-            <Route path='/admin-login' element={<AdminLogin />} />
-            <Route path="/administrator-login" element={<SUlogin />} />
 
             <Route path="/makepost" element={<MakePost />} />
 
@@ -150,10 +157,18 @@ function App() {
             <Route path="User-profile" element={<UserProfile />} />
             <Route path="Update" element={<UpdateProfile />} />
             <Route path="noti" element={<NotificationManager />} />
-            <Route path="chat-app" element={<Chatapp client2={"user@gmail.com"}/>} />
+            <Route path="chat-app" element={<Chatapp client2={"user@gmail.com"} />} />
             <Route path="navtest" element={<Mainnav />} />
             <Route path="posts" element={<MakePosts />} />
             <Route path="allusers" element={<FetchUserNameEmail />} />
+            <Route path="/hot-topics/:search" element={<HotTopicsPosts />} />
+
+
+
+            {/* alumimies networks layout */}
+            <Route element={<MainLayout />}>
+              <Route path="/aluminies" element={<LandingPageAlumni />} />
+            </Route>
 
 
 
