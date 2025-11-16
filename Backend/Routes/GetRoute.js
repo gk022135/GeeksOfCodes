@@ -10,7 +10,7 @@ const AllEntries = require('../Controllers/AllEntries')
 //student imports
 const SingleClassDetail = require('../Controllers/Student/SingleClassDetails')
 const VarifyLocation = require('../Controllers/Student/VarifyLocation')
-
+const getDailyActivityHeatmap = require('../Controllers/Student/DailyTrack').getDailyActivityHeatmap;
 
 
 //teacher Imports
@@ -66,13 +66,10 @@ getrouter.get('/all-users', ListAllUsers)
 //student 
 getrouter.get('/get-single-class-details',SingleClassDetail);
 getrouter.get('/get-varify-location', VarifyLocation);
+getrouter.get('/activity/daily', getDailyActivityHeatmap);
 
 
 //misclenoius route
 // getrouter.get('/verify', httpToWebsocket);
 
 module.exports = getrouter;
-
-
-//somthing crazy going to be happening
-//hi there i tried so hard 

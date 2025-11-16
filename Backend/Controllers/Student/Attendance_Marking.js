@@ -1,5 +1,6 @@
 const AttendanceModel = require('../../Models/Attendance');
-const UserModel = require('../../Models/UserSchema')
+const UserModel = require('../../Models/UserSchema');
+const DailyActivity = require('../../Models/DailyTrack');
 
 async function Attendance_marking(req, res) {
     try {
@@ -14,7 +15,7 @@ async function Attendance_marking(req, res) {
         }
 
         const studentExist = await UserModel.findOne({ email: email })
-        console.log("student data ", studentExist._id)
+        console.log("student data ", studentExist?._id)
         if (!studentExist) {
             return res.status(400).json({
                 message: "Student Not Exists",
@@ -24,20 +25,22 @@ async function Attendance_marking(req, res) {
         const userId = studentExist._id;
 
         // Find attendance for the given class on today's date
-        const today = new Date() //.setHours(0, 0, 0, 0)
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // normalize date
+
         let attendance = await AttendanceModel.findOne({ course: classId, date: today });
 
         if (!attendance) {
-            // If no attendance exists for today, create a new record
             attendance = new AttendanceModel({
                 course: classId,
                 date: today,
                 attendanceRecords: [{ student: userId, status }]
             });
-
         } else {
-            // Check if student already marked attendanc
-            const existingRecord = attendance.attendanceRecords.find(record => record.student.toString() == userId);
+            const existingRecord = attendance.attendanceRecords.find(
+                (record) => record.student.toString() == userId
+            );
+
             if (existingRecord) {
                 return res.status(400).json({
                     message: "Attendance already marked for this student",
@@ -45,16 +48,27 @@ async function Attendance_marking(req, res) {
                 });
             }
 
-            // Add the student's attendance
             attendance.attendanceRecords.push({ student: userId, status });
         }
+
         await attendance.save();
 
+        // -------------------------------------------------------
+        //  UPDATE DAILY ACTIVITY (classesAttended++)
+        // -------------------------------------------------------
+        if (status === "Present") {
+            await DailyActivity.updateOne(
+                { student: userId, date: today },
+                {
+                    $setOnInsert: { active: true },
+                    $inc: { "stats.classesAttended": 1 }
+                },
+                { upsert: true }
+            );
+        }
+        // -------------------------------------------------------
 
-
-        //try to fetch all attendance of this student for this course
-        //course count === total number of classes,
-        //corseid and student id == student attendance
+        // Fetching attendance stats
         const getClassesAttendedByStudent = async (courseId, studentId) => {
             try {
                 const attendedClasses = await AttendanceModel.countDocuments({
@@ -84,22 +98,16 @@ async function Attendance_marking(req, res) {
         let presentsClass;
 
         const fetchingdata = async (classId, userId) => {
-            const idcourse = classId;
-            const stdid = userId;
+            totalClass = await getTotalClasses(classId);
+            presentsClass = await getClassesAttendedByStudent(classId, userId);
 
-            console.log("Fetching data for:", idcourse, stdid);
-
-            totalClass = await getTotalClasses(idcourse);
-            presentsClass = await getClassesAttendedByStudent(idcourse, stdid);
-
-            console.log("Total Classes:", totalClass);  
+            console.log("Total Classes:", totalClass);
             console.log("Presented in Class:", presentsClass);
 
             return res.status(200).json({
                 message: "Your attendance has been marked successfully",
                 success: true,
-                sutta: "kya re laude",
-                totalClass: totalClass, 
+                totalClass: totalClass,
                 attendendClass: presentsClass,
             });
         };
