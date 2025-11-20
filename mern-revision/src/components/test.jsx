@@ -3,124 +3,147 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTask, deletetask } from "../redux/slice/todoSlice";
 import AddTimer from "./AddTimer";
 import StartTimer from "./StartTimer";
-import { useAuth0 } from "@auth0/auth0-react";
-import { NavLink } from 'react-router-dom';
 
 function TodoHome() {
-    // const { user, isAuthenticated, isLoading } = useAuth0();
-    const [todolist, setTodolist] = useState({
-        task: "",
-    });
+    const [todolist, setTodolist] = useState({ task: "" });
     const [email, setEmail] = useState("");
-    const [completedTasksBackend, setCompletedTasks] = useState([])
+    const [completedTasksBackend, setCompletedTasks] = useState([]);
     const [TOBEdeletetask, setToBedeletetask] = useState("");
-    console.log("hi task ", todolist);
 
-
-    //at start of the page load all tasks ---> getalltask Api and completed task api and update the todolist and completed task
-
-
-
-    useEffect(async () => {
-        const UserEmail = localStorage.getItem('UserData').email
-        setEmail(UserEmail);
-        const CurrentTask = await fetch(`http://localhost:3000/mern-revision/v1/get/current-tasks?email=${email}`)
-
-        setTodolist(CurrentTask.data)
-
-        const completedTasks = await fetch(`http://localhost:3000/mern-revision/v1/get/all-completed-tasks?email=${email}`)
-
-        setCompletedTasks(completedTasks.data)
-
-    }, [])// on refresh of page
-
-
-    const [percentages, setPercentages] = useState(0);
-
-
+    const dispatch = useDispatch();
     const taskList = useSelector(state => state.todo.tasks);
     const completedTasks = useSelector(state => state.todo.completedTasks);
 
+    const [percentages, setPercentages] = useState(0);
 
-    const dispatch = useDispatch();
+    // ==========================
+    // LOAD TASKS ON PAGE MOUNT
+    // ==========================
+    useEffect(() => {
+        async function fetchData() {
+            const userData = JSON.parse(localStorage.getItem("UserData"));
+            if (!userData) return;
 
+            setEmail(userData.email);
+
+            // GET CURRENT TASKS
+            const curr = await fetch(`http://localhost:3000/mern-revision/v1/get/current-tasks?email=${userData.email}`);
+            const curr_res = await curr.json();
+            setTodolist({ task: "" }); // keep input safe
+
+            if (curr_res.success) {
+                // update redux store for current tasks
+                curr_res.data.forEach(item => dispatch(addTask(item)));
+            }
+
+            // GET COMPLETED TASKS
+            const comp = await fetch(`http://localhost:3000/mern-revision/v1/get/all-completed-tasks?email=${userData.email}`);
+            const comp_res = await comp.json();
+
+            if (comp_res.success) {
+                setCompletedTasks(comp_res.data);
+                console.log(comp_res.data)
+            }
+        }
+
+        fetchData();
+    }, []);
+
+    // ==========================
+    // INPUT FIELD HANDLER
+    // ==========================
     const handleTask = (e) => {
         setTodolist({
-            ...todolist, [e.target.name]: e.target.value
+            ...todolist,
+            [e.target.name]: e.target.value,
         });
     };
 
-    const addHandler = async() => {
-        if (todolist.task.trim()) {
-            const newTaskWithTimestamp = {
-                ...todolist,
-                createdAt: new Date().toISOString(),
-            };
-            dispatch(addTask(newTaskWithTimestamp));
-            console.log("Task added:", newTaskWithTimestamp);
-            //here you have to make the api call and setTOdo data
+    // ==========================
+    // ADD NEW TASK (POST)
+    // ==========================
+    const addHandler = async () => {
+        if (!todolist.task.trim()) return;
 
-            const addnewTask = await fetch('http://localhost:3000/mern-revision/v1/add-new-task', {
-                headers :{
-                    method : POST,
-                    BODY : {
-                        email : email,
-                        taskBody : newTaskWithTimestamp
-                    },
-                    content/type : application/json
-                }
-            })
+        const newTaskWithTimestamp = {
+            task: todolist.task,
+            createdAt: new Date().toISOString(),
+        };
 
+        dispatch(addTask(newTaskWithTimestamp));
 
-            setTodolist({ task: "" });
-        } else {
-            console.log("Task cannot be empty");
-        }
+        // for(i =0; i<completedTasksBackend.length; i++){
+        //     if(!taskList.find(completedTasksBackend[i])){
+        //         dispatch(addTask(completedTasksBackend[i]));
+        //     }
+        // }
+        
+
+        await fetch("http://localhost:3000/mern-revision/v1/add-new-task", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email,
+                taskBody: newTaskWithTimestamp,
+            }),
+        });
+
+        setTodolist({ task: "" });
     };
 
+    // ==========================
+    // MOVE TASK TO COMPLETED (PUT)
+    // ==========================
     const removeHandler = async (index) => {
         const percentage = percentages[index] || 0;
 
-        console.log("Removing task at index:", index, "with percentage:", percentage);
-        if (percentage > 0 && percentage <= 100) {
-            const completedAt = new Date().toISOString();
-            dispatch(deletetask({ index, percentage, completedAt }));
+        if (percentage <= 0) return;
 
-            //task comletion api called here
-            const MarkCompleted = await fetch ('http://localhost:3000/mern-revision/v1/put/mark-current-task-completed',
-                {
-                    headers : {
-                        methode: PUT,
-                        BODY : {
-                            email : email,
-                            taskBody : completedAt
-                        }
-                    }
-                }
-            )
-            console.log("Deletion initiated at", completedAt);
-        }
+        const completedAt = new Date().toISOString();
+        const selectedTask = taskList[index];
+
+        dispatch(deletetask({ index, percentage, completedAt }));
+
+        await fetch("http://localhost:3000/mern-revision/v1/put/move-task-to-completed", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email,
+                taskBody: {
+                    ...selectedTask,
+                    percentage,
+                    completedAt,
+                },
+            }),
+        });
     };
 
+    // ==========================
+    // PROGRESS FIELD HANDLER
+    // ==========================
     const percentHandler = (index, e) => {
-        setPercentages(prev => ({ ...prev, [index]: e.target.value }));
+        setPercentages(prev => ({
+            ...prev,
+            [index]: e.target.value,
+        }));
     };
 
-
-    //Delete task from the current Task with api call and maintiane the state
-    async function DeleteTheTask (email){
-            const deleteTheTask = await fetch('http://localhost:3000/mern-revision/v1/put/delete-current-task', {
-                headers : {
-                    method : PUT,
-                    body : {
-                        email : email,
-                        taskBody : TOBEdeletetask
-                    }
-                }
-            })
+    // ==========================
+    // DELETE CURRENT TASK (PUT)
+    // ==========================
+    async function DeleteTheTask() {
+        console.log("hhihihihi")
+        await fetch("http://localhost:3000/mern-revision/v1/put/delete-current-task", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email,
+                taskBody: TOBEdeletetask,
+            }),
+        });
     }
-
-
 
     return (
         <div className="min-h-screen bg-base-100 flex flex-col items-center px-6 py-8">
@@ -181,10 +204,11 @@ function TodoHome() {
                                         <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white text-sm font-bold rounded-full mr-3">
                                             {index + 1}
                                         </span>
-                                        {task.task}
+                                        {task.task} 
                                         <p className="text-sm text-white/60">
                                             Created at: {new Date(task.createdAt).toLocaleString()}
                                         </p>
+                                       
                                     </h1>
 
                                     <div className="flex flex-wrap items-center gap-4">
@@ -213,6 +237,13 @@ function TodoHome() {
                                         <div className="bg-white/10 rounded-lg p-2 border border-white/20">
                                             <AddTimer />
                                         </div>
+                                        <button className="h-10 px-6 bg-gradient-to-r from-red-600 to-emerald-600 hover:from-red-500 hover:to-emerald-500 text-white font-medium rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500/50"
+                                        onClick={ () =>{
+                                            setToBedeletetask(task.task);
+                                            DeleteTheTask();
+                                        }}
+                                        >Delete</button>
+
                                     </div>
                                 </div>
                             ))

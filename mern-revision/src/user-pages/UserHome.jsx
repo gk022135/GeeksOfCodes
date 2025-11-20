@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, User, Code, LogOut, Users, Calendar, QrCode, CheckSquare, MessageCircle, Activity, Bell, Settings, Search,SquareArrowRight } from 'lucide-react';
+import { ChevronRight, User, Code, LogOut, Users, Calendar, QrCode, CheckSquare, MessageCircle, Activity, Bell, Settings, Search, SquareArrowRight } from 'lucide-react';
 
 import Todo_Page from "./Todo_redir";
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -67,7 +67,7 @@ const UserHome = () => {
             description: 'VS-Code editor for real-time collaboration',
             icon: Code,
             color: 'from-orange-500 to-red-500',
-            url :'/code-editor'
+            url: '/code-editor'
         },
         {
             id: 'profile',
@@ -75,7 +75,7 @@ const UserHome = () => {
             description: 'View and edit your profile',
             icon: User,
             color: 'from-indigo-500 to-purple-500',
-            url : '/User-profile'
+            url: '/User-profile'
         },
         {
             id: 'logout',
@@ -83,7 +83,7 @@ const UserHome = () => {
             description: 'Sign out of your account',
             icon: LogOut,
             color: 'from-red-500 to-pink-500',
-            url:'/logout'
+            url: '/logout'
         }
     ];
 
@@ -124,7 +124,7 @@ const UserHome = () => {
                 <div className="flex-1">
                     <h4 className="font-semibold text-white text-sm">{item.title}</h4>
                     <p className="text-gray-300 text-xs mt-1">{item.description}</p>
-                    <a href={item.url} >{<SquareArrowRight size={30} color='pink'/>}</a>
+                    <a href={item.url} >{<SquareArrowRight size={30} color='pink' />}</a>
                 </div>
             </div>
         </div>
@@ -188,7 +188,7 @@ const UserHome = () => {
                                 />
                                 <div>
                                     <h3 className="font-semibold text-white">{userInfo.name}</h3>
-                                    <p className="text-gray-300 text-sm">{userInfo.role === "normal-user" ? "Student":"user"}({userInfo.StudentDepAndYear})</p>
+                                    <p className="text-gray-300 text-sm">{userInfo.role === "normal-user" ? "Student" : "user"}({userInfo.StudentDepAndYear})</p>
                                 </div>
                             </div>
 
@@ -267,9 +267,16 @@ const UserHome = () => {
                                     New Todo
                                 </button>
                                 <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all duration-300"
-                                onClick={() =>{
-                                    navigate('/discussion')
-                                }}
+                                    onClick={() => {
+                                        navigate('/upload-pyq')
+                                    }}
+                                >
+                                    Previous Year
+                                </button>
+                                <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all duration-300"
+                                    onClick={() => {
+                                        navigate('/discussion')
+                                    }}
                                 >
                                     Join Forum
                                 </button>
@@ -297,9 +304,9 @@ const UserHome = () => {
                         {/* Settings */}
                         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
                             <button className="w-full flex items-center justify-center space-x-2 text-white hover:text-gray-300 transition-colors"
-                            onClick={()=>{
-                                navigate('/setting')
-                            }}>
+                                onClick={() => {
+                                    navigate('/setting')
+                                }}>
                                 <Settings className="w-5 h-5" />
                                 <span>Settings</span>
                             </button>

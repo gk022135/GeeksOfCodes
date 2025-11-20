@@ -15,7 +15,7 @@ import AdminHome from "./Teacher-pages/Admin_Home";
 import AdminLogin from "./signup-login/AdminLogin";
 import Create_class from "./Teacher-pages/Create_Class";
 import All_Class_adm from "./Teacher-pages/All_Class_Ad";
-import TodoHome from "./components/TodoHome";
+// import TodoHome from "./components/TodoHome";
 import All_Class_Std from "./user-pages/All_class_std";
 import All_Class from "./user-pages/All_Class";
 import PopComponent from "./UiComponents/PopupComponent";
@@ -62,6 +62,9 @@ import MainLayout from "./layouts/aluminies";
 import StudentLayout from "./layouts/studentLayout";
 import HomeLayout from "./layouts/mainLayout";
 import LandingPageAlumni from "./AluminiesNetworks/landingPage";
+import UploadPYQ from "./PYQ/upload_pyq";
+
+import TODOHOME1 from "./components/test"
 
 
 
@@ -99,7 +102,7 @@ function App() {
             {/* User Routes (Protected by StudentAuthorise) */}
             <Route element={<StudentLayout />} >
               <Route path="/user-home" element={<UserHome />} />
-              <Route path="/todo-home" element={<TodoHome />} />
+              {/* <Route path="/todo-home" element={<TodoHome />} /> */}
 
               <Route path="/qrscanner" element={<Qr_res />} />
               <Route path="/discussion" element={<HomeDiscussion />} />
@@ -123,6 +126,7 @@ function App() {
               <Route path="/all-classes-student" element={<All_Class_Std />} />
               {/* Dynamic route for each course sending details with query params */}
               <Route path="/all-classes-student/:courseCode/:courseName/:Teacher" element={<ClassDetailParticular />} />
+              <Route path="/upload-pyq" element = {<UploadPYQ />} />
 
             </Route>
 
@@ -162,6 +166,7 @@ function App() {
             <Route path="posts" element={<MakePosts />} />
             <Route path="allusers" element={<FetchUserNameEmail />} />
             <Route path="/hot-topics/:search" element={<HotTopicsPosts />} />
+            <Route path="/todotes" element={<TODOHOME1 />} />
 
 
 

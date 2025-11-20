@@ -15,6 +15,7 @@ import CollaborativeEditorLanding from "../../Landingpage/part2";
 import CategoryCards from "./categories";
 import MakePosts from "../make-post";
 import FetchAllPost from "../../Discusion/FetchAllPost";
+import FetchUserNameEmail from "../../chat/user-sidebar";
 
 export default function Mainnav({ FetchAllPost2, Explore, Makepost }) {
   const [toggle, setToggle] = useState("home");
@@ -60,7 +61,7 @@ export default function Mainnav({ FetchAllPost2, Explore, Makepost }) {
       {/* --- Fixed Left Sidebar --- */}
       <aside className="hidden sm:flex fixed top-0 left-0 h-full w-60 bg-base-100 flex-col border-r border-gray-800 z-20">
         <div className="p-4 text-lg font-semibold flex items-center gap-2">
-          <span className="text-orange-500">🟧</span> Substack Clone
+          <span className="text-orange-500">🟧</span> CodeX Community
         </div>
 
         <nav className="flex-1 space-y-1 px-2 overflow-y-auto">
@@ -153,10 +154,10 @@ export default function Mainnav({ FetchAllPost2, Explore, Makepost }) {
       >
         <div className="rounded-2xl p-6 min-h-[100vh]">
           {toggle === "search" && <SearchFunction />}
-          {toggle === "home" && <CollaborativeEditorLanding />}
+          {toggle === "home" && <FetchAllPost />}
           {toggle === "categories" && <CategoryCards />}
           {toggle === "add new" && <MakePosts />}
-          {toggle === "message" && <FetchAllPost />}
+          {toggle === "message" && <FetchUserNameEmail />}
           {toggle === "posts" && <FetchAllPost />}
         </div>
       </main>
