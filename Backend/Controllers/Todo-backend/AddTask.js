@@ -1,4 +1,4 @@
-const UserModel = require("../models/UserModel");
+const UserModel = require("../../Models/UserSchema");
 
 const AddTask = async (req, res) => {
     try {

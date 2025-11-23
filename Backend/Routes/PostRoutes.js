@@ -35,11 +35,8 @@ const TeacherNotification = require('../Controllers/notification/addNotification
 
 
 //todos imports
-// const AddUser = require('../controllers/AddUser');
-// const AddTask = require('../controllers/AddTask');
-// const deleteTasks = require('../controllers/DeleteTask');
-// const completedTasks = require('../controllers/CompletedTask');
-// const Alltasks = require('../controllers/all-gets/Alltasks');
+const {AddNewTask} = require('../Controllers/Todo-backend/todo-all')
+router.post('/add-new-task', AddNewTask);
 
 // 
 router.post('/signup',signUpValidation, signupctrl);
