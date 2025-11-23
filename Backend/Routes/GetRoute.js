@@ -72,4 +72,11 @@ getrouter.get('/activity/daily', getDailyActivityHeatmap);
 //misclenoius route
 // getrouter.get('/verify', httpToWebsocket);
 
+
+//TODO GET ROUTES
+ const  {CompletedTask, GetAllTask } = require('../Controllers/Todo-backend/todo-all')
+ getrouter.get('/current-tasks',GetAllTask);
+ getrouter.get('/all-completed-tasks',CompletedTask);
+
+
 module.exports = getrouter;

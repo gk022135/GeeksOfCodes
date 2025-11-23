@@ -26,4 +26,16 @@ putrouter.put('/make-like-on-post/',Like);
 putrouter.put('/make-dislike-on-post',Dislike);
 putrouter.put('/make-a-comment',CommnetOnPost);
 
+
+//TODO UPDATE ROUTES
+const {MoveTaskToCompleted,DeleteNotCompletedTask} = require('../Controllers/Todo-backend/todo-all')
+
+putrouter.put('/move-task-to-completed', MoveTaskToCompleted);
+putrouter.put('/delete-current-task', DeleteNotCompletedTask);
+
+
+//RECENT ACTTIVITIES OF USERS
+const {addRecentActivity} = require('../Controllers/Student/StudentRecentActivity')
+putrouter.put('/adding-recent-activity/:id',addRecentActivity)
+
 module.exports = putrouter
