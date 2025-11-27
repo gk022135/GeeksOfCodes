@@ -65,6 +65,7 @@ import LandingPageAlumni from "./AluminiesNetworks/landingPage";
 import UploadPYQ from "./PYQ/upload_pyq";
 
 import TODOHOME1 from "./components/test"
+import RenderPyq from "./PYQ/render";
 
 
 
@@ -167,6 +168,7 @@ function App() {
             <Route path="allusers" element={<FetchUserNameEmail />} />
             <Route path="/hot-topics/:search" element={<HotTopicsPosts />} />
             <Route path="/todotes" element={<TODOHOME1 />} />
+             <Route path="/pyq" element={<RenderPyq />} />
 
 
 
