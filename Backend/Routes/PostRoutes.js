@@ -69,7 +69,9 @@ router.post('/upload-the-image',ImageUploader);
 router.post('/teacher-notification',TeacherNotification);
 
 
-
+//pyq
+const { AddPyq, GetAllPyq } = require('../Controllers/PYQ/AddDriveLink');
+router.post('/add-pyq', AddPyq);
 
 //todos routes are here
 // router.post('/adduser', AddUser);
