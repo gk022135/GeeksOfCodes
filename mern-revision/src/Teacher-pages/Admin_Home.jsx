@@ -43,7 +43,7 @@ function AdminHome() {
           </h1>
           <div className="flex items-center justify-center">
             <p className="text-gray-300 text-center sm:text-base md:text-lg lg:text-xl leading-relaxed max-w-4xl">
-              Welcome to <span className="text-2xl bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent font-semibold">smvDeX</span>, A versatile web platform integrating real-time code collaboration, a secure gate pass system with QR scanning, an attendance tracker, an advanced to-do list with backend support, and a community discussion forum. Making it an all-in-one solution for students and organizations.
+              Welcome to <span className="text-2xl bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent font-semibold">GeeksOfCodes</span>, A versatile web platform integrating real-time code collaboration, a secure gate pass system with QR scanning, an attendance tracker, an advanced to-do list with backend support, and a community discussion forum. Making it an all-in-one solution for students and organizations.
             </p>
           </div>
         </div>
