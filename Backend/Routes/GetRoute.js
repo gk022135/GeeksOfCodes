@@ -69,6 +69,10 @@ getrouter.get('/get-varify-location', VarifyLocation);
 getrouter.get('/activity/daily', getDailyActivityHeatmap);
 
 
+//pyq
+const { GetAllPyq } = require('../Controllers/PYQ/AddDriveLink');
+getrouter.get('/get-all-pyq', GetAllPyq);
+
 //misclenoius route
 // getrouter.get('/verify', httpToWebsocket);
 
