@@ -33,7 +33,7 @@ function HomeDiscussion() {
             </div>
 
             {/* <Mainnav FetchAllPost = {FetchAllPost} Explore={Explore} Makepost={Makepost}/> */}
-            <Mainnav />
+            {/* <Mainnav /> */}
         </div>
     );
 }

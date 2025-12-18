@@ -52,6 +52,7 @@ function SignupTeacher() {
         e.preventDefault();
         const response = await SendDataSignLogin("admin-sign-up", NewObject);
         if (response.success) {
+            localStorage.setItem("useremail", NormaluserData.email)
             toast.success(response.message);
             setTimeout(() => {
                 navigate('/admin-login')

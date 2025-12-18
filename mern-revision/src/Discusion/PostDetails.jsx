@@ -183,7 +183,53 @@ const PostDetail = () => {
     }
 
     return (
-        <div className="max-w-4xl mx-auto mt-20">
+        <div className="max-w-4xl mx-auto z-30" >
+            <div className="sticky mb-1 rounded-2xl w-full border-2 top-0 z-20 bg-base-100/95 backdrop-blur border-b border-gray-600">
+                <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+
+                    {/* LEFT — Back */}
+                    <button
+                        onClick={() => window.history.back()}
+                        className="text-sm text-gray-400 hover:text-white transition"
+                    >
+                        ← Back
+                    </button>
+
+                    {/* CENTER — Author */}
+                    <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-full bg-gray-800 border border-green-400 flex items-center justify-center text-sm font-semibold text-white">
+                            {post.email?.[0]?.toUpperCase() || "U"}
+                        </div>
+
+                        <div className="flex flex-col leading-tight">
+                            <span className="text-sm font-medium text-white">
+                                {post.email || "Unknown User"}
+                            </span>
+                            <span className="text-xs text-gray-400">
+                                Author
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* RIGHT — Actions */}
+                    <div className="flex items-center gap-2">
+                        <button className="px-3 py-1.5 text-sm rounded-full border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white transition">
+                            Follow
+                        </button>
+
+                        <button
+                            onClick={() => {
+                                // open action menu
+                            }}
+                            className="w-9 h-9 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-800 hover:text-white transition"
+                        >
+                            ⋯
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
             <div className="bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 rounded-xl shadow-2xl overflow-hidden">
                 <div className="flex items-center gap-4 p-5 border-b border-gray-700/50 bg-gradient-to-r from-gray-800/50 to-gray-900/50">
                     <div className="relative">

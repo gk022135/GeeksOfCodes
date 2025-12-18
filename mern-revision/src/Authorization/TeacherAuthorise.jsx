@@ -1,7 +1,7 @@
 
 import { Navigate, Outlet } from "react-router-dom";
 
-function TeacherAuthorise() {
+function TeacherAuthorise({ children }) {
   const userInfo = localStorage.getItem("UserData");
   const role = userInfo ? JSON.parse(userInfo).role : "";
 
@@ -9,7 +9,7 @@ function TeacherAuthorise() {
     return <Navigate to="/admin-login" replace />;
   }
 
-  return <Outlet />;
+  return<>{children}</>;;
 }
 
 export default TeacherAuthorise;
