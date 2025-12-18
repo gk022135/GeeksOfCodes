@@ -1,20 +1,35 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import TeacherNavbar from "../components/navbar/teacherNavbar";
 import TeacherAuthorise from "../Authorization/TeacherAuthorise";
 
-export default function StudentLayout() {
+export default function TeacherLayout() {
   return (
     <TeacherAuthorise>
-      <div className="flex h-screen bg-base-100 text-gray-200 overflow-hidden">
-        {/* Fixed Navbar */}
-        <div className="fixed top-0 z-20 w-full">
-          <Navbar />
-        </div>
+      <div className="h-screen bg-base-100 text-gray-200">
 
-        {/* Scrollable content */}
-        <main className="flex-1 h-full overflow-y-auto mt-16">
-          <Outlet /> {/* Protected pages render here */}
+        {/* Fixed Navbar (top + sidebar handled inside) */}
+        <TeacherNavbar />
+
+        {/* 
+          Main Content Area
+          - pt-16  → top navbar height (mobile + desktop)
+          - lg:pl-64 → left sidebar width (desktop only)
+        */}
+        <main
+          className="
+            pt-16
+            lg:pl-64
+            h-screen
+            overflow-y-auto
+            px-4
+            sm:px-6
+            lg:px-8
+            pb-6
+          "
+        >
+          <Outlet />
         </main>
+
       </div>
     </TeacherAuthorise>
   );

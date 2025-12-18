@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import ThemeSelector from "../themectrl";
 import ProfileIcon from "../ui/profileicon";
 import { House, Plus, LayoutGrid, Mail, Bell, Search } from "lucide-react";
+import Logout from "./Logout";
 
 const Navbar = () => {
   const { isAuthenticated } = useAuth0();
@@ -36,7 +37,7 @@ const Navbar = () => {
               <NavLink to="/" className="hover:text-white hover:border-b-2 border-blue-400">Home</NavLink>
               <NavLink to="/user-home" className="hover:text-white hover:border-b-2 border-blue-400">User-Access</NavLink>
               <NavLink to="/login" className="hover:text-white hover:border-b-2 border-blue-400">
-                {isLogged ? <LogoutButton /> : "Login"}
+                {isLogged ? <Logout /> : "Login"}
               </NavLink>
               <NavLink to="/Contact" className="hover:text-white hover:border-b-2 border-blue-400">Contact</NavLink>
               <NavLink to="/discussion" className="hover:text-white hover:border-b-2 border-blue-400">Community</NavLink>

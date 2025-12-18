@@ -66,7 +66,14 @@ import UploadPYQ from "./PYQ/upload_pyq";
 
 import TODOHOME1 from "./components/test"
 import RenderPyq from "./PYQ/render";
-
+import CommunitiyLayout from "./layouts/communityLayout";
+import CategoryCards from "./components/navbar/categories";
+import SearchFunction from "./components/navbar/search";
+import TeacherLayout from "./layouts/teacherLayout";
+import TeacherNavbar from "./components/navbar/teacherNavbar";
+import AddResources from "./Teacher-pages/ResourcesAdd";
+import Attendance from "./Teacher-pages/AttendanceDetails";
+import TeacherProfile from "./Teacher-pages/TeacherProfile";
 
 
 function App() {
@@ -90,44 +97,49 @@ function App() {
 
 
             {/* Teacher Routes */}
-            <Route element={<TeacherAuthorise />}>
-              <Route path='/admin-dashboard' element={<AdminHome />} />
-              <Route path="/create-class" element={<Create_class />} />
-              <Route path="/all-classes-adm" element={<All_Class_adm />} />
-              <Route path="/admin-noti" element={<NotificationManager />} />
-
-
+            <Route path="/teacher" element={<TeacherLayout />}>
+              <Route index element={<AdminHome />} />
+              <Route path="all-class" element={<All_Class_adm />} />
+              <Route path="create-class" element={<Create_class />} />
+              <Route path="attendance" element={<Attendance />} />
+              <Route path="set-location" element={<SetLocation />} />
+              <Route path="add-resource" element={<AddResources />} />
+              <Route path="notifications" element={<NotificationManager />} />
+              <Route path="profile" element={<TeacherProfile />} />
             </Route>
+
+
+
 
 
             {/* User Routes (Protected by StudentAuthorise) */}
             <Route element={<StudentLayout />} >
               <Route path="/user-home" element={<UserHome />} />
               {/* <Route path="/todo-home" element={<TodoHome />} /> */}
+              <Route path="/code-editor" element={<Code_editor />} />
+
 
               <Route path="/qrscanner" element={<Qr_res />} />
-              <Route path="/discussion" element={<HomeDiscussion />} />
-              <Route path="/discussion/makepost" element={<MakePost />} />
-              <Route path="/upload" element={<ImageUpload />} />
-
-
-
-              {/* Documentation of project */}
-              <Route path="/Qr-working-docs" element={<QrWorking />} />
-              <Route path="/attendace-marking-docs" element={<AttendanceMarking />} />
-              <Route path="/class-creating-docs" element={<ClassCreate />} />
-              <Route path="/gatepss-working-docs" element={<GatePassWorking />} />
+              <Route path="/pyq" element={<RenderPyq />} />
+              <Route path="User-profile" element={<UserProfile />} />
+              <Route path="Update" element={<UpdateProfile />} />
 
 
 
 
-              <Route path="/popcomp" element={<PopComponent />} />
+
+
+
+
               <Route path="/qrscanner" element={<Qr_res />} />
               <Route path="/all-classes" element={<All_Class />} />
               <Route path="/all-classes-student" element={<All_Class_Std />} />
               {/* Dynamic route for each course sending details with query params */}
               <Route path="/all-classes-student/:courseCode/:courseName/:Teacher" element={<ClassDetailParticular />} />
-              <Route path="/upload-pyq" element = {<UploadPYQ />} />
+              <Route path="/upload-pyq" element={<UploadPYQ />} />
+              <Route path="/setlocation" element={<SetLocation />} />
+              <Route path="/varifylocaation/:_id" element={<VarifyLocation />} />
+              <Route path="/todo-home" element={<TODOHOME1 />} />
 
             </Route>
 
@@ -142,35 +154,32 @@ function App() {
               <Route path='/admin-login' element={<AdminLogin />} />
               <Route path="/administrator-login" element={<SUlogin />} />
               <Route path="/otpvarification" element={<Otpvarifiacation />} />
+              {/* Documentation of project */}
+              <Route path="/Qr-working-docs" element={<QrWorking />} />
+              <Route path="/attendace-marking-docs" element={<AttendanceMarking />} />
+              <Route path="/class-creating-docs" element={<ClassCreate />} />
+              <Route path="/gatepss-working-docs" element={<GatePassWorking />} />
 
             </Route>
 
 
+            {/* Comminitiy Layout */}
+            <Route element={<CommunitiyLayout />}>
+              <Route path="/all-posts" element={<FetchAllPost />} />
+              <Route path="/posts/detail/:id" element={<PostDetail />} />
+              <Route path="posts" element={<MakePosts />} />
+              <Route path="allusers" element={<FetchUserNameEmail />} />
+              <Route path="/hot-topics/:search" element={<HotTopicsPosts />} />
+              <Route path="/makepost" element={<MakePost />} />
+              <Route path="/discussion" element={<HomeDiscussion />} />
+              <Route path="/discussion/makepost" element={<MakePost />} />
+              <Route path="/categories" element={<CategoryCards />} />
+              <Route path="/search" element={<SearchFunction />} />
+              <Route path="/messages" element={<FetchUserNameEmail />} />
+              <Route path="/notifications" element={<NotificationManager />} />
 
-            <Route path="/makepost" element={<MakePost />} />
-
-            <Route path="/setlocation" element={<SetLocation />} />
-            <Route path="/varifylocaation/:_id" element={<VarifyLocation />} />
-            <Route path="/all-posts" element={<FetchAllPost />} />
-            <Route path="/posts/detail/:id" element={<PostDetail />} />
-
-            <Route path="/quiz" element={<QuizBuilder />} />
-            <Route path="/code-editor" element={<Code_editor />} />
-            <Route path="/chat" element={<WebSock />} />
-            <Route path="/contri" element={<ContributionGraph />} />
-
-            <Route path="User-profile" element={<UserProfile />} />
-            <Route path="Update" element={<UpdateProfile />} />
-            <Route path="noti" element={<NotificationManager />} />
-            <Route path="chat-app" element={<Chatapp client2={"user@gmail.com"} />} />
-            <Route path="navtest" element={<Mainnav />} />
-            <Route path="posts" element={<MakePosts />} />
-            <Route path="allusers" element={<FetchUserNameEmail />} />
-            <Route path="/hot-topics/:search" element={<HotTopicsPosts />} />
-            <Route path="/todotes" element={<TODOHOME1 />} />
-             <Route path="/pyq" element={<RenderPyq />} />
-
-
+              <Route path="/upload" element={<ImageUpload />} />
+            </Route>
 
             {/* alumimies networks layout */}
             <Route element={<MainLayout />}>
@@ -179,11 +188,33 @@ function App() {
 
 
 
+
+            <Route path="/quiz" element={<QuizBuilder />} />
+            <Route path="/chat" element={<WebSock />} />
+            <Route path="/contri" element={<ContributionGraph />} />
+
+
+
+            <Route path="noti" element={<NotificationManager />} />
+            <Route path="chat-app" element={<Chatapp client2={"user@gmail.com"} />} />
+            <Route path="navtest" element={<TeacherNavbar />} />
+
+
+
+
+
+
+
+
+            <Route path="/popcomp" element={<PopComponent />} />
+
+
+
           </Routes>
 
 
           {/* <HashLoader color='green' /> */}
-          <div className="grid grid-cols-3 text-xl text-white bg-base-100 z-0 p-5 bottom-0">
+          {/* <div className="grid grid-cols-3 text-xl text-white bg-base-100 z-0 p-5 bottom-0">
             <a href="/otpvarification">otpvarification</a>
             <a href="/qrscanner">qrscanner</a>
             <a href="/qrgenerator">qrgenerator</a>
@@ -194,7 +225,7 @@ function App() {
             <a href="/upload">Image Upload</a>
             <a href="/administrator">Adminstrator Dashboard</a>
             <a href="/administrator-login">Administrator Login</a>
-          </div>
+          </div> */}
           {/* <Component /> */}
 
           {/* <ThemeChanger /> */}

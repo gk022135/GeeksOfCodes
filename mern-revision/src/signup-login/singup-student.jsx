@@ -47,6 +47,8 @@ function SignupStudent() {
 
         if (response.error) toast.error(response.error);
         else if (response.success) {
+            //email to localstorage
+            localStorage.setItem("useremail", NormaluserData.email)
             toast.success(response.message);
             setTimeout(() => navigate("/otpvarification"), 1000);
         } else if (response.message === "User already exists, please login") {

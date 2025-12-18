@@ -42,7 +42,7 @@ function AdminLogin() {
             toast.success(response.message)
             if (response.role === 'Admin-user') {
                 setTimeout(() => {
-                    navigate("/admin-dashboard");
+                    navigate("/teacher");
                 }, 1000);
             }
         }

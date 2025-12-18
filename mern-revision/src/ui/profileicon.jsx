@@ -29,7 +29,7 @@ const ProfileIcon = ({ imageUrl, profileUrl, alt = "Profile" }) => {
                         </a>
                     </li>
                     <li className='border-b-1 border-gray-400'>
-                        <a href="/admin-dashboard" className="flex items-center space-x-2 hover:text-amber-600">
+                        <a href="/teacher" className="flex items-center space-x-2 hover:text-amber-600">
                             <UserPen size={16} />
                             <span>Teacher Profile</span>
                         </a>
